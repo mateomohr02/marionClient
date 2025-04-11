@@ -5,7 +5,7 @@ const HeroHeader = () => {
     <div className="relative w-full h-[600px] flex items-center justify-center">
       {/* Imagen de fondo */}
       <Image
-        src="/marionBG.png"
+        src="/marionBackground.png"
         alt="Partera Marion"
         layout="fill"
         objectFit="cover"
