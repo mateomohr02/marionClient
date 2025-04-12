@@ -15,7 +15,7 @@ const useAddCourse = () => {
     
 
     try {
-      const response = await axios.post('http://localhost:5000/api/courses/add-course', courseData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/add-course`, courseData);
 
       console.log(response, 'Respuesta del backend');
       
