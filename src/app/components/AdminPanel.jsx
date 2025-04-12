@@ -1,12 +1,20 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PlusCircle, ListChecks, Users } from 'lucide-react';
+import { PlusCircle, ListChecks, Users, LogOut} from 'lucide-react';
 import FormAddCourse from './FormAddCourse';
 import CoursesListAdmin from './CoursesListAdmin';
+import { useLogout } from '../../../hooks/useLogout';
+import { useRouter } from 'next/navigation';
 
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState('dashboard');
+  const Router = useRouter()
+
+  const logout = () => {
+    localStorage.clear();
+    Router.push('/')
+  }
 
   const renderContent = () => {
     switch (activeView) {
@@ -16,6 +24,9 @@ const AdminPanel = () => {
         return <CoursesListAdmin/>;
       case 'manageUsers':
         return <div>Gestión de usuarios</div>;
+      case 'logout':
+        logout();
+        return null;
       default:
         return <div>Seleccione en el panel de la izquierda la acción que desea realizar.</div>;
     }
@@ -47,6 +58,13 @@ const AdminPanel = () => {
           >
             <Users className="w-5 h-5" />
             Gestionar Usuarios
+          </button>
+          <button
+            onClick={() => setActiveView('logout')}
+            className="flex items-center gap-2 text-left hover:text-red-600 transition"
+          >
+            <LogOut className="w-5 h-5" />
+            Cerrar Sesión
           </button>
         </nav>
       </aside>
