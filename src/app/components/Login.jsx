@@ -2,17 +2,26 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from "../../../hooks/useLogin.js";
 
 export default function Login() {
+
+  const Router = useRouter();
+  const { login, error, loading } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
-
-    console.log(email, password);
-    
     e.preventDefault();
-    
+        
+    const user = await login( email, password );
+
+    if (user) {
+      Router.push('/areaPersonal')
+    }
+
   };
 
   return (
