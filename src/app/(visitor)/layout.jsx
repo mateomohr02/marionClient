@@ -23,7 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${dancingScript.variable} antialiased`}>
+      <body className={`${dancingScript.variable} ${poppins.variable} antialiased`}>
         <NavBar />
         {children}
         <Footer />

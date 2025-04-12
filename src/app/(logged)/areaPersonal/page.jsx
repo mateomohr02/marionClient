@@ -1,32 +1,35 @@
-'use client'
+'use client';
 
-import AccessForm from '@/app/components/AccessForm'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import AccessForm from '@/app/components/AccessForm';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import AdminPanel from '@/app/components/AdminPanel';
 
 const Page = () => {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
+  const [user, setUser] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    
     const token = localStorage.getItem("token");
     const userData = localStorage.getItem("userData");
 
     if (!token || !userData) {
-      router.push('/login'); // Redirige si no hay sesión
+      router.push('/login');
     } else {
-      setIsAuthChecked(true); // Permitir renderizar si está todo bien
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+      setIsAuthChecked(true);
     }
   }, []);
 
-  if (!isAuthChecked) return null; // Evita el parpadeo o render innecesario
+  if (!isAuthChecked) return null;
 
   return (
     <div>
-        Area Personal
+      {user?.userType === '0' ? <AdminPanel /> : null}
     </div>
   );
-}
+};
 
 export default Page;

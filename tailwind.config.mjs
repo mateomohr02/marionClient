@@ -28,7 +28,7 @@ export default {
       },
       fontFamily: {
         dancing: ['var(--font-dancing-script)'],
-        poppins: ["var(--font-poppins)"],
+        poppins: ['var(--font-poppins)'],
       },
     },
   },

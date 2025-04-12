@@ -2,18 +2,41 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRegister } from '../../../hooks/register';
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
+  const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
+  const { register, loading, error } = useRegister();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, name, lastName, password, repeatPassword });
-    // Acá podés conectar con tu backend o hook
+
+    if (password !== repeatPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    const userSend = {
+      name: name + " " + lastName,
+      email,
+      password,
+      userType: '1', // Valor por defecto para usuario común
+    };
+
+    const user = await register(userSend);
+
+    if (user) {
+      alert('Usuario Creado con Éxito')
+      router.push('/login');
+    }
   };
 
   return (
@@ -39,7 +62,7 @@ export default function Register() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                placeholder='Nombre'
+                placeholder="Nombre"
               />
             </div>
             <div className="flex-1 w-full">
@@ -53,7 +76,7 @@ export default function Register() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
-                placeholder='Apellido'
+                placeholder="Apellido"
               />
             </div>
           </div>
@@ -102,11 +125,16 @@ export default function Register() {
           />
         </div>
 
+        {error && (
+          <p className="text-red-600 text-sm mb-4 text-center">{error}</p>
+        )}
+
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+          disabled={loading}
         >
-          Registrarse
+          {loading ? 'Registrando...' : 'Registrarse'}
         </button>
 
         <p className="text-center mt-4">
