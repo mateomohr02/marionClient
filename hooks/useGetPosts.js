@@ -14,8 +14,16 @@ const useGetPosts = (page = 1, limit = 10) => {
       setSuccess(false);
 
       try {
+
+        const token = localStorage.getItem('token');
+
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/posts?limit=${limit}&offset=${(page - 1) * limit}`
+          `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/get-all-posts?limit=${limit}&offset=${(page - 1) * limit}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
         setPosts(response.data.data);
@@ -29,6 +37,7 @@ const useGetPosts = (page = 1, limit = 10) => {
 
     fetchPosts();
   }, [page, limit]);
+ 
 
   return { posts, loading, error, success };
 };
