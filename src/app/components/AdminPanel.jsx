@@ -6,13 +6,14 @@ import FormAddCourse from './FormAddCourse';
 import CoursesListAdmin from './CoursesListAdmin';
 import { useLogout } from '../../../hooks/useLogout';
 import { useRouter } from 'next/navigation';
+import FormAddPost from './FormAddPost';
 
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState('dashboard');
   const Router = useRouter()
 
   const logout = () => {
-    localStorage.clear();
+    useLogout();
     Router.push('/')
   }
 
@@ -20,6 +21,8 @@ const AdminPanel = () => {
     switch (activeView) {
       case 'addCourse':
         return <FormAddCourse/>;
+        case 'addPost':
+          return <FormAddPost/>;
       case 'manageCourses':
         return <CoursesListAdmin/>;
       case 'manageUsers':
@@ -38,6 +41,15 @@ const AdminPanel = () => {
       <aside className="w-64 bg-gray-100 p-6 border-r border-gray-200">
         <h2 className="text-2xl font-bold mb-6">Panel de administrador</h2>
         <nav className="flex flex-col gap-4">
+          <h3>Blog</h3>
+        <button
+            onClick={() => setActiveView('addPost')}
+            className="flex items-center gap-2 text-left hover:text-blue-600 transition"
+          >
+            <ListChecks className="w-5 h-5" />
+            Agregar Publicación
+          </button>
+          <h3>Educación</h3>
           <button
             onClick={() => setActiveView('addCourse')}
             className="flex items-center gap-2 text-left hover:text-blue-600 transition"
@@ -52,6 +64,7 @@ const AdminPanel = () => {
             <ListChecks className="w-5 h-5" />
             Gestionar Cursos
           </button>
+          <h3>Usuarios</h3>
           <button
             onClick={() => setActiveView('manageUsers')}
             className="flex items-center gap-2 text-left hover:text-blue-600 transition"
