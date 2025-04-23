@@ -24,7 +24,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         gradientLeft: "#FF6E5A",
-        gradientRight: "#7B61D0"
+        gradientRight: "#7B61D0",
+        pastelPink: "#FFEEEC",
+        snow: "#FFF8F8"
       },
       fontFamily: {
         dancing: ['var(--font-dancing-script)'],

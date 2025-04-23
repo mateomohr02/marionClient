@@ -11,8 +11,8 @@ const Page = () => {
 
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Publicaciones Recientes</h1>
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Blog de la comunidad</h1>
 
       {loading && <p>Cargando publicaciones...</p>}
       {error && <p className="text-red-500">{error}</p>}

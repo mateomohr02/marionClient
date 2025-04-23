@@ -4,14 +4,14 @@ import React from "react";
 const CourseCard = ({ course, index }) => {
   return (
     <div className="w-full">
-      <div className="relative w-full flex justify-center p-10">
+      <div className="relative w-full flex justify-center p-8">
         {/* Fondo con opacidad */}
-        <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft opacity-30"></div>
 
         {/* Contenido en fila */}
         <div className="relative flex gap-8 items-start z-10 max-w-6xl w-full">
           {/* Imagen */}
-          <div className="w-[250px] h-[250px] bg-gray-300 flex items-center justify-center flex-shrink-0">
+          <div className="w-[275px] h-[275px] bg-gray-300 flex items-center justify-center flex-shrink-0">
             <span className="text-gray-600 text-lg">Imagen {index + 1}</span>
           </div>
 
@@ -32,7 +32,7 @@ const CourseCard = ({ course, index }) => {
 
             {/* Botón alineado a la parte inferior izquierda del bloque de texto */}
             <div className="mt-4">
-              <button className="px-4 py-2 bg-white rounded-full text-black font-semibold font-poppins border border-gray-300 hover:shadow-md">
+              <button className="px-4 py-2 bg-pastelPink rounded-2xl hover:shadow-md text-black font-semibold font-poppins hover:bg-snow transition-all ease-in-out duration-300">
                 Obtener Acceso
               </button>
             </div>
