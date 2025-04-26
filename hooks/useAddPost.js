@@ -6,7 +6,7 @@ const useAddPost = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  const addPost = async (postData) => {
+  const addPost = async (formData) => {
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -14,9 +14,18 @@ const useAddPost = () => {
     try {
       const token = localStorage.getItem('token');
 
+      // Armar array de bloques desde el nuevo formato
+      const content = formData.blocks.map((block) => ({
+        contentType: block.type,
+        value: block.value,
+      }));
+
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_ROUTE}/api/posts/add-post`,
-        postData,
+        `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/add-post`,
+        {
+          title: formData.title,
+          content,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,

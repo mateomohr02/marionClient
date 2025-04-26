@@ -5,72 +5,98 @@ import useAddPost from '../../../hooks/useAddPost';
 
 const FormAddPost = () => {
   const { addPost, loading, error, success } = useAddPost();
-  const [form, setForm] = useState({
-    title: '',
-    content: '',
-    videoUrl: '',
-    imageUrls: ['']
-  });
+  const [title, setTitle] = useState('');
+  const [contentBlocks, setContentBlocks] = useState([
+    { contentType: 'text', value: '' }
+  ]);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleContentChange = (index, field, value) => {
+    const updated = [...contentBlocks];
+    updated[index][field] = value;
+    setContentBlocks(updated);
   };
 
-  const handleImageUrlChange = (index, value) => {
-    const newImageUrls = [...form.imageUrls];
-    newImageUrls[index] = value;
-    setForm({ ...form, imageUrls: newImageUrls });
+  const addBlock = (type) => {
+    setContentBlocks([...contentBlocks, { contentType: type, value: '' }]);
   };
 
-  const addImageField = () => {
-    setForm({ ...form, imageUrls: [...form.imageUrls, ''] });
-  };
-
-  const removeImageField = (index) => {
-    const newImageUrls = form.imageUrls.filter((_, i) => i !== index);
-    setForm({ ...form, imageUrls: newImageUrls });
+  const removeBlock = (index) => {
+    const updated = contentBlocks.filter((_, i) => i !== index);
+    setContentBlocks(updated);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await addPost(form);
+    const postData = {
+      title,
+      content: contentBlocks.filter(block => block.value.trim() !== '')
+    };
+    const response = await addPost(postData);
     if (response?.data?.status === 'success') {
       alert('Publicación creada con éxito.');
-      setForm({
-        title: '',
-        content: '',
-        videoUrl: '',
-        imageUrls: ['']
-      });
+      setTitle('');
+      setContentBlocks([{ contentType: 'text', value: '' }]);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
-      <input name="title" placeholder="Título" value={form.title} onChange={handleChange} className="p-2 border rounded" />
-      <textarea name="content" placeholder="Contenido" value={form.content} onChange={handleChange} className="p-2 border rounded" />
-      <input name="videoUrl" placeholder="URL del video (opcional)" value={form.videoUrl} onChange={handleChange} className="p-2 border rounded" />
+      <input
+        name="title"
+        placeholder="Título"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="p-2 border rounded"
+      />
 
-      <div className="flex flex-col gap-2">
-        <p className="font-medium">URLs de imágenes (opcional):</p>
-        {form.imageUrls.map((url, index) => (
-          <div key={index} className="flex gap-2">
+      {contentBlocks.map((block, index) => (
+        <div key={index} className="flex flex-col gap-1">
+          <label className="text-sm text-gray-600">{block.contentType.toUpperCase()}</label>
+          {block.contentType === 'text' && (
+            <textarea
+              value={block.value}
+              onChange={(e) => handleContentChange(index, 'value', e.target.value)}
+              className="p-2 border rounded"
+              placeholder="Texto"
+            />
+          )}
+          {block.contentType === 'image' && (
             <input
               type="text"
-              placeholder={`Imagen ${index + 1}`}
-              value={url}
-              onChange={(e) => handleImageUrlChange(index, e.target.value)}
-              className="p-2 border rounded w-full"
+              value={block.value}
+              onChange={(e) => handleContentChange(index, 'value', e.target.value)}
+              className="p-2 border rounded"
+              placeholder="URL de imagen"
             />
-            {form.imageUrls.length > 1 && (
-              <button type="button" onClick={() => removeImageField(index)} className="text-red-500 font-bold">
-                ✕
-              </button>
-            )}
-          </div>
-        ))}
-        <button type="button" onClick={addImageField} className="text-blue-600 underline text-sm self-start">
-          + Agregar otra imagen
+          )}
+          {block.contentType === 'video' && (
+            <input
+              type="text"
+              value={block.value}
+              onChange={(e) => handleContentChange(index, 'value', e.target.value)}
+              className="p-2 border rounded"
+              placeholder="URL de video"
+            />
+          )}
+          <button
+            type="button"
+            onClick={() => removeBlock(index)}
+            className="text-red-500 text-sm self-end"
+          >
+            Eliminar
+          </button>
+        </div>
+      ))}
+
+      <div className="flex gap-2">
+        <button type="button" onClick={() => addBlock('text')} className="text-blue-600 underline text-sm">
+          + Texto
+        </button>
+        <button type="button" onClick={() => addBlock('image')} className="text-blue-600 underline text-sm">
+          + Imagen
+        </button>
+        <button type="button" onClick={() => addBlock('video')} className="text-blue-600 underline text-sm">
+          + Video
         </button>
       </div>
 
@@ -85,3 +111,4 @@ const FormAddPost = () => {
 };
 
 export default FormAddPost;
+

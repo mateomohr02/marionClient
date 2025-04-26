@@ -12,14 +12,12 @@ const Page = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Blog de la comunidad</h1>
-
       {loading && <p>Cargando publicaciones...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {!loading && posts.length === 0 && <p>No hay publicaciones disponibles.</p>}
 
       {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
+        <PostCard key={post.id} post={post}/>
       ))}
     </div>
   );
