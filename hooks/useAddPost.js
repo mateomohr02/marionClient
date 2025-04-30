@@ -15,9 +15,9 @@ const useAddPost = () => {
       const token = localStorage.getItem('token');
 
       // Armar array de bloques desde el nuevo formato
-      const content = formData.blocks.map((block) => ({
-        contentType: block.type,
-        value: block.value,
+      const content = formData.content.map((c) => ({
+        contentType: c.contentType,
+        value: c.value,
       }));
 
       const response = await axios.post(
@@ -36,6 +36,7 @@ const useAddPost = () => {
       setSuccess(true);
       return response.data;
     } catch (err) {
+
       setError(err.response?.data?.message || 'Error al agregar la publicación');
     } finally {
       setLoading(false);

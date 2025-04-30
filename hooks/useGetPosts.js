@@ -25,7 +25,7 @@ const useGetPosts = (page = 1, limit = 10) => {
             },
           }
         );
-
+        
         setPosts(response.data.data);
         setSuccess(true);
       } catch (err) {

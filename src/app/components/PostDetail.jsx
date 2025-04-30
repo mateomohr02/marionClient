@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Undo2 } from "lucide-react";
+import CommentSection from "./CommentSection";
+import FormAddComment from "./FormAddComment";
 
-const PostDetail = ({ data }) => {
+const PostDetail = ({ data, comments }) => {
   return (
     <div className="mt-6 rounded-2xl relative max-w-[calc(60vw)] mx-auto p-6">
       
@@ -68,10 +70,11 @@ const PostDetail = ({ data }) => {
             );
           }
         })}
-        <h3>Comentarios</h3>
-
-        <div>
-          {/* Aqui iran los comentarios */}
+        <div className="bg-pastelPink/70 rounded-2xl p-4">
+        <h3 className="text-2xl font-poppins">Comentarios</h3>
+        <span></span>
+          <FormAddComment postId={data?.id}/>
+          <CommentSection data={comments}/>
         </div>
       </div>
 
