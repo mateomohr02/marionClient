@@ -1,25 +1,28 @@
 import axios from "axios";
 
-export const useAddComment = (postId, parentId = null, content) => {
-  const response = axios.post(
-    `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/add-comment/${postId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    {
-      parentId,
-      content,
+export const useAddComment = async ({ postId, parentId = null, content}) => {
+  try {
+
+    const token = localStorage.getItem('token');
+
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/add-comment/${postId}`,
+      { parentId, content },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.data.status !== "success") {
+      console.error("Error al añadir comentario:", response.data);
+      return { error: true };
     }
-  );
 
-  if (response.status !== 'success') {
-    console.log('Error al añadir comentario');
-    return "error";
+    return { success: true };
+  } catch (error) {
+    console.error("Error al añadir comentario:", error);
+    return { error: true };
   }
-
-  console.log(response, 'Respuestaaa');
-  
-  return response;
 };

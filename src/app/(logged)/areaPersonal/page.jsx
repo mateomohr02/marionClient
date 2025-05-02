@@ -1,6 +1,5 @@
 'use client';
 
-import AccessForm from '@/app/components/AccessForm';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminPanel from '@/app/components/AdminPanel';

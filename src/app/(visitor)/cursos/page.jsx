@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import useFetchCourses from '../../../../hooks/useFetchCourses'
-import CourseCard from '@/app/components/CourseCard'
+import useFetchCourses from "../../../../hooks/useFetchCourses";
+import CourseCard from "@/app/components/CourseCard";
 
 const CoursesPage = () => {
-  const { courses, loading, error } = useFetchCourses()
+  const { courses, loading, error } = useFetchCourses();
 
-  if (loading) return <p>Cargando cursos...</p>
-  if (error) return <p>{error}</p>
+  if (loading) return <div className="h-screen"></div>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="w-full flex flex-col gap-10 pt-10">
@@ -15,7 +15,7 @@ const CoursesPage = () => {
         <CourseCard key={course.id} course={course} index={index} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default CoursesPage
+export default CoursesPage;

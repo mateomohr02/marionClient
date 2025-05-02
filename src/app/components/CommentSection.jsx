@@ -1,6 +1,6 @@
 import CommentCard from "./CommentCard";
 
-const CommentSection = ({ data }) => {
+const CommentSection = ({ data, postId}) => {
   // Construir un mapa de comentarios por ID
   const commentMap = {};
   data.forEach(comment => {
@@ -24,7 +24,7 @@ const CommentSection = ({ data }) => {
   return (
     <div>
       {rootComments.map(comment => (
-        <CommentCard key={comment.id} data={comment} level={0} />
+        <CommentCard key={comment.id} data={comment} postId={postId} level={0} />
       ))}
     </div>
   );

@@ -51,7 +51,8 @@ const Page = () => {
         <PostDetail key={post?.id} data={post}/>
         </>
       ) : (
-        <div>Cargando publicación...</div>
+        <div className="h-screen">
+          </div>
       )}
     </div>
   );

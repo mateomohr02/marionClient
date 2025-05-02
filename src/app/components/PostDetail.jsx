@@ -74,7 +74,7 @@ const PostDetail = ({ data }) => {
         <h3 className="text-2xl font-poppins">Comentarios</h3>
         <span></span>
           <FormAddComment postId={data?.id}/>
-          <CommentSection data={data?.Replies}/>
+          <CommentSection data={data?.Replies} postId={data?.id}/>
         </div>
       </div>
 

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Forward } from "lucide-react";
-import useAddComment from "../../../hooks/useAddComment";
+import { useAddComment } from "../../../hooks/useAddComment";
+
 
 const FormAddComment = ({ postId, parentId = null, onCancel }) => {
   const [focused, setFocused] = useState(false);
@@ -14,12 +15,23 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
     if (!content.trim()) return;
     setLoading(true);
 
+    const token = localStorage.getItem("token");
+
     try {
-      // await useAddComment({ postId, content, parentId });
-      console.log("Comentario enviado:", { postId, parentId, content });
-      setContent("");
-      setFocused(false);
-      if (onCancel) onCancel() && setContent(""); // Cierra el formulario
+      const result = await useAddComment({
+        postId,
+        parentId,
+        content,
+        token,
+      });
+
+      if (result.success) {
+        setContent("");
+        setFocused(false);
+        if (onCancel) onCancel();
+      } else {
+        console.error("Comentario no guardado correctamente.");
+      }
     } catch (err) {
       console.error("Error al comentar:", err);
     } finally {
@@ -40,7 +52,7 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
           onFocus={() => setFocused(true)}
           className="w-full p-2 resize-none border-b border-black bg-transparent text-black focus:outline-none focus:border-black transition-all min-h-[40px]"
           rows={focused ? 3 : 1}
-          placeholder={parentId ? "Añade tu respuesta": "Añade un comentario"}
+          placeholder={parentId ? "Añade tu respuesta" : "Añade un comentario"}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
