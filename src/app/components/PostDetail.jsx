@@ -3,7 +3,7 @@ import { Undo2 } from "lucide-react";
 import CommentSection from "./CommentSection";
 import FormAddComment from "./FormAddComment";
 
-const PostDetail = ({ data, comments }) => {
+const PostDetail = ({ data }) => {
   return (
     <div className="mt-6 rounded-2xl relative max-w-[calc(60vw)] mx-auto p-6">
       
@@ -74,7 +74,7 @@ const PostDetail = ({ data, comments }) => {
         <h3 className="text-2xl font-poppins">Comentarios</h3>
         <span></span>
           <FormAddComment postId={data?.id}/>
-          <CommentSection data={comments}/>
+          <CommentSection data={data?.Replies}/>
         </div>
       </div>
 

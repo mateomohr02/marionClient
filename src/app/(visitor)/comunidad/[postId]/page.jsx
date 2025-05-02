@@ -12,7 +12,6 @@ const Page = () => {
   const paramsId = params.postId;
 
   const [post, setPost] = useState(null); // ⬅️ Aca guardás el resultado
-  const [comments, setComments] = useState(null);
 
   const fetchPost = async (postId) => {
     const token = localStorage.getItem('token');
@@ -36,9 +35,8 @@ const Page = () => {
   useEffect(() => {
     const getPostData = async () => {
       const data = await fetchPost(paramsId);
-      const comments = await useGetComments(paramsId)
       setPost(data?.data); // ⬅️ Guardo en el estado
-      setComments(comments?.data);
+  
     };
 
     if (paramsId) {
@@ -50,7 +48,7 @@ const Page = () => {
     <div>
       {post ? (
         <>
-        <PostDetail key={post?.id} data={post} comments={comments}/>
+        <PostDetail key={post?.id} data={post}/>
         </>
       ) : (
         <div>Cargando publicación...</div>

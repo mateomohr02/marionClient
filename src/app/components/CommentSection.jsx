@@ -1,19 +1,34 @@
-import CommentCard from "./CommentCard"
+import CommentCard from "./CommentCard";
 
-const CommentSection = ({data}) => {
+const CommentSection = ({ data }) => {
+  // Construir un mapa de comentarios por ID
+  const commentMap = {};
+  data.forEach(comment => {
+    comment.replies = [];
+    commentMap[comment.id] = comment;
+  });
+
+  // Llenar el árbol de comentarios
+  const rootComments = [];
+  data.forEach(comment => {
+    if (comment.parentId === null) {
+      rootComments.push(comment);
+    } else {
+      const parent = commentMap[comment.parentId];
+      if (parent) {
+        parent.replies.push(comment);
+      }
+    }
+  });
 
   return (
     <div>
-
-      {
-        data.map((comment)=>{
-
-          return <CommentCard key={comment.id} data={comment}/>
-          
-        })
-      }
+      {rootComments.map(comment => (
+        <CommentCard key={comment.id} data={comment} level={0} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default CommentSection
+export default CommentSection;
+
