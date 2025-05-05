@@ -16,12 +16,12 @@ const useAddCourse = () => {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/add-course`,
+        courseData, // 2do parámetro = body
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // 3er parámetro = config (headers, etc.)
           },
-        },
-        courseData
+        }
       );
 
       setSuccess(true);
