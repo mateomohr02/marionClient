@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { useState } from 'react';
+import axios from "axios";
+import { useState } from "react";
 
 const useAddCourse = () => {
   const [loading, setLoading] = useState(false);
@@ -11,20 +11,23 @@ const useAddCourse = () => {
     setError(null);
     setSuccess(false);
 
-    console.log(courseData, 'DATA QUE SE ENVIA DESDE EL FRONT');
-    
+    console.log(courseData, "DATA QUE SE ENVIA DESDE EL FRONT");
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/add-course`, courseData);
-
-      console.log(response, 'Respuesta del backend');
-      
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/add-course`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        courseData
+      );
 
       setSuccess(true);
       return response.data;
-
     } catch (err) {
-      setError(err.response?.data?.message || 'Error al agregar el curso');
+      setError(err.response?.data?.message || "Error al agregar el curso");
     } finally {
       setLoading(false);
     }
