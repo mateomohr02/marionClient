@@ -10,7 +10,7 @@ const Page = () => {
   const { posts, loading, error } = useGetPosts(page, limit);
 
   return (
-    <div>
+    <div className="min-h-[calc(100vh-8rem)]">
       {loading && <div className="h-screen"></div>}
       {error && <p className="text-red-500">{error}</p>}
       {!loading && posts.length === 0 && (

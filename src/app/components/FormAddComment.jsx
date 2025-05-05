@@ -3,19 +3,28 @@
 import { useState } from "react";
 import { Forward } from "lucide-react";
 import { useAddComment } from "../../../hooks/useAddComment";
-
+import { useRouter } from "next/navigation";
 
 const FormAddComment = ({ postId, parentId = null, onCancel }) => {
+
+  const router = useRouter()
+  
   const [focused, setFocused] = useState(false);
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!content.trim()) return;
     setLoading(true);
 
     const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert('Para realizar un comentario necesita iniciar sesión.')
+      router.push('/areaPersonal')
+      return "";
+    }
 
     try {
       const result = await useAddComment({
@@ -29,11 +38,14 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
         setContent("");
         setFocused(false);
         if (onCancel) onCancel();
+        alert('Comentario realizado con éxito.')
+        router.push(`/comunidad`);
+
       } else {
-        console.error("Comentario no guardado correctamente.");
+        alert('Error al comentar.')
       }
     } catch (err) {
-      console.error("Error al comentar:", err);
+      alert('Error al comentar.')
     } finally {
       setLoading(false);
     }

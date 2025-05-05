@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminPanel from '@/app/components/AdminPanel';
+import UserInfo from '@/app/components/profile/UserInfo';
 
 const Page = () => {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -26,7 +27,8 @@ const Page = () => {
 
   return (
     <div>
-      {user?.userType === '0' ? <AdminPanel /> : null}
+      {user?.userType === '0' ? <AdminPanel /> : <UserInfo userData={user}/>}
+      
     </div>
   );
 };
