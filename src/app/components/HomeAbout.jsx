@@ -52,7 +52,7 @@ const HomeAbout = () => {
         <ul className="list-disc text-2xl mt-4 ml-6">
           <li>¿Cómo nos <span className="font-bold">preparamos?</span></li>
           <li>¿Dónde encontramos <span className="font-bold">respuestas?</span></li>
-          <li>¿Qué nos <span className="font-bold">espera</span> en el <span className="font-bold">embarazo</span>, el <span className="font-bold">parto</span> y el <span>puerperioP</span></li>
+          <li>¿Qué nos <span className="font-bold">espera</span> en el <span className="font-bold">embarazo</span>, el <span className="font-bold">parto</span> y el <span>puerperio</span></li>
         </ul>
 
         <p className="text-2xl text-black mt-4 leading-relaxed font-poppins">
