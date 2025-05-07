@@ -51,6 +51,7 @@ const UserInfo = ({ userData }) => {
             <UserCourseCard
               key={course.id}
               title={course.name}
+              courseId={course.id}
               description={course.description}
             />
           ))}

@@ -3,6 +3,7 @@ import Link from "next/link";
 const UserCourseCard = ({
   title,
   description,
+  courseId,
   imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOwRConBYl2t6L8QMOAQqa5FDmPB_bg7EnGA&s",
   languages = "Español"
 }) => {
@@ -40,9 +41,9 @@ const UserCourseCard = ({
 
             {/* Botón */}
             <div className="mt-4">
-              <button className="px-4 py-2 bg-pastelPink rounded-2xl hover:shadow-md text-black font-semibold font-poppins hover:bg-snow transition-all ease-in-out duration-300">
+              <Link href={`/courses/${courseId}`} className="px-4 py-2 bg-pastelPink rounded-2xl hover:shadow-md text-black font-semibold font-poppins hover:bg-snow transition-all ease-in-out duration-300">
                 Ir al Curso
-              </button>
+              </Link>
             </div>
           </div>
         </div>

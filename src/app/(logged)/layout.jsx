@@ -1,6 +1,8 @@
+import { StoreProvider } from "../../../redux/store/StoreProvider";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import "../globals.css";
+
 import { Dancing_Script, Poppins } from "next/font/google";
 
 const dancingScript = Dancing_Script({
@@ -11,9 +13,9 @@ const dancingScript = Dancing_Script({
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "700"], 
+  weight: ["400", "700"],
   variable: "--font-poppins",
-})
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -22,12 +24,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${dancingScript.variable} antialiased`}>
-        <NavBar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={`${dancingScript.variable} antialiased`}>
+          <NavBar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

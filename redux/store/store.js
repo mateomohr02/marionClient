@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./counterSlice"; // Reducer de ejemplo
+import courseReducer from "../slices/courseSlice";
+import blogReducer from "../slices/blogSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer, // Agrega más reducers aquí
+    course: courseReducer,
+    blog: blogReducer,
   },
 });
 
