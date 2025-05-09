@@ -5,6 +5,7 @@ const initialState = {
   currentCourse: null,
   courseLessons: [],
   currentLesson: null,
+  courseDetail: {},
   lessonDetail: {},
 };
 
@@ -27,6 +28,9 @@ const courseSlice = createSlice({
     setLessonDetail: (state, action) => {
       state.lessonDetail = action.payload;
     },
+    setCourseDetail: (state, action) => {
+      state.courseDetail = action.payload;
+    },
     clearCourseState: () => initialState,
   },
 });
@@ -38,6 +42,7 @@ export const {
   setCurrentLesson,
   setLessonDetail,
   clearCourseState,
+  setCourseDetail
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

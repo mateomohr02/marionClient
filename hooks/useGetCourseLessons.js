@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setCourseLessons,
   setCurrentCourse,
+  setCurrentLesson,
   setLessonDetail,
+  setCourseDetail
 } from "../redux/slices/courseSlice";
 
 export const useGetCourseLessons = (courseId) => {
@@ -29,9 +31,14 @@ export const useGetCourseLessons = (courseId) => {
           }
         );
 
+        console.log(response.data, 'RESPUESTA HOOK');
+        
+
         dispatch(setCurrentCourse(courseId));
         dispatch(setCourseLessons(response.data.data));
         dispatch(setLessonDetail(response.data.data[0]));
+        dispatch(setCurrentLesson(response.data.data[0].id));
+        dispatch(setCourseDetail(response.data.course));
 
       } catch (err) {
         console.error("Error al obtener las lecciones:", err.message);

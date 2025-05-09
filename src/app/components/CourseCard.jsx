@@ -18,14 +18,19 @@ const CourseCard = ({ course, index }) => {
           {/* Bloque de texto completo */}
           <div className="flex flex-col justify-between h-[250px] text-black max-w-3xl w-full">
             <div>
-              <h2 className="text-2xl font-semibold font-poppins">{course.name}</h2>
+              <h2 className="text-2xl font-semibold font-poppins">
+                {course.name}
+              </h2>
               <p className="mt-2 text-xl font-poppins">
-                Idiomas disponibles: <span className="font-semibold">Español - Alemán</span>
+                Idiomas disponibles:{" "}
+                <span className="font-semibold">Español - Alemán</span>
               </p>
               <p className="mt-2 text-base leading-relaxed break-words font-poppins">
-                {course.description}
+                {course.description.slice(0, 490)} . . .
                 <Link href={`/cursos`}>
-                  <span className="text-blue-600 hover:underline ml-1 font-poppins">Ver Más...</span>
+                  <span className="text-blue-600 hover:underline ml-1 font-poppins">
+                    Ver Más
+                  </span>
                 </Link>
               </p>
             </div>
