@@ -11,9 +11,9 @@ const useAddCourse = () => {
     setError(null);
     setSuccess(false);
 
-    console.log(courseData, "DATA QUE SE ENVIA DESDE EL FRONT");
-
     try {
+      const token = localStorage.getItem('token');
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/add-course`,
         courseData, // 2do parámetro = body
@@ -25,7 +25,7 @@ const useAddCourse = () => {
       );
 
       setSuccess(true);
-      return response.data;
+      return response;
     } catch (err) {
       setError(err.response?.data?.message || "Error al agregar el curso");
     } finally {

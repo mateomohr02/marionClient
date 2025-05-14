@@ -18,8 +18,10 @@ const FormAddCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const response = await addCourse(form);
-    if (response.data.status === 'success') {
+
+    if (response?.data?.status === 'success') {
         alert('Curso agregado con éxito.')
         setForm({
             name: '',

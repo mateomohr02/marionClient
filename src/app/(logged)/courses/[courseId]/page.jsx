@@ -12,7 +12,8 @@ const page = () => {
   const { lessons, loading, error } = useGetCourseLessons(paramsId);
 
   if (loading) return <p>Cargando lecciones...</p>;
-  if (error) return <p>Error al cargar lecciones</p>;
+  if (lessons.length === 0) return <p>Todavía no hay clases para el curso.</p>;
+
 
   return (
     <div>

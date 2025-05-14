@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,7 +6,7 @@ import {
   setCurrentCourse,
   setCurrentLesson,
   setLessonDetail,
-  setCourseDetail
+  setCourseDetail,
 } from "../redux/slices/courseSlice";
 
 export const useGetCourseLessons = (courseId) => {
@@ -16,6 +16,7 @@ export const useGetCourseLessons = (courseId) => {
 
   const existingLessons = useSelector((state) => state.course.courseLessons);
   const currentCourseId = useSelector((state) => state.course.currentCourse);
+  const hasFetched = useRef(false); // previene que se vuelva a llamar
 
   useEffect(() => {
     const fetchLessons = async () => {
@@ -31,15 +32,16 @@ export const useGetCourseLessons = (courseId) => {
           }
         );
 
-        console.log(response.data, 'RESPUESTA HOOK');
-        
-
-        dispatch(setCurrentCourse(courseId));
-        dispatch(setCourseLessons(response.data.data));
-        dispatch(setLessonDetail(response.data.data[0]));
-        dispatch(setCurrentLesson(response.data.data[0].id));
+        dispatch(setCourseLessons(response.data.data || []));
         dispatch(setCourseDetail(response.data.course));
+        dispatch(setCurrentCourse(courseId));
 
+        if (response.data.data && response.data.data.length > 0) {
+          dispatch(setLessonDetail(response.data.data[0]));
+          dispatch(setCurrentLesson(response.data.data[0].id));
+        }
+
+        hasFetched.current = true;
       } catch (err) {
         console.error("Error al obtener las lecciones:", err.message);
         setError(err);
@@ -48,16 +50,17 @@ export const useGetCourseLessons = (courseId) => {
       }
     };
 
+    // Solo ejecuta si no se ha cargado aún
     if (
       courseId &&
+      !hasFetched.current &&
       (currentCourseId !== courseId || !existingLessons || existingLessons.length === 0)
     ) {
       fetchLessons();
     } else {
       setLoading(false); // ya había datos, no hace falta cargar
     }
-  }, [courseId, currentCourseId, existingLessons, dispatch]);
+  }, [courseId, dispatch]); // removimos las dependencias que cambian con dispatch
 
   return { lessons: existingLessons, loading, error };
-
 };
