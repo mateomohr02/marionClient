@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import useAddPost from '../../../hooks/useAddPost';
+import { Plus } from "lucide-react";
+
+
 
 const FormAddPost = () => {
   const { addPost, loading, error, success } = useAddPost();
@@ -40,7 +43,9 @@ const FormAddPost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded shadow-md max-w-5xl mx-auto">
+      <h3 className='mx-auto font-semibold text-xl'>Añadir Publicación al Blog</h3>
+       <hr />
       <input
         name="title"
         placeholder="Título"
@@ -83,24 +88,24 @@ const FormAddPost = () => {
             onClick={() => removeBlock(index)}
             className="text-red-500 text-sm self-end"
           >
-            Eliminar
+            Descartar
           </button>
         </div>
       ))}
 
       <div className="flex gap-2">
-        <button type="button" onClick={() => addBlock('text')} className="text-blue-600 underline text-sm">
-          + Texto
+        <button type="button" onClick={() => addBlock('text')} className="px-2 bg-white py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300">
+          <Plus className="p-1" /> Texto
         </button>
-        <button type="button" onClick={() => addBlock('image')} className="text-blue-600 underline text-sm">
-          + Imagen
+        <button type="button" onClick={() => addBlock('image')} className="px-2 bg-white py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300">
+          <Plus className="p-1" /> Imagen
         </button>
-        <button type="button" onClick={() => addBlock('video')} className="text-blue-600 underline text-sm">
-          + Video
+        <button type="button" onClick={() => addBlock('video')} className="px-2 bg-white py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300">
+          <Plus className="p-1" /> Video
         </button>
       </div>
-
-      <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded" disabled={loading}>
+       <hr />
+      <button type="submit" className="hover:bg-blue-600 bg-blue-500 text-white py-2 px-4 rounded" disabled={loading}>
         {loading ? 'Publicando...' : 'Publicar'}
       </button>
 

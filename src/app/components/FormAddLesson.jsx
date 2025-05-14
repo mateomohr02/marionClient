@@ -3,6 +3,8 @@
 import { useState } from "react";
 import useFetchCourses from "../../../hooks/useFetchCourses";
 import axios from "axios";
+import { Plus } from "lucide-react";
+import LessonCard from "./profile/LessonCard";
 
 const FormAddLesson = () => {
   const { courses, loading, error } = useFetchCourses();
@@ -114,184 +116,197 @@ const FormAddLesson = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-2xl">
-      <select
-        value={courseId}
-        onChange={(e) => setCourseId(e.target.value)}
-        className="p-2 border rounded"
+    <>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded shadow-md max-w-5xl mx-auto"
       >
-        <option value="">Seleccionar curso</option>
-        {courses.map((course) => (
-          <option key={course.id} value={course.id}>
-            {course.name}
+        <h3 className="mx-auto font-semibold text-xl">Añadir Clase</h3>
+        <hr />
+        <select
+          value={courseId}
+          onChange={(e) => setCourseId(e.target.value)}
+          className="p-2 border rounded"
+        >
+          <option value="">
+            Seleccionar el curso al que pertenece la clase
           </option>
-        ))}
-      </select>
+          {courses.map((course) => (
+            <option key={course.id} value={course.id}>
+              {course.name}
+            </option>
+          ))}
+        </select>
 
-      <input
-        placeholder="Título de la lección"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="p-2 border rounded"
-      />
+        <input
+          placeholder="Título de la Clase"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="p-2 border rounded"
+        />
 
-      {contentBlocks.map((block, index) => (
-        <div key={index} className="border p-2 rounded bg-gray-50">
-          <label className="text-sm text-gray-600">
-            {block.contentType.toUpperCase()}
-          </label>
+        {contentBlocks.map((block, index) => (
+          <div key={index} className="border p-2 rounded bg-gray-50">
+            <label className="text-sm text-gray-600">
+              {block.contentType.toUpperCase()}
+            </label>
 
-          {block.contentType === "text" && (
-            <textarea
-              value={block.value}
-              onChange={(e) =>
-                handleContentChange(index, "value", e.target.value)
-              }
-              className="p-2 border rounded w-full"
-              placeholder="Texto"
-            />
-          )}
+            {block.contentType === "text" && (
+              <textarea
+                value={block.value}
+                onChange={(e) =>
+                  handleContentChange(index, "value", e.target.value)
+                }
+                className="p-2 border rounded w-full"
+                placeholder="Texto"
+              />
+            )}
 
-          {["image", "video"].includes(block.contentType) && (
-            <input
-              type="text"
-              value={block.value}
-              onChange={(e) =>
-                handleContentChange(index, "value", e.target.value)
-              }
-              className="p-2 border rounded w-full"
-              placeholder={`URL de ${block.contentType}`}
-            />
-          )}
-
-          {block.contentType === "section" && (
-            <div className="flex flex-col gap-2">
+            {["image", "video"].includes(block.contentType) && (
               <input
                 type="text"
-                value={block.subtitle}
+                value={block.value}
                 onChange={(e) =>
-                  handleSectionChange(index, "subtitle", e.target.value)
+                  handleContentChange(index, "value", e.target.value)
                 }
-                placeholder="Subtítulo"
-                className="p-2 border rounded"
+                className="p-2 border rounded w-full"
+                placeholder={`URL de ${block.contentType}`}
               />
-              {block.value.map((inner, innerIndex) => (
-                <div key={innerIndex} className="flex flex-col gap-1 ml-4">
-                  <label className="text-xs">{inner.contentType}</label>
-                  {inner.contentType === "text" && (
-                    <textarea
-                      value={inner.value}
-                      onChange={(e) =>
-                        handleSectionInnerChange(
-                          index,
-                          innerIndex,
-                          "value",
-                          e.target.value
-                        )
-                      }
-                      placeholder="Texto"
-                      className="p-2 border rounded"
-                    />
-                  )}
-                  {["image", "video"].includes(inner.contentType) && (
-                    <input
-                      type="text"
-                      value={inner.value}
-                      onChange={(e) =>
-                        handleSectionInnerChange(
-                          index,
-                          innerIndex,
-                          "value",
-                          e.target.value
-                        )
-                      }
-                      placeholder={`URL de ${inner.contentType}`}
-                      className="p-2 border rounded"
-                    />
-                  )}
+            )}
+
+            {block.contentType === "section" && (
+              <div className="flex flex-col gap-2">
+                <input
+                  type="text"
+                  value={block.subtitle}
+                  onChange={(e) =>
+                    handleSectionChange(index, "subtitle", e.target.value)
+                  }
+                  placeholder="Subtítulo"
+                  className="p-2 border rounded"
+                />
+                {block.value.map((inner, innerIndex) => (
+                  <div key={innerIndex} className="flex flex-col gap-1 ml-4">
+                    <label className="text-xs">{inner.contentType}</label>
+                    {inner.contentType === "text" && (
+                      <textarea
+                        value={inner.value}
+                        onChange={(e) =>
+                          handleSectionInnerChange(
+                            index,
+                            innerIndex,
+                            "value",
+                            e.target.value
+                          )
+                        }
+                        placeholder="Texto"
+                        className="p-2 border rounded"
+                      />
+                    )}
+                    {["image", "video"].includes(inner.contentType) && (
+                      <input
+                        type="text"
+                        value={inner.value}
+                        onChange={(e) =>
+                          handleSectionInnerChange(
+                            index,
+                            innerIndex,
+                            "value",
+                            e.target.value
+                          )
+                        }
+                        placeholder={`URL de ${inner.contentType}`}
+                        className="p-2 border rounded"
+                      />
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => removeSectionInnerBlock(index, innerIndex)}
+                      className="text-red-500 text-xs self-end"
+                    >
+                      Descartar
+                    </button>
+                  </div>
+                ))}
+                <div className="flex gap-2">
                   <button
                     type="button"
-                    onClick={() => removeSectionInnerBlock(index, innerIndex)}
-                    className="text-red-500 text-xs self-end"
+                    onClick={() => addSectionInnerBlock(index, "text")}
+                    className="px-2 py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
                   >
-                    Eliminar
+                    <Plus className="p-1" />
+                    Añadir Texto
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => addSectionInnerBlock(index, "image")}
+                    className="px-2 py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
+                  >
+                    <Plus className="p-1" /> Imagen
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => addSectionInnerBlock(index, "video")}
+                    className="px-2 py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
+                  >
+                    <Plus className="p-1" /> Video
                   </button>
                 </div>
-              ))}
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => addSectionInnerBlock(index, "text")}
-                  className="text-blue-600 text-sm underline"
-                >
-                  + Texto
-                </button>
-                <button
-                  type="button"
-                  onClick={() => addSectionInnerBlock(index, "image")}
-                  className="text-blue-600 text-sm underline"
-                >
-                  + Imagen
-                </button>
-                <button
-                  type="button"
-                  onClick={() => addSectionInnerBlock(index, "video")}
-                  className="text-blue-600 text-sm underline"
-                >
-                  + Video
-                </button>
               </div>
-            </div>
-          )}
+            )}
 
+            <button
+              type="button"
+              onClick={() => removeBlock(index)}
+              className="px-2 py-1 flex items-center gap-1 border hover:bg-red-100 text-red-600 hover:border-red-600 rounded transition-all ease-in-out duration-300 mt-2"
+            >
+              Descartar
+            </button>
+          </div>
+        ))}
+
+        <div className="flex gap-2">
           <button
             type="button"
-            onClick={() => removeBlock(index)}
-            className="text-red-500 text-sm mt-2"
+            onClick={() => addBlock("text")}
+            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
           >
-            Eliminar bloque
+            <Plus className="p-1" /> Texto
+          </button>
+          <button
+            type="button"
+            onClick={() => addBlock("image")}
+            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
+          >
+            <Plus className="p-1" /> Imagen
+          </button>
+          <button
+            type="button"
+            onClick={() => addBlock("video")}
+            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
+          >
+            <Plus className="p-1" /> Video
+          </button>
+          <button
+            type="button"
+            onClick={() => addBlock("section")}
+            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
+          >
+            <Plus className="p-1" /> Sección
           </button>
         </div>
-      ))}
-
-      <div className="flex gap-2">
+        <hr />
         <button
-          type="button"
-          onClick={() => addBlock("text")}
-          className="text-blue-600 underline text-sm"
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
         >
-          + Texto
+          Añadir Clase
         </button>
-        <button
-          type="button"
-          onClick={() => addBlock("image")}
-          className="text-blue-600 underline text-sm"
-        >
-          + Imagen
-        </button>
-        <button
-          type="button"
-          onClick={() => addBlock("video")}
-          className="text-blue-600 underline text-sm"
-        >
-          + Video
-        </button>
-        <button
-          type="button"
-          onClick={() => addBlock("section")}
-          className="text-blue-600 underline text-sm"
-        >
-          + Sección
-        </button>
-      </div>
-
-      <button
-        type="submit"
-        className="bg-blue-600 text-white py-2 px-4 rounded"
-      >
-        Crear Lección
-      </button>
-    </form>
+      </form>
+      <h3 className="text-2xl font-semibold text-center my-4">Vista Previa de la Clase:</h3>
+      <LessonCard lesson={{ title, content: contentBlocks }} />
+    </>
   );
 };
 
