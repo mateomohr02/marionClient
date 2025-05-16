@@ -2,11 +2,12 @@
 
 import { useParams } from "next/navigation";
 import PostDetail from "@/app/components/PostDetail";
-import useGetPostDetail from "../../../../../hooks/useGetPostDetail";
+import useGetPostDetail from "../../../../../../../hooks/useGetPostDetail";
 
 const Page = () => {
-  const { postId } = useParams();
-  const { post, loading } = useGetPostDetail(postId); // solo blog
+  const { postId, courseId } = useParams();
+
+  const { post, loading } = useGetPostDetail(postId, courseId); // solo blog
 
   return (
     <div>

@@ -5,9 +5,12 @@ import {
 } from "../../../redux/slices/courseSlice";
 import { useState, useRef } from "react";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const CourseNavBar = () => {
   const dispatch = useDispatch();
+  const pathname = usePathname();
   const lessons = useSelector((state) => state.course.courseLessons);
   const currentLesson = useSelector((state) => state.course.currentLesson);
   const currentLessonDetail = useSelector((state) => state.course.lessonDetail);
@@ -82,9 +85,11 @@ const CourseNavBar = () => {
       </div>
 
       <div className="p-[2px] rounded-full bg-gradient-to-r from-gradientLeft to-gradientRight">
-        <button className="text-xl text-black font-semibold px-4 py-2 rounded-full bg-snow/70 hover:bg-snow transition-all ease-in-out duration-300">
-          Ir al Foro del Curso
-        </button>
+        <Link href={`${pathname}/foro`}>
+          <span className="block text-xl text-black font-semibold px-4 py-2 rounded-full bg-snow/70 hover:bg-snow transition-all ease-in-out duration-300">
+            Ir al Foro del Curso
+          </span>
+        </Link>
       </div>
     </div>
   );

@@ -1,9 +1,14 @@
+'use client'
+
 import Link from "next/link";
 import { Undo2 } from "lucide-react";
 import CommentSection from "./CommentSection";
 import FormAddComment from "./FormAddComment";
+import { useRouter } from "next/navigation";
 
 const PostDetail = ({ data }) => {
+  const router = useRouter();
+
   return (
     <div className="mt-6 rounded-2xl relative max-w-[calc(60vw)] mx-auto p-6">
       
@@ -13,25 +18,26 @@ const PostDetail = ({ data }) => {
       {/* Contenido por encima del fondo */}
       <div className="relative z-10 space-y-6">
 
-        {/* Contenedor del botón y título */}
-        <div className="flex items-center justify-between mb-6">
-          
+        {/* Contenedor superior con título y botón */}
+        <div className="flex justify-between items-start mb-6">
+
+          {/* Título y autor */}
+          <div className="flex-1">
+            <h2 className="text-3xl font-bold text-black">{data?.title}</h2>
+            {data.User?.name && (
+              <p className="text-sm sm:text-base text-black font-poppins mt-1">
+                Publicación de: <span className="font-medium">{data.User.name}</span>
+              </p>
+            )}
+          </div>
+
           {/* Botón de volver */}
-          <Link
-            href="/comunidad"
+          <button
+            onClick={() => router.back()}
             className="flex items-center gap-2 bg-pastelPink text-black font-semibold font-poppins p-2 rounded-full hover:shadow-md hover:bg-snow transition-all ease-in-out duration-300"
           >
             <Undo2 size={25} />
-          </Link>
-
-          {/* Título */}
-          <h2 className="flex-1 text-3xl font-bold text-center text-black">
-            {data?.title}
-          </h2>
-
-          {/* Espacio invisible para balancear el layout */}
-          <div className="w-[90px]"></div>
-
+          </button>
         </div>
 
         {/* Contenido dinámico */}
@@ -70,16 +76,17 @@ const PostDetail = ({ data }) => {
             );
           }
         })}
+
+        {/* Comentarios */}
         <div className="bg-pastelPink/70 rounded-2xl p-4">
-        <h3 className="text-2xl font-poppins">Comentarios</h3>
-        <span></span>
-          <FormAddComment postId={data?.id}/>
-          <CommentSection data={data?.Replies} postId={data?.id}/>
+          <h3 className="text-2xl font-poppins">Comentarios</h3>
+          <FormAddComment postId={data?.id} />
+          <CommentSection data={data?.Replies} postId={data?.id} />
         </div>
       </div>
-
     </div>
   );
 };
 
 export default PostDetail;
+

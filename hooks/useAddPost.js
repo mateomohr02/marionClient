@@ -6,7 +6,7 @@ const useAddPost = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  const addPost = async (formData) => {
+  const addPost = async (formData, courseId = null) => {
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -14,14 +14,17 @@ const useAddPost = () => {
     try {
       const token = localStorage.getItem('token');
 
-      // Armar array de bloques desde el nuevo formato
       const content = formData.content.map((c) => ({
         contentType: c.contentType,
         value: c.value,
       }));
 
+      const endpoint = courseId
+        ? `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/forum/${courseId}`
+        : `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/add-post`;
+
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/add-post`,
+        endpoint,
         {
           title: formData.title,
           content,
@@ -36,7 +39,6 @@ const useAddPost = () => {
       setSuccess(true);
       return response.data;
     } catch (err) {
-
       setError(err.response?.data?.message || 'Error al agregar la publicación');
     } finally {
       setLoading(false);

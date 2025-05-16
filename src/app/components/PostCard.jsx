@@ -1,11 +1,20 @@
 import React from "react";
 import Link from "next/link";
 import { Image, Video } from "lucide-react";
+import { usePathname } from "next/navigation";
+
 
 const PostCard = ({ post }) => {
+
+  const pathname = usePathname();
+
   const contentPreview = (post.content || []).slice(0, 3);
-  const imageCount = post.content?.filter(c => c.contentType === 'image' && c.value?.trim()).length || 0;
-  const hasVideo = post.content?.some(c => c.contentType === 'video' && c.value?.trim());
+  const imageCount =
+    post.content?.filter((c) => c.contentType === "image" && c.value?.trim())
+      .length || 0;
+  const hasVideo = post.content?.some(
+    (c) => c.contentType === "video" && c.value?.trim()
+  );
 
   let showingText = true;
 
@@ -19,15 +28,23 @@ const PostCard = ({ post }) => {
             {post.title}
           </h2>
 
+          {post.User?.name && (
+            <p className="text-sm sm:text-base text-black font-poppins -mt-4">
+              Publicación de: <span className="font-medium">{post.User.name}</span>
+            </p>
+          )}
+
           {contentPreview.map((block, i) => {
-            if (block.contentType === 'text' && showingText) {
+            if (block.contentType === "text" && showingText) {
               showingText = false;
               return (
                 <p
                   key={i}
                   className="text-sm sm:text-base font-poppins text-black break-words"
                 >
-                  {block.value.length > 250 ? `${block.value.slice(0, 250)}...` : block.value}
+                  {block.value.length > 250
+                    ? `${block.value.slice(0, 250)}...`
+                    : block.value}
                 </p>
               );
             }
@@ -52,7 +69,7 @@ const PostCard = ({ post }) => {
             </div>
 
             <Link
-              href={`/comunidad/${post.id}`}
+              href={`${pathname}/${post.id}`}
               className="self-start sm:self-auto px-4 py-2 bg-pastelPink rounded-2xl hover:shadow-md text-black font-semibold font-poppins hover:bg-snow transition-all ease-in-out duration-300"
             >
               Ver más sobre esta publicación
