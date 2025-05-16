@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const CourseCard = ({ course, index }) => {
   const pathname = usePathname();
   const courseSlug = course.name.replace(/\s+/g, "-");
+
+  console.log(course, "cursooo");
 
   return (
     <div className="w-full">
@@ -14,8 +17,13 @@ const CourseCard = ({ course, index }) => {
         {/* Contenido en fila */}
         <div className="relative flex gap-8 items-start z-10 max-w-6xl w-full">
           {/* Imagen */}
-          <div className="w-[275px] h-[275px] bg-gray-300 flex items-center justify-center flex-shrink-0">
-            <span className="text-gray-600 text-lg">Imagen {index + 1}</span>
+          <div className="w-[275px] h-[275px] relative flex-shrink-0 overflow-hidden rounded-lg shadow-md">
+            <Image
+              src={course.poster}
+              alt={`Imagen del curso ${course.name}`}
+              fill
+              className="object-cover"
+            />
           </div>
 
           {/* Bloque de texto */}
@@ -54,4 +62,3 @@ const CourseCard = ({ course, index }) => {
 };
 
 export default CourseCard;
-
