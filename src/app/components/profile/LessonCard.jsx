@@ -18,14 +18,13 @@ const LessonCard = ({ lesson: lessonProp }) => {
       <h1 className="text-4xl font-semibold mb-4 w-3/5 m-auto">
         {lesson.title}
       </h1>
-
       <div className="flex flex-col gap-4">
         {lesson?.content?.map((cont, index) => {
           if (cont.contentType === "text") {
             return (
               <p
                 key={index}
-                className="text-base leading-relaxed text-left w-3/5 m-auto"
+                className="mt-3 text-base text-justify leading-relaxed font-poppins w-3/5 m-auto"
               >
                 {cont.value}
               </p>
@@ -92,7 +91,7 @@ const LessonCard = ({ lesson: lessonProp }) => {
                   <div className="flex flex-col md:flex-row gap-8">
                     <div className="w-[calc(100vw/8*5)]">
                       {textContent && (
-                        <p className="text-base leading-relaxed text-left">
+                        <p className="text-base text-justify leading-relaxed font-poppins">
                           {textContent.value}
                         </p>
                       )}

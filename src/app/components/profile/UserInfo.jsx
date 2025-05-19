@@ -53,6 +53,7 @@ const UserInfo = ({ userData }) => {
               title={course.name}
               courseId={course.id}
               description={course.description}
+              poster={course.poster}
             />
           ))}
           <div className="px-20 pt-2">

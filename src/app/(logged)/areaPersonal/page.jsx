@@ -25,6 +25,8 @@ const Page = () => {
 
   if (!isAuthChecked) return null;
 
+  
+
   return (
     <div>
       {user?.userType === '0' ? <AdminPanel /> : <UserInfo userData={user}/>}
