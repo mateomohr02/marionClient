@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { CornerDownRight } from "lucide-react";
@@ -12,7 +12,9 @@ const CommentCard = ({ data, level = 0, postId }) => {
 
   return (
     <div className="my-4" style={{ paddingLeft }}>
-      <p className="font-poppins font-semibold">{data.User?.name || 'Usuario'}</p>
+      <p className="font-poppins font-semibold">
+        {data.User?.name || "Usuario"}
+      </p>
       <div className="mt-2">
         <p className="font-poppins">{data.content}</p>
         <button
@@ -25,12 +27,16 @@ const CommentCard = ({ data, level = 0, postId }) => {
       </div>
 
       {showReplyForm && (
-        <FormAddComment postId={postId} parentId={data.id} />
+        <FormAddComment
+          postId={postId}
+          parentId={data.id}
+          onCancel={() => setShowReplyForm(false)} // ✅ cerrar al enviar o cancelar
+        />
       )}
 
       {data.replies && data.replies.length > 0 && (
         <div className="mt-4">
-          {data.replies.map(reply => (
+          {data.replies.map((reply) => (
             <CommentCard
               key={reply.id}
               data={reply}

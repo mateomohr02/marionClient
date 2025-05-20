@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   blogPosts: [],
   currentPost: null,
-  comments: [],
+  postDetail: null,
 };
 
 const blogSlice = createSlice({
@@ -16,9 +16,18 @@ const blogSlice = createSlice({
     setCurrentPost: (state, action) => {
       state.currentPost = action.payload;
     },
-    setComments: (state, action) => {
-      state.comments = action.payload;
+    setPostDetail: (state, action) => {
+      state.postDetail = action.payload;
     },
+    addReplyToPostDetail: (state, action) => {
+      if (state.postDetail && state.postDetail.Replies) {
+        state.postDetail.Replies = [
+          ...state.postDetail.Replies,
+          action.payload,
+        ];
+      }
+    },
+
     clearBlogState: () => initialState,
   },
 });
@@ -26,8 +35,9 @@ const blogSlice = createSlice({
 export const {
   setBlogPosts,
   setCurrentPost,
-  setComments,
   clearBlogState,
+  setPostDetail,
+  addReplyToPostDetail,
 } = blogSlice.actions;
 
 export default blogSlice.reducer;

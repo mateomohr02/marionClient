@@ -1,16 +1,18 @@
 import CommentCard from "./CommentCard";
 
-const CommentSection = ({ data, postId}) => {
-  // Construir un mapa de comentarios por ID
+const CommentSection = ({ data, postId }) => {
+  // Clonar los comentarios para evitar modificar los originales
   const commentMap = {};
-  data.forEach(comment => {
-    comment.replies = [];
+  const clonedData = data.map(comment => ({ ...comment, replies: [] }));
+
+  // Construir mapa de comentarios
+  clonedData.forEach(comment => {
     commentMap[comment.id] = comment;
   });
 
   // Llenar el árbol de comentarios
   const rootComments = [];
-  data.forEach(comment => {
+  clonedData.forEach(comment => {
     if (comment.parentId === null) {
       rootComments.push(comment);
     } else {
@@ -31,4 +33,3 @@ const CommentSection = ({ data, postId}) => {
 };
 
 export default CommentSection;
-
