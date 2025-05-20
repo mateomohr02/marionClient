@@ -84,13 +84,18 @@ const CourseNavBar = () => {
         </div>
       </div>
 
-      <div className="p-[2px] rounded-full bg-gradient-to-r from-gradientLeft to-gradientRight">
-        <Link href={`${pathname}/foro`}>
-          <span className="block text-xl text-black font-semibold px-4 py-2 rounded-full bg-snow/70 hover:bg-snow transition-all ease-in-out duration-300">
-            Ir al Foro del Curso
-          </span>
-        </Link>
-      </div>
+      <Link
+        href={`${pathname}/foro`}
+        className="relative inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group"
+      >
+        {/* Fondo animado */}
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-fuchsia-500 to-rose-400 rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
+
+        {/* Contenido del botón */}
+        <span className="relative z-10 px-6 py-2 text-base sm:text-lg bg-white/80 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
+          🗪 Foro del Curso
+        </span>
+      </Link>
     </div>
   );
 };
