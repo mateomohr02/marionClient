@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mercadopago/sdk-react": "^1.0.3",
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.8.4",
     "lucide-react": "^0.487.0",
