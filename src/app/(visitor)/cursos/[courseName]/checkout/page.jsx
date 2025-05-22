@@ -1,15 +1,13 @@
 "use client";
 
+import Checkout from "@/app/components/Checkout";
 import { useValidateCheckout } from "../../../../../../hooks/useValidateCheckout";
 import { useParams } from "next/navigation";
 
 const Page = () => {
-  const {courseName} = useParams(); // Ej: "Parto-Suave"
+  const {courseName} = useParams();
 
-  const formattedSlug = courseName.replace(/-/g, " "); // Ej: "Parto Suave"
-
-    console.log(formattedSlug, 'slug');
-    
+  const formattedSlug = courseName.replace(/-/g, " "); 
 
   const { item, loading, error, success } = useValidateCheckout(formattedSlug);
 
@@ -17,11 +15,8 @@ const Page = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">{item.name}</h1>
-      <p className="mt-2">{item.description}</p>
-      <p className="mt-2">Precio: ${item.price}</p>
-      {/* Aquí podrías renderizar el botón de pago */}
+    <div>
+      <Checkout item={item}/>
     </div>
   );
 };
