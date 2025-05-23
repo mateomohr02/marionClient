@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "./Loading";
 
 const Checkout = ({ item }) => {
   const [loading, setLoading] = useState(true);
@@ -46,7 +47,7 @@ const Checkout = ({ item }) => {
     createPreferenceAndRedirect();
   }, []);
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <Loading/>;
   if (error) return <div>{error}</div>;
 
   return null; // Nunca llega acá si redirige correctamente

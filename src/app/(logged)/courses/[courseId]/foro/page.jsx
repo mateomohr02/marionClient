@@ -4,6 +4,7 @@ import FormAddPostForum from "@/app/components/FormAddPostForum";
 import useGetCourseForum from "../../../../../../hooks/useGetCourseForum";
 import PostCard from "../../../../components/PostCard";
 import { useParams } from "next/navigation";
+import Loading from "@/app/components/Loading";
 
 
 const Page = () => {
@@ -19,7 +20,7 @@ const Page = () => {
 
   return (
     <div className="min-h-[calc(100vh-8rem)]">
-      {loading && <div className="h-screen"></div>}
+      {loading && <Loading/>}
       {error && <p className="text-red-500">{error}</p>}
       {!loading && posts.length === 0 && (
         <p>No hay publicaciones disponibles.</p>

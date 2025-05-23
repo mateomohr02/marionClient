@@ -1,12 +1,13 @@
 "use client";
 
+import Loading from "@/app/components/Loading";
 import useFetchCourses from "../../../../hooks/useFetchCourses";
 import CourseCard from "@/app/components/CourseCard";
 
 const CoursesPage = () => {
   const { courses, loading, error } = useFetchCourses();
 
-  if (loading) return <div className="h-screen"></div>;
+  if (loading) return <Loading/>;
   if (error) return <p>{error}</p>;
 
   return (

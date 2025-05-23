@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/components/Loading";
 import useGetPosts from "../../../../hooks/useGetPosts";
 import PostCard from "../../components/PostCard";
 
@@ -11,7 +12,7 @@ const Page = () => {
 
   return (
     <div className="min-h-[calc(100vh-8rem)]">
-      {loading && <div className="h-screen"></div>}
+      {loading && <Loading/>}
       {error && <p className="text-red-500">{error}</p>}
       {!loading && posts.length === 0 && (
         <p>No hay publicaciones disponibles.</p>

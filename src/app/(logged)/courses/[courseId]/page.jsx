@@ -5,13 +5,14 @@ import { useGetCourseLessons } from "../../../../../hooks/useGetCourseLessons"; 
 import { useParams } from "next/navigation";
 import LessonCard from "@/app/components/profile/LessonCard";
 import LessonFooterNavigation from "@/app/components/LessonFooterNavigation";
+import Loading from "@/app/components/Loading";
 
 const page = () => {
   const params = useParams();
   const paramsId = params.courseId;
   const { lessons, loading, error } = useGetCourseLessons(paramsId);
 
-  if (loading) return <p>Cargando lecciones...</p>;
+  if (loading) return <Loading/>;
   if (lessons.length === 0) return <p>Todavía no hay clases para el curso.</p>;
 
 

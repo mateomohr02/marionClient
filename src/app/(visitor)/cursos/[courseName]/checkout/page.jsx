@@ -3,6 +3,7 @@
 import Checkout from "@/app/components/Checkout";
 import { useValidateCheckout } from "../../../../../../hooks/useValidateCheckout";
 import { useParams } from "next/navigation";
+import Loading from "@/app/components/Loading";
 
 const Page = () => {
   const {courseName} = useParams();
@@ -11,7 +12,7 @@ const Page = () => {
 
   const { item, loading, error, success } = useValidateCheckout(formattedSlug);
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <Loading/>;
   if (error) return <div>{error}</div>;
 
   return (
