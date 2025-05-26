@@ -21,7 +21,7 @@ const Checkout = ({ item }) => {
         }
 
         const response = await axios.post(
-          "http://localhost:5000/api/mercado-pago/create-preference-id",
+          "https://marionapi-production.up.railway.app//api/mercado-pago/create-preference-id",
           {
             title: item.name,
             unit_price: item.price,
