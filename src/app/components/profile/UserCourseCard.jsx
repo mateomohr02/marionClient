@@ -11,7 +11,7 @@ const UserCourseCard = ({
   const courseSlug = title.replace(/\s+/g, "-");
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-10">
       <div className="relative w-full flex justify-center p-6 sm:p-8 overflow-hidden shadow-lg bg-white/60 backdrop-blur-md">
         {/* Fondo degradado suave */}
         <div className="absolute inset-0 bg-gradient-to-l from-gradientRight to-gradientLeft opacity-25 pointer-events-none" />
