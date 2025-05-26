@@ -3,7 +3,6 @@
 import { useParams } from "next/navigation";
 import PostDetail from "@/app/components/PostDetail";
 import useGetPostDetail from "../../../../../hooks/useGetPostDetail";
-import { useSelector } from "react-redux";
 import Loading from "@/app/components/Loading";
 
 const Page = () => {

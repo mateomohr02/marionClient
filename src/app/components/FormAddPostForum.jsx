@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import useAddPost from "../../../hooks/useAddPost";
-import { useRouter } from "next/navigation";
 import { Forward } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addPostToForum } from "../../../redux/slices/blogSlice"; // <--- NUEVO
 
 const FormAddPostForum = ({ courseId }) => {
+  const dispatch = useDispatch();
   const { addPost, loading, error, success } = useAddPost();
-  const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -23,12 +24,12 @@ const FormAddPostForum = ({ courseId }) => {
     };
 
     const response = await addPost(postData, courseId);
-    if (response?.status === "success") {
+
+    if (response?.status === "success" && response.data) {
+      dispatch(addPostToForum(response.data)); 
       setTitle("");
       setContent("");
       setFocused(false);
-      alert("Publicación creada con éxito.");
-      router.refresh();
     }
   };
 
@@ -41,10 +42,8 @@ const FormAddPostForum = ({ courseId }) => {
   return (
     <div className="w-full my-6 px-4 md:px-0">
       <div className="relative flex justify-center">
-        {/* Fondo degradado */}
         <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft opacity-30 w-full max-w-4xl mx-auto rounded-2xl"></div>
 
-        {/* Contenido del formulario */}
         <form
           onSubmit={handleSubmit}
           className="relative z-10 w-full max-w-4xl rounded-2xl p-6 sm:p-8 shadow-sm backdrop-blur flex flex-col gap-4"
