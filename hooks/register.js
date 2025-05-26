@@ -12,7 +12,7 @@ export const useRegister = () => {
     console.log(name, email, password, 'DATA QUE LLEGA A LA ACTION');
     
     try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}api/auth/signup`, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/auth/signup`, {
         name,
         email,
         password,
