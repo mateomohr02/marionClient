@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="relative py-20 mt-10 before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-gradientLeft before:to-gradientRight after:absolute after:bottom-0 after:left-0 after:w-full after:h-[5px] after:bg-gradient-to-r after:from-gradientLeft after:to-gradientRight">
+    <div className="relative z-50 py-20 before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-gradientLeft before:to-gradientRight after:absolute after:bottom-0 after:left-0 after:w-full after:h-[5px] after:bg-gradient-to-r after:from-gradientLeft after:to-gradientRight">
       <div className="flex justify-between items-start max-w-7xl mx-auto">
         {/* Redes Sociales */}
         <div className="flex flex-col items-start gap-4">
