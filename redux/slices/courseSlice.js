@@ -5,7 +5,7 @@ const initialState = {
   currentCourse: null,
   courseLessons: [],
   currentLesson: null,
-  courseDetail: {},
+  courseDetail: null,
   lessonDetail: {},
 };
 

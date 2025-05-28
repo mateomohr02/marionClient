@@ -27,9 +27,7 @@ export const useValidateCheckout = (itemName) => {
               Authorization: `Bearer ${token}`,
             },
           }
-        );
-        console.log(response, 'responsessssesees');
-        
+        );        
         setItem(response.data.course);
         setSuccess(true);
       } catch (err) {
