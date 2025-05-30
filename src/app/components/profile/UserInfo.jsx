@@ -8,6 +8,7 @@ import Link from "next/link";
 import UserCourseCard from "./UserCourseCard";
 import { useRouter } from "next/navigation";
 
+
 const UserInfo = ({ userData }) => {
   const [userCourses, setUserCourses] = useState([]);
   const router = useRouter();

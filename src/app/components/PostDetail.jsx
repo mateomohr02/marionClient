@@ -4,6 +4,8 @@ import { Undo2 } from "lucide-react";
 import CommentSection from "./CommentSection";
 import FormAddComment from "./FormAddComment";
 import { useRouter } from "next/navigation";
+import { motion } from 'framer-motion';
+
 
 const PostDetail = ({ data }) => {
   const router = useRouter();
@@ -14,7 +16,11 @@ const PostDetail = ({ data }) => {
       <div className="absolute inset-0 bg-gradient-to-br from-gradientRight to-gradientLeft  opacity-20"></div>
 
       {/* Contenido por encima del fondo */}
-      <div className="relative z-10 space-y-6">
+      <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="relative z-10 space-y-6">
         {/* Contenedor superior con título y botón */}
         <div className="flex justify-between items-center gap-5 mb-6">
           {/* Título y autor */}
@@ -83,7 +89,7 @@ const PostDetail = ({ data }) => {
             <CommentSection data={data?.Replies} postId={data?.id} />
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

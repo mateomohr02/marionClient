@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from 'framer-motion';
 
 const UserCourseCard = ({
   title,
@@ -11,7 +12,11 @@ const UserCourseCard = ({
   const courseSlug = title.replace(/\s+/g, "-");
 
   return (
-    <div className="w-full mb-10">
+    <motion.div className="w-full mb-10"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
       <div className="relative w-full flex justify-center p-6 sm:p-8 overflow-hidden shadow-lg bg-white/60 backdrop-blur-md">
         {/* Fondo degradado suave */}
         <div className="absolute inset-0 bg-gradient-to-l from-gradientRight to-gradientLeft opacity-25 pointer-events-none" />
@@ -68,7 +73,7 @@ const UserCourseCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -2,29 +2,40 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { usePathname, useParams } from "next/navigation";
+import { useRouter, usePathname, useParams } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
-import { setCourseDetail } from "../../../../../redux/slices/courseSlice"; // Asegúrate de tener esta action
+import { setCourseDetail } from "../../../../../redux/slices/courseSlice";
 import Loading from "@/app/components/Loading";
+import { showAlert } from "../../../../../redux/slices/alertSlice";
 
 const Page = () => {
   const course = useSelector((state) => state.course.courseDetail);
   const dispatch = useDispatch();
   const pathname = usePathname();
   const params = useParams();
+  const router = useRouter();
   const courseSlug = params.courseName.replace(/-/g, " ");
   const [loading, setLoading] = useState(!course);
   const [error, setError] = useState(null);
+  const [authorization, setAuthorization] = useState(false);
+
 
   useEffect(() => {
     const fetchCourse = async () => {
-
       const token = localStorage.getItem("token");
+
+      // Si no hay token, redirige al login
+      if (!token) {
+        dispatch(showAlert("Para acceder a la clase gratuita necesita iniciar sesión."))
+        router.push("/login");
+        return;
+      }else{
+        setAuthorization(true);
+      }
 
       if (!course) {
         try {
-          
           const res = await axios.get(
             `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/get-course-by-name?name=${courseSlug}`,
             {
@@ -49,9 +60,9 @@ const Page = () => {
     };
 
     fetchCourse();
-  }, [course, courseSlug, dispatch]);
+  }, [course, courseSlug, dispatch, router]);
 
-  if (loading) return <Loading />;
+  if (loading || !authorization) return <Loading />;
   if (error) return <p>{error}</p>;
 
   const placeholder =

@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addReplyToPostDetail } from "../../../redux/slices/blogSlice";
+import { showAlert } from "../../../redux/slices/alertSlice";
+
+
 
 const FormAddComment = ({ postId, parentId = null, onCancel }) => {
   const router = useRouter();
@@ -23,8 +26,8 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      alert("Para realizar un comentario necesita iniciar sesión.");
-      router.push("/areaPersonal");
+      dispatch(showAlert("Para realizar un comentario necesita iniciar sesión."));
+      router.push("/login");
       return;
     }
 
@@ -42,17 +45,16 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
       const result = response.data;
 
       if (result.status === "success" && result.data) {
-        // Actualizar redux con el nuevo comentario o respuesta
         dispatch(addReplyToPostDetail(result.data));
         setContent("");
         setFocused(false);
         if (onCancel) onCancel();
       } else {
-        alert("Error al comentar.");
+        dispatch(showAlert("Error al comentar"));
       }
     } catch (err) {
       console.error(err);
-      alert("Error al comentar.");
+      dispatch(showAlert("Error al comentar"));
     } finally {
       setLoading(false);
     }
@@ -65,40 +67,42 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-4 mt-6">
-      <div className="flex-1">
-        <textarea
-          onFocus={() => setFocused(true)}
-          className="w-full p-2 resize-none border-b border-black bg-transparent text-black focus:outline-none focus:border-black transition-all min-h-[40px]"
-          rows={focused ? 3 : 1}
-          placeholder={parentId ? "Añade tu respuesta" : "Añade un comentario"}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
+    <>
+      <form onSubmit={handleSubmit} className="flex gap-4 mt-6">
+        <div className="flex-1">
+          <textarea
+            onFocus={() => setFocused(true)}
+            className="w-full p-2 resize-none border-b border-black bg-transparent text-black focus:outline-none focus:border-black transition-all min-h-[40px]"
+            rows={focused ? 3 : 1}
+            placeholder={parentId ? "Añade tu respuesta" : "Añade un comentario"}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
 
-        {(focused || content) && (
-          <div className="flex justify-end mt-2 gap-2">
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="px-4 py-1 text-sm font-medium text-black hover:text-black transition-all"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              disabled={!content.trim() || loading}
-              className={`flex items-center gap-1 bg-black text-white px-4 py-1.5 text-sm font-medium rounded-full hover:opacity-90 transition-all ${
-                !content.trim() || loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            >
-              <Forward size={16} />
-              Comentar
-            </button>
-          </div>
-        )}
-      </div>
-    </form>
+          {(focused || content) && (
+            <div className="flex justify-end mt-2 gap-2">
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="px-4 py-1 text-sm font-medium text-black hover:text-black transition-all"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                disabled={!content.trim() || loading}
+                className={`flex items-center gap-1 bg-black text-white px-4 py-1.5 text-sm font-medium rounded-full hover:opacity-90 transition-all ${
+                  !content.trim() || loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                <Forward size={16} />
+                Comentar
+              </button>
+            </div>
+          )}
+        </div>
+      </form>
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ const CourseCard = ({ course, index }) => {
 
   const handleClick = () => {
     setCourseDetail(course);
+    
   };
 
 const placeholder =

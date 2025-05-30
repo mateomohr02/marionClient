@@ -1,4 +1,5 @@
 import { StoreProvider } from "../../../redux/store/StoreProvider";
+import Alert from "../components/Alert";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import "../globals.css";
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
     <StoreProvider>
       <html lang="en">
         <body className={`${dancingScript.variable} ${poppins.variable} antialiased`}>
+          <Alert/>
           <NavBar />
           {children}
           <Footer />
