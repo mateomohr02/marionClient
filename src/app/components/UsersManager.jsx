@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Loading from "./Loading";
-import { setUsers, deleteUser } from "../../../redux/slices/adminSlice";
+import { setUsers, setUserActivity, deleteUser } from "../../../redux/slices/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
+import UserPosts from "./UserPosts";
+import useGetUserActivity from "../../../hooks/useGetUserActivity";
 
 const usePaginatedUsers = (page, limit = 10) => {
   const dispatch = useDispatch();
   const [qUsers, setqUsers] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+
   const token = typeof window !== "undefined" && localStorage.getItem("token");
 
   useEffect(() => {
@@ -26,7 +29,7 @@ const usePaginatedUsers = (page, limit = 10) => {
         );
 
         setqUsers(res.data.data.length);
-        dispatch(setUsers(res.data.data)); // ← Guardamos los usuarios en Redux
+        dispatch(setUsers(res.data.data));
         setTotalPages(res.data.pagination.totalPages);
       } catch (err) {
         console.error("Error fetching users:", err);
@@ -42,43 +45,79 @@ const usePaginatedUsers = (page, limit = 10) => {
 };
 
 const UsersManager = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const { totalPages, qUsers, loading } = usePaginatedUsers(page);
   const users = useSelector((state) => state.admin.users);
+  const activity = useSelector((state) => state.admin.activity);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [activityLoading, setActivityLoading] = useState(false);
   const token = typeof window !== "undefined" && localStorage.getItem("token");
 
-  const handleDelete = async (id) => {
-  if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return;
-
-  try {
-    await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_ROUTE}/api/users/${id}`,
-      {
+  const handleSync = async () => {
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/users/sync`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
-    );
-    dispatch(deleteUser(id)); // 🔥 Eliminar del store inmediatamente
-    alert("Usuario eliminado");
-    // NO es necesario hacer setPage(1), porque ya actualizamos Redux
-  } catch (error) {
-    console.error("Error al eliminar el usuario:", error);
-    alert("Error al eliminar el usuario");
-  }
-};
+      });
+    } catch (error) {
+      console.error("Error al Sincronizar", error);
+      alert("Error Sincronizar");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm("¿Estás seguro de que quieres eliminar este usuario?")) return;
+
+    try {
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_ROUTE}/api/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(deleteUser(id));
+      alert("Usuario eliminado");
+      if (selectedUserId === id) setSelectedUserId(null);
+    } catch (error) {
+      console.error("Error al eliminar el usuario:", error);
+      alert("Error al eliminar el usuario");
+    }
+  };
+
+  const handleUserActivityDisplay = async (userId) => {
+    setSelectedUserId(userId);
+    setActivityLoading(true);
+    try {
+      const data = await useGetUserActivity(userId);
+      dispatch(setUserActivity(data));
+    } catch (err) {
+      console.error("Error fetching user activity:", err);
+    } finally {
+      setActivityLoading(false);
+    }
+  };
 
   return (
-    <div>
+    <div className="p-4">
       {loading ? (
         <Loading />
       ) : (
         <>
-          <p className="text-xl px-2 mb-2">
-            Cantidad de Usuarios Totales: <span className="font-bold">{qUsers}</span>
-          </p>
-
+          <div className="flex justify-between items-center py-2">
+            <p className="text-xl px-2 mb-2">
+              Cantidad de Usuarios Totales: <span className="font-bold">{qUsers}</span>
+            </p>
+            <button
+              onClick={() => handleSync()}
+              className="inline-block rounded-full bg-blue-700 text-white py-2 px-4 font-medium"
+            >
+              Sincronizar Administradores
+            </button>
+          </div>
           <div className="bg-gradient-to-br from-gradientLeft to bg-gradientRight p-1 rounded-[0.75rem]">
             <table className="min-w-full overflow-hidden bg-snow/70 rounded-lg">
               <thead>
@@ -95,7 +134,9 @@ const UsersManager = () => {
                     <td className="py-2 px-4">{user.name}</td>
                     <td className="py-2 px-4">{user.email}</td>
                     <td className="py-2 px-4">
-                      {user.Courses && user.Courses.length > 0 ? (
+                      {user.userType === "0" ? (
+                        <span className="text-gray-600 italic">Administrador</span>
+                      ) : user.Courses && user.Courses.length > 0 ? (
                         <ul className="list-disc pl-4">
                           {user.Courses.map((course) => (
                             <li key={course.id}>{course.name}</li>
@@ -106,12 +147,12 @@ const UsersManager = () => {
                       )}
                     </td>
                     <td className="space-x-2 items-center py-2">
-                      <Link
-                        href={`/admin/users/${user.id}/posts`}
+                      <button
+                        onClick={() => handleUserActivityDisplay(user.id)}
                         className="inline-block rounded-full bg-white/60 text-black py-2 px-4 font-medium"
                       >
                         Ver Publicaciones
-                      </Link>
+                      </button>
                       <button
                         onClick={() => handleDelete(user.id)}
                         className="inline-block rounded-full bg-red-600 text-white py-2 px-4 font-medium"
@@ -146,9 +187,14 @@ const UsersManager = () => {
           Siguiente
         </button>
       </div>
+
+      {selectedUserId && (
+        <div className="mt-6">
+          {activityLoading ? <Loading /> : <UserPosts activity={activity} />}
+        </div>
+      )}
     </div>
   );
 };
 
 export default UsersManager;
-

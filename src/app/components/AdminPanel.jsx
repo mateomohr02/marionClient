@@ -50,7 +50,7 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
       {/* Barra de navegación superior */}
       <nav className="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200 shadow-sm relative">
         <h1 className="text-xl font-bold">Panel de Administrador</h1>
@@ -159,7 +159,7 @@ const AdminPanel = () => {
       </nav>
 
       {/* CONTENIDO */}
-      <main className="flex-1 p-6 overflow-y-auto w-full mx-auto">
+      <main className="flex-1 w-full mx-auto">
         {renderContent()}
       </main>
     </div>
