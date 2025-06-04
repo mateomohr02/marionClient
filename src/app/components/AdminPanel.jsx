@@ -7,6 +7,7 @@ import {
   PlusCircle,
   ListChecks,
   Users,
+  List,
   PenLine,
 } from 'lucide-react';
 import FormAddCourse from './FormAddCourse';
@@ -14,6 +15,8 @@ import FormAddLesson from './FormAddLesson';
 import FormAddPost from './FormAddPost';
 import { useLogout } from '../../../hooks/useLogout';
 import { useRouter } from 'next/navigation';
+import UserInfo from './profile/UserInfo';
+import UsersManager from './UsersManager';
 
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState(null);
@@ -37,8 +40,10 @@ const AdminPanel = () => {
         return <FormAddLesson />;
       case 'addPost':
         return <FormAddPost />;
+      case 'seeCourses':
+        return <UserInfo/>;
       case 'manageUsers':
-        return <div>Gestión de usuarios</div>;
+        return <UsersManager/>;
       default:
         return <div className="text-gray-500">Seleccioná una acción del menú superior.</div>;
     }
@@ -103,6 +108,16 @@ const AdminPanel = () => {
                 >
                   <ListChecks size={16} className="inline mr-2" />
                   Agregar Clase
+                </button>
+                <button
+                  onClick={() => {
+                    setActiveView('seeCourses');
+                    setOpenDropdown(null);
+                  }}
+                  className="block px-4 py-2 text-left w-full hover:bg-gray-100"
+                >
+                  <List size={16} className="inline mr-2" />
+                  Ver Cursos
                 </button>
               </div>
             )}
