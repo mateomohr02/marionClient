@@ -1,6 +1,6 @@
 "use client";
 
-import { Undo2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import CommentSection from "./CommentSection";
 import FormAddComment from "./FormAddComment";
 import { useRouter } from "next/navigation";
@@ -26,9 +26,9 @@ const PostDetail = ({ data }) => {
           {/* Título y autor */}
           <button
             onClick={() => router.back()}
-            className=" gap-2 text-gray-600 hover:text-black pb-1 px-2 hover:scale-110 transition-all ease-in-out duration-300"
+            className="px-2"
           >
-            <Undo2/>
+            <ArrowLeft className=""/>
           </button>
           <div className="flex-1">
             <h2 className="text-3xl font-bold text-black">{data?.title}</h2>

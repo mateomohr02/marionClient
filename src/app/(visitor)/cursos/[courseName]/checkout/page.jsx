@@ -14,6 +14,8 @@ const Page = () => {
   if (loading) return <Loading />;
   if (error) return <div>{error}</div>;
 
+  console.log(item);
+  
   return (
     <div>
       <Checkout item={item} />
