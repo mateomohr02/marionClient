@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 import Loading from "./Loading";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE); // 👈 stripe client
 
 const Checkout = ({ item }) => {
   const [error, setError] = useState(null);
@@ -37,7 +40,37 @@ const Checkout = ({ item }) => {
       window.location.href = init_point;
     } catch (err) {
       console.error("Error:", err);
-      setError("Hubo un error al iniciar el pago.");
+      setError("Hubo un error al iniciar el pago con Mercado Pago.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleStripeCheckout = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_ROUTE}/api/stripe/create-checkout-session`,
+        {
+          price: item.price,
+          name: item.name,
+          courseId: item.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const stripe = await stripePromise;
+      window.location.href = res.data.url;
+    } catch (err) {
+      console.error("Error con Stripe:", err);
+      setError("Hubo un error al iniciar el pago con Stripe.");
     } finally {
       setLoading(false);
     }
@@ -49,7 +82,6 @@ const Checkout = ({ item }) => {
 
   return (
     <div className="flex flex-col md:flex-row p-1 gap-1 max-w-screen-xl min-h-[calc(100vh-31rem)] mx-auto bg-gradient-to-br from-gradientLeft to-gradientRight rounded-[0.75rem] my-4">
-      {/* Columna izquierda - Información del curso */}
       <div className="flex-1 bg-snow/75 rounded-lg p-6 shadow-md">
         <Link
           href={`/cursos/${item.name.replace(/\s+/g, "-").toLowerCase()}`}
@@ -60,8 +92,8 @@ const Checkout = ({ item }) => {
             Detalle del Curso
           </div>
         </Link>
+
         <div className="flex">
-          {/* Texto */}
           <div className="flex-1 flex flex-col">
             <h2 className="text-2xl font-bold mt-2 text-gray-800">
               {item.name}
@@ -71,7 +103,6 @@ const Checkout = ({ item }) => {
             </p>
           </div>
 
-          {/* Imagen */}
           <div className="ml-6 w-2/5">
             <img
               src={item.poster}
@@ -82,7 +113,6 @@ const Checkout = ({ item }) => {
         </div>
       </div>
 
-      {/* Columna derecha - Resumen de compra */}
       <div className="w-full md:w-[350px] bg-snow/75 rounded-lg p-6 shadow-md">
         <h3 className="text-lg font-semibold text-gray-700 mb-4">
           Resumen de compra
@@ -103,17 +133,27 @@ const Checkout = ({ item }) => {
           <span>${item.price}</span>
         </div>
 
+        {/* Botón Mercado Pago */}
         <button
           onClick={handleBuy}
           disabled={loading}
+          className="relative w-full inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group disabled:opacity-50 mb-2"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
+          <span className="relative z-10 flex items-center justify-center w-full px-6 py-3 bg-snow/90 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
+            Pagar con Mercado Pago
+          </span>
+        </button>
+
+        {/* Botón Stripe */}
+        <button
+          onClick={handleStripeCheckout}
+          disabled={loading}
           className="relative w-full inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group disabled:opacity-50"
         >
-          {/* Fondo animado */}
-          <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
-
-          {/* Contenido del botón */}
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
           <span className="relative z-10 flex items-center justify-center w-full px-6 py-3 bg-snow/90 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
-            Comprar ahora
+            Pagar con Stripe
           </span>
         </button>
       </div>
