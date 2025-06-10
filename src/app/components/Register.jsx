@@ -175,7 +175,7 @@ export default function Register() {
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-9 text-sm text-gray-600 hover:text-gray-800"
             >
-              {showPassword ? <EyeClosed/> : <Eye/>}
+              {showPassword ? <Eye /> : <EyeClosed />}
             </button>
             {formErrors.password && (
               <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
@@ -206,7 +206,7 @@ export default function Register() {
               onClick={() => setShowRepeatPassword(!showRepeatPassword)}
               className="absolute right-3 top-9 text-sm text-gray-600 hover:text-gray-800"
             >
-              {showRepeatPassword ? "Ocultar" : "Ver"}
+              {showRepeatPassword ? <Eye /> : <EyeClosed />}
             </button>
             {formErrors.repeatPassword && (
               <p className="text-red-500 text-sm mt-1">

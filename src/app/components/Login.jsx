@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { validateLoginForm } from "../../../utils/validationRegLogForms.js";
 import { showAlert } from "../../../redux/slices/alertSlice.js";
 import { useDispatch } from "react-redux";
+import { Eye, EyeClosed } from "lucide-react";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +39,9 @@ export default function Login() {
   // Mostrar alerta si hay error de autenticación
   useEffect(() => {
     if (error) {
-      dispatch(showAlert("No se ha podido iniciar sesión. Inténtalo nuevamente."));
+      dispatch(
+        showAlert("No se ha podido iniciar sesión. Inténtalo nuevamente.")
+      );
     }
   }, [error, dispatch]);
 
@@ -81,7 +85,7 @@ export default function Login() {
             )}
           </div>
 
-          <div className="mb-6">
+          <div className="mb-6 relative">
             <label
               htmlFor="password"
               className="block text-sm font-medium text-gray-700 font-poppins mb-1"
@@ -90,20 +94,25 @@ export default function Login() {
             </label>
             <input
               id="password"
-              type="password"
-              placeholder="********"
+              type={showPassword ? "text" : "password"}
               className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 font-poppins ${
                 formErrors.password
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-blue-400 focus:border-blue-400"
               }`}
               value={password}
+              placeholder="********"
               onChange={(e) => setPassword(e.target.value)}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-9 text-sm text-gray-600 hover:text-gray-800"
+            >
+              {showPassword ? <Eye /> : <EyeClosed />}
+            </button>
             {formErrors.password && (
-              <p className="text-red-500 text-sm mt-1">
-                {formErrors.password}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
             )}
           </div>
 
