@@ -4,9 +4,9 @@ import { LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useGetUserCourses } from "../../../../hooks/useGetUserCourses";
 import { useLogout } from "../../../../hooks/useLogout";
-import Link from "next/link";
 import UserCourseCard from "./UserCourseCard";
 import { useRouter } from "next/navigation";
+import UserNoCourses from "./UserNoCourses";
 
 
 const UserInfo = ({ userData }) => {
@@ -32,13 +32,7 @@ const UserInfo = ({ userData }) => {
   return (
     <div className="min-h-[calc(100vh-8rem)]">
       {userCourses.length === 0 ? (
-        <p className="px-5 pt-2 min-h-[calc(100vh-8rem)]">
-          No formas parte de ningún curso. Ve a{" "}
-          <Link href={"/cursos"} className="underline text-blue-600">
-            Cursos
-          </Link>{" "}
-          para ver los cursos disponibles.
-        </p>
+        <UserNoCourses/>
       ) : (
         <>
           <div className="flex items-center justify-between">

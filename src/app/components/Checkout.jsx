@@ -7,6 +7,8 @@ import Loading from "./Loading";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { FaStripe } from "react-icons/fa";
+import { SiMercadopago } from "react-icons/si";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE); // 👈 stripe client
 
@@ -134,28 +136,40 @@ const Checkout = ({ item }) => {
         </div>
 
         {/* Botón Mercado Pago */}
-        <button
-          onClick={handleBuy}
-          disabled={loading}
-          className="relative w-full inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group disabled:opacity-50 mb-2"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
-          <span className="relative z-10 flex items-center justify-center w-full px-6 py-3 bg-snow/90 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
-            Pagar con Mercado Pago
-          </span>
-        </button>
+        {/* Botón Mercado Pago */}
+<button
+  onClick={handleBuy}
+  disabled={loading}
+  className="relative w-full inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group disabled:opacity-50 mb-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
+  <span className="relative z-10 flex items-center justify-center w-full px-6 py-3 bg-snow/90 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300 gap-2">
+    🇦🇷 Pagar con 
+    <img
+      src="https://http2.mlstatic.com/storage/mobile-on-demand-resources/image/web-private-nav-mp-logo_1X?updatedAt=1746639317789"
+      alt="Logo Mercado Pago"
+      className="h-7 object-contain"
+    />
+  </span>
+</button>
 
-        {/* Botón Stripe */}
-        <button
-          onClick={handleStripeCheckout}
-          disabled={loading}
-          className="relative w-full inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group disabled:opacity-50"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
-          <span className="relative z-10 flex items-center justify-center w-full px-6 py-3 bg-snow/90 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
-            Pagar con Stripe
-          </span>
-        </button>
+{/* Botón Stripe */}
+<button
+  onClick={handleStripeCheckout}
+  disabled={loading}
+  className="relative w-full inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group disabled:opacity-50"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
+  <span className="relative z-10 flex items-center justify-center w-full px-6 py-3 bg-snow/90 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300 gap-2">
+    🌎 Pagar con 
+    <img
+      src="https://assets2.brandfolder.io/bf-boulder-prod/bskj2q8srfqx3cvfqvhk73pc/v/43110511/original/Stripe%20wordmark%20-%20blurple%20(small).png"
+      alt="Stripe"
+      className="h-7 object-contain"
+    />
+  </span>
+</button>
+
       </div>
     </div>
   );
