@@ -7,8 +7,6 @@ import Loading from "./Loading";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { FaStripe } from "react-icons/fa";
-import { SiMercadopago } from "react-icons/si";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE); // 👈 stripe client
 
