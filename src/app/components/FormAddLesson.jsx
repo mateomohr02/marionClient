@@ -12,6 +12,27 @@ const FormAddLesson = () => {
   const [courseId, setCourseId] = useState("");
   const [contentBlocks, setContentBlocks] = useState([]);
 
+  const uploadVideoToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "clases-marion");
+
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await res.json();
+      return data.secure_url;
+    } catch (error) {
+      console.error("Error al subir video:", error);
+      return null;
+    }
+  };
+
   const handleContentChange = (index, field, value) => {
     const updated = [...contentBlocks];
     updated[index][field] = value;
@@ -162,7 +183,7 @@ const FormAddLesson = () => {
               />
             )}
 
-            {["image", "video"].includes(block.contentType) && (
+            {["image"].includes(block.contentType) && (
               <input
                 type="text"
                 value={block.value}
@@ -172,6 +193,31 @@ const FormAddLesson = () => {
                 className="p-2 border rounded w-full"
                 placeholder={`URL de ${block.contentType}`}
               />
+            )}
+            {block.contentType === "video" && (
+              <div className="flex flex-col gap-2">
+                <input
+                  type="file"
+                  accept="video/*"
+                  onChange={async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const url = await uploadVideoToCloudinary(file);
+                    if (url) {
+                      handleContentChange(index, "value", url);
+                    }
+                  }}
+                  className="p-2 border rounded w-full"
+                />
+                {block.value && (
+                  <video
+                    src={block.value}
+                    controls
+                    controlsList="nodownload"
+                    className="rounded w-full max-h-64"
+                  />
+                )}
+              </div>
             )}
 
             {block.contentType === "section" && (
@@ -203,7 +249,7 @@ const FormAddLesson = () => {
                         className="p-2 border rounded"
                       />
                     )}
-                    {["image", "video"].includes(inner.contentType) && (
+                    {["image"].includes(inner.contentType) && (
                       <input
                         type="text"
                         value={inner.value}
@@ -219,6 +265,32 @@ const FormAddLesson = () => {
                         className="p-2 border rounded"
                       />
                     )}
+                    {block.contentType === "video" && (
+                      <div className="flex flex-col gap-2">
+                        <input
+                          type="file"
+                          accept="video/*"
+                          onChange={async (e) => {
+                            const file = e.target.files[0];
+                            if (!file) return;
+                            const url = await uploadVideoToCloudinary(file);
+                            if (url) {
+                              handleContentChange(index, "value", url);
+                            }
+                          }}
+                          className="p-2 border rounded w-full"
+                        />
+                        {block.value && (
+                          <video
+                            src={block.value}
+                            controls
+                            controlsList="nodownload"
+                            className="rounded w-full max-h-64"
+                          />
+                        )}
+                      </div>
+                    )}
+
                     <button
                       type="button"
                       onClick={() => removeSectionInnerBlock(index, innerIndex)}
@@ -304,7 +376,9 @@ const FormAddLesson = () => {
           Añadir Clase
         </button>
       </form>
-      <h3 className="text-2xl font-semibold text-center my-4">Vista Previa de la Clase:</h3>
+      <h3 className="text-2xl font-semibold text-center my-4">
+        Vista Previa de la Clase:
+      </h3>
       <LessonCard lesson={{ title, content: contentBlocks }} />
     </>
   );

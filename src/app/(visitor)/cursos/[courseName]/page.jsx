@@ -143,8 +143,12 @@ const Page = () => {
               return (
                 <div key={index} className="flex justify-center">
                   <div className="w-full aspect-video overflow-hidden shadow-md">
-                    <video
-                      src={cont.value}
+                    <iframe
+                      src={
+                              cont.value
+                                .replace("watch?v=", "embed/")
+                                .split("&")[0]
+                            }
                       controls
                       className="w-full h-full object-cover"
                     />

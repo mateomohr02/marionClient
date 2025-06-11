@@ -48,25 +48,22 @@ const LessonCard = ({ lesson: lessonProp }) => {
             return (
               <div key={index} className="flex justify-center">
                 <div className="w-3/5 aspect-video mx-auto my-4">
-                  {cont.value == "" ? (
-                        <img
-                          key={index*10}
-                          src={videoPlaceholder}
-                          onError={(e) => (e.target.src = placeholder)}
-                          className="w-full h-full shadow-lg"
-                        />
-                      ) : (
-                        <iframe
-                          className="w-full h-full shadow-lg"
-                          src={
-                            cont.value
-                              .replace("watch?v=", "embed/")
-                              .split("&")[0]
-                          }
-                          title={`Seccion-Video-${index}`}
-                          allowFullScreen
-                        />
-                      )}
+                  {cont.value ? (
+                    <video
+                      controls
+                      controlsList="nodownload"
+                      className="w-full h-full shadow-lg"
+                      src={cont.value}
+                    >
+                      Tu navegador no soporta la reproducción de video.
+                    </video>
+                  ) : (
+                    <img
+                      src={videoPlaceholder}
+                      onError={(e) => (e.target.src = placeholder)}
+                      className="w-full h-full shadow-lg"
+                    />
+                  )}
                 </div>
               </div>
             );
@@ -131,25 +128,24 @@ const LessonCard = ({ lesson: lessonProp }) => {
                 {video && (
                   <div className="flex justify-center">
                     <div className="w-full aspect-video mx-auto my-4">
-                      {video.value == "" ? (
+                      {video.value === "" ? (
                         <img
-                          key={index*15}
+                          key={index * 15}
                           src={videoPlaceholder}
                           alt={`Sección-Imagen-${index}`}
                           onError={(e) => (e.target.src = placeholder)}
                           className="w-full h-full shadow-lg"
                         />
                       ) : (
-                        <iframe
+                        <video
+                          key={index * 10}
+                          controls
+                          controlsList="nodownload"
                           className="w-full h-full shadow-lg"
-                          src={
-                            video.value
-                              .replace("watch?v=", "embed/")
-                              .split("&")[0]
-                          }
-                          title={`Seccion-Video-${index}`}
-                          allowFullScreen
-                        />
+                          src={video.value}
+                        >
+                          Tu navegador no soporta la reproducción de video.
+                        </video>
                       )}
                     </div>
                   </div>
