@@ -8,7 +8,7 @@ const HomeBanner = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft opacity-60"></div>
         
         {/* Capa superior animada para pulso solo en el fondo */}
-        <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft opacity-30 blur-3xl animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-gradientRight to-gradientLeft  blur-3xl animate-pulse"></div>
 
         {/* Contenedor del texto y botón */}
         <div className="relative z-10 text-center max-w-3xl filter-none opacity-100">

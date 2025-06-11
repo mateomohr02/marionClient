@@ -8,17 +8,22 @@ export default {
   theme: {
     extend: {
       textShadow: {
-        'default': '2px 2px 5px rgba(0, 0, 0, 0.5)',
-        'md': '4px 4px 8px rgba(0, 0, 0, 0.6)',
+        default: "2px 2px 5px rgba(0, 0, 0, 0.5)",
+        md: "4px 4px 8px rgba(0, 0, 0, 0.6)",
       },
       keyframes: {
         underlineGrow: {
           "0%": { transform: "scaleX(0)" },
           "100%": { transform: "scaleX(1)" },
         },
+        scrollUp: {
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(-50%)" },
+        },
       },
       animation: {
         underlineGrow: "underlineGrow 0.3s ease-out forwards",
+        scrollUp: "scrollUp 80s linear infinite",
       },
       colors: {
         background: "var(--background)",
@@ -26,11 +31,11 @@ export default {
         gradientLeft: "#FF6E5A",
         gradientRight: "#7B61D0",
         pastelPink: "#FFEEEC",
-        snow: "#FFF8F8"
+        snow: "#FFF8F8",
       },
       fontFamily: {
-        dancing: ['var(--font-dancing-script)'],
-        poppins: ['var(--font-poppins)'],
+        dancing: ["var(--font-dancing-script)"],
+        poppins: ["var(--font-poppins)"],
       },
     },
   },
@@ -38,17 +43,18 @@ export default {
     function ({ addUtilities }) {
       addUtilities({
         ".text-gradient": {
-          "@apply text-transparent bg-clip-text bg-gradient-to-r from-gradientLeft to-gradientRight": {},
+          "@apply text-transparent bg-clip-text bg-gradient-to-r from-gradientLeft to-gradientRight":
+            {},
         },
-        
-          ".text-shadow": {
-            "text-shadow": "3px 3px 3px rgba(0, 0, 0, 0.3)",
-          },
 
-          ".text-shadow-md": {
-            "text-shadow": "4px 4px 8px rgba(0, 0, 0, 0.6)",
-          },
-    });
+        ".text-shadow": {
+          "text-shadow": "3px 3px 3px rgba(0, 0, 0, 0.3)",
+        },
+
+        ".text-shadow-md": {
+          "text-shadow": "4px 4px 8px rgba(0, 0, 0, 0.6)",
+        },
+      });
     },
   ],
 };

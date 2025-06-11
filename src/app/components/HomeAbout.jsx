@@ -81,21 +81,48 @@ const HomeAbout = () => {
         </p>
       </div>
 
-      {/* Contenedor de imágenes (placeholder) */}
-      {/* Contenedor de imágenes con fondo opaco */}
-      <div className="relative w-1/4 flex flex-col p-2 gap-2">
+      {/* Carrusel de imágenes */}
+      <div className="relative w-1/4 max-h-[1000px] min-h-[900px] overflow-hidden">
         {/* Fondo con opacidad */}
-        <div className="absolute inset-0 bg-gradient-to-bl from-gradientRight to-gradientLeft opacity-75"></div>
+        <div className="absolute inset-0 bg-gradient-to-bl from-gradientRight to-gradientLeft opacity-75 z-0"></div>
 
-        {/* Imágenes sin opacidad */}
-        {[...Array(4)].map((_, index) => (
-          <div
-            key={index}
-            className="relative w-full h-[300px] bg-gray-300 flex items-center justify-center z-10"
-          >
-            <span className="text-gray-600 text-lg">Imagen {index + 1}</span>
-          </div>
-        ))}
+        {/* Gradiente de fade arriba */}
+        <div className="pointer-events-none absolute top-0 left-0 right-0 h-12 z-20 bg-gradient-to-b from-pastelPink to-transparent"></div>
+
+        {/* Gradiente de fade abajo */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 z-20 bg-gradient-to-t from-pastelPink to-transparent"></div>
+
+        {/* Carrusel */}
+        <div className="absolute flex flex-col animate-[scrollUp_80s_linear_infinite] z-10 px-2 gap-2">
+          {[
+            "https://imgur.com/5dGNQnB.png",
+            "https://imgur.com/AHJRGVz.png",
+            "https://imgur.com/D1u8HAF.png",
+            "https://imgur.com/uBWwtRC.png",
+            "https://imgur.com/FIbx0W3.png",
+            "https://imgur.com/2qJab8P.png",
+          ]
+            .concat([
+              "https://imgur.com/5dGNQnB.png",
+              "https://imgur.com/AHJRGVz.png",        
+              "https://imgur.com/D1u8HAF.png",
+              "https://imgur.com/uBWwtRC.png",
+              "https://imgur.com/FIbx0W3.png",
+              "https://imgur.com/2qJab8P.png",
+            ])
+            .map((url, index) => (
+              <div
+                key={index}
+                className="w-full h-fit overflow-hidden shadow-md"
+              >
+                <img
+                  src={url}
+                  alt={`Imagen ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
