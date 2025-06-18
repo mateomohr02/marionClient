@@ -1,7 +1,13 @@
+import { StoreProvider } from "@/redux/store/StoreProvider";
+
 import { getMessages, getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
-import "./globals.css";
+import Alert from "@/components/Alert";
+import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
+
+import "@/app/globals.css";
 
 import { Dancing_Script, Poppins } from "next/font/google";
 
@@ -18,8 +24,9 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Error: 404",
-  description: "Partera Marion: Not found",
+  title: "Partera Marion",
+  description:
+    "Formaciones diseñadas especialmente para acompañarte en cada etapa del embarazo: desde la gestación, hasta el posparto.",
 };
 
 export default async function RootLayout({ children }) {
@@ -27,14 +34,19 @@ export default async function RootLayout({ children }) {
   const messages = await getMessages();
 
   return (
+    <StoreProvider>
       <html lang={locale}>
         <body
           className={`${dancingScript.variable} ${poppins.variable} antialiased`}
         >
           <NextIntlClientProvider messages={messages}>
+            <Alert />
+            <NavBar />
             {children}
+            <Footer />
           </NextIntlClientProvider>
         </body>
       </html>
+    </StoreProvider>
   );
 }
