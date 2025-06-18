@@ -4,5 +4,23 @@
         "Btn1":"Ver Más",
         "Cta":"Ver Clase Gratuita",
         "BuyBtn":"Comprar Acceso Completo"
+    },
+    "DetailPage":{
+        "LoginReq":"Para acceder a la clase gratuita necesita iniciar sesión.",
+        "NotFound":"Curso no encontrado",
+        "FetchError":"Error al obtener el curso",
+        "Cta":"Obtener Acceso Completo por",
+        "Text1":"Clase Gratuita"
+    },
+    "Checkout":{
+        "InitError":"Hubo un error al iniciar el pago con Mercado Pago.",
+        "StripeError":"Hubo un error al iniciar el pago con Stripe.",
+        "ReturnBtn":"Detalle del Curso",
+        "Summary":"Resumen de compra",
+        "ProductLabel":"Producto",
+        "PriceLabel":"Precio",
+        "Total":"Total",
+        "BtnPay":"Pagar con",
+        "AltPoster":"Imagen de portada del curso"
     }
 }

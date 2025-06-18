@@ -8,6 +8,7 @@ import Link from "next/link";
 import { setCourseDetail } from "@/redux/slices/courseSlice";
 import Loading from "@/components/Loading";
 import { showAlert } from "@/redux/slices/alertSlice";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
   const course = useSelector((state) => state.course.courseDetail);
@@ -20,6 +21,7 @@ const Page = () => {
   const [error, setError] = useState(null);
   const [authorization, setAuthorization] = useState(false);
 
+  const t = useTranslations("Cursos");
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -27,7 +29,7 @@ const Page = () => {
 
       // Si no hay token, redirige al login
       if (!token) {
-        dispatch(showAlert("Para acceder a la clase gratuita necesita iniciar sesión."))
+        dispatch(showAlert(t("DetailPage.LoginReq")))
         router.push("/login");
         return;
       }else{
@@ -48,10 +50,10 @@ const Page = () => {
           if (res.data) {
             dispatch(setCourseDetail(res.data.course));
           } else {
-            setError("Curso no encontrado");
+            setError(t("DetailPage.NotFound"));
           }
         } catch (err) {
-          setError("Error al obtener el curso");
+          setError(t("DetailPage.FetchError"));
           console.error(err);
         } finally {
           setLoading(false);
@@ -99,7 +101,7 @@ const Page = () => {
         {/* Botón principal */}
         <Link href={`${pathname}/checkout`}>
           <span className="relative z-10 inline-block px-12 py-5 bg-white/90 hover:bg-white text-xl font-bold font-poppins text-gray-900 rounded-full backdrop-blur-sm shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out whitespace-nowrap cursor-pointer no-underline">
-            ✨ Obtener Acceso Completo por{" "}
+            ✨ {t("DetailPage.Cta")}{" "}
             <span className="text-primary font-extrabold">
               ${course?.price}
             </span>
@@ -108,7 +110,7 @@ const Page = () => {
       </div>
 
       <p className="text-4xl mx-auto font-poppins font-semibold text-center my-16">
-        Clase Gratuita 👇
+        {t("DetailPage.Text1")} 👇
       </p>
 
       {/* Contenido teórico */}

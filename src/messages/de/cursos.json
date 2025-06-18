@@ -4,5 +4,25 @@
     "Btn1": "Mehr anzeigen",
     "Cta": "Kostenlose Lektion ansehen",
     "BuyBtn": "Vollzugang kaufen"
-  }
+  },
+  "DetailPage": {
+  "LoginReq": "Um auf die kostenlose Lektion zuzugreifen, musst du dich einloggen.",
+  "NotFound": "Kurs nicht gefunden",
+  "FetchError": "Fehler beim Laden des Kurses",
+  "Cta": "Vollzugang erhalten für",
+  "Text1": "Kostenlose Lektion"
+},
+"Checkout": {
+  "InitError": "Beim Starten der Zahlung mit Mercado Pago ist ein Fehler aufgetreten.",
+  "StripeError": "Beim Starten der Zahlung mit Stripe ist ein Fehler aufgetreten.",
+  "ReturnBtn": "Kursdetails",
+  "Summary": "Kaufübersicht",
+  "ProductLabel": "Produkt",
+  "PriceLabel": "Preis",
+  "Total": "Gesamt",
+  "BtnPay": "Bezahlen mit",
+  "AltPoster": "Titelbild des Kurses"
+}
+
+
 }
