@@ -1,1 +1,32 @@
-{}
+{
+    "HeroHeader": {
+        "Title":"Partera Marion:",
+        "Text1": "Aprende a lograr un ",
+        "Text2": " parto suave.",
+        "Text3": "Regístrate",
+        "Text4": " y accedé a los cursos!"
+    },
+    "HomeContent":{
+        "Title":"Lo que encontrarás aquí...",
+        "Text1":"Soy ",
+        "Text2":"Marion Striegel",
+        "Text3":", partera con más de 40 años de experiencia. He acompañado a cientos de mujeres a dar a luz con confianza, amor y poder. Quiero compartir contigo todo lo que sé, para que vivas tu embarazo y parto como una experiencia transformadora."
+    },
+    "HomeAbout":{
+        "Title":"Sobre mi...",
+        "Text1":"Finalicé mi carrera de <span>partera obstétrica</span> en el año 1984 en <span>Alemania</span>, y durante los siguientes años trabajé en una gran clínica, donde perfeccioné mis habilidades.",
+        "Text2":"En 1989 decidí dar un nuevo paso y comencé a trabajar en un <span>consultorio particular</span>, donde di <span>clases pre y postparto</span>, asistiendo <span>partos ambulatorios</span> y acompañando a <span>madres</span> en sus hogares con sus <span>recién nacidos</span>. Por la creciente demanda comencé con los <span>nacimientos domiciliarios</span> en el 1990.",
+        "Text3":"En 1996 emigré con mi familia a <span>Argentina</span>, donde sigo ejerciendo mi<span>pasión:</span> aconsejar, acompañar y construir confianza en el<span>embarazo, parto y postparto</span>.",
+        "Text4":"Hace unos años, un <span>momento único y desafiante</span> marcó el mundo: la pandemia del COVID. De repente, todo se detuvo... Pero los <span>bebés</span> siguieron creciendo, los <span>embarazos</span> avanzaron y las <span>madres</span> se enfrentaron a <span>incertidumbres y preguntas</span>:",
+        "Q1":"¿Cómo nos <span>preparamos?</span>",
+        "Q2":"¿Dónde encontramos <span>respuestas?</span>",
+        "Q3":"¿Qué nos <span>espera</span> en el <span>embarazo</span>, el <span>parto</span> y el <span>puerperio</span>?",
+        "Text5":"Fue entonces cuando nació la idea de este <span>proyecto</span>.",
+        "Text6":"Un <span>espacio online</span> para <span>acompañarlas</span> en cada etapa y ayudar a más madres en este <span>proceso tan especial</span>!",
+        "Text7":"Hoy, con <span>experiencia y vocación</span>, hago realidad este <span>sueño</span> para estar<span>más cerca de vos</span>."
+    },
+    "HomeBanner":{
+        "CTA":"Registrate para acceder a formaciones y a nuestra comunidad.",
+        "btn":"Regístrate Aquí"
+    }
+}

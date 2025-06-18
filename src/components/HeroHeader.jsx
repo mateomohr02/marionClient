@@ -1,6 +1,10 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 const HeroHeader = () => {
+
+  const t = useTranslations("Home")
+
   return (
     <div className="relative w-full h-[600px] z-10 flex items-center justify-center">
       {/* Imagen de fondo */}
@@ -16,14 +20,14 @@ const HeroHeader = () => {
       {/* Contenido ajustado */}
       <div className="absolute top-[20%] left-[20%] text-white flex flex-col">
         <h1 className="text-7xl font-dancing">
-          Partera Marion:
+          {t("HeroHeader.Title")}
         </h1>
         <p className="text-5xl mt-4 leading-tight font-poppins text-justify">
-          Aprende a lograr un <br /> 
-          <span className="font-extrabold text-7xl text-justify tracking-wider">parto suave</span>.
+          {t("HeroHeader.Text1")} <br /> 
+          <span className="font-extrabold text-7xl text-justify tracking-wider whitespace-pre-line">{t("HeroHeader.Text2")}</span>.
         </p>
         <p className="text-3xl mt-4 font-poppins">
-          <span className="font-extrabold">Regístrate</span> y accedé a los cursos!
+          <span className="font-extrabold">{t("HeroHeader.Text3")}</span> {t("HeroHeader.Text4")}
         </p>
       </div>
     </div>

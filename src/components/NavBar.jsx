@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const NavBar = () => {
   const [visibleNavBar, setVisibleNavBar] = useState(false);
-
+  const t = useTranslations("Navbar")
   return (
     <div className="w-full top-0 left-0 z-50 shadow-md relative bg-transparent">
       {/* Bordes arriba y abajo */}
@@ -21,10 +22,10 @@ const NavBar = () => {
 
         {/* Navegación en escritorio */}
         <div className="hidden lg:flex lg:w-[80%] lg:items-center lg:justify-between">
-          <NavLink href="/" label="Inicio" />
-          <NavLink href="/cursos" label="Descubre Cursos" />
-          <NavLink href="/comunidad" label="Noticias y Comunidad" />
-          <NavLink href="/areaPersonal" label="Mi Aprendizaje" />
+          <NavLink href="/" label={t("Label1")} />
+          <NavLink href="/cursos" label={t("Label2")} />
+          <NavLink href="/comunidad" label={t("Label3")} />
+          <NavLink href="/areaPersonal" label={t("Label4")} />
         </div>
       </div>
 
@@ -34,10 +35,10 @@ const NavBar = () => {
           visibleNavBar ? 'max-h-96 pb-4 px-4 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <NavLinkMobile href="/" label="Inicio" onClick={() => setVisibleNavBar(false)} />
-        <NavLinkMobile href="/cursos" label="Descubre Cursos" onClick={() => setVisibleNavBar(false)} />
-        <NavLinkMobile href="/comunidad" label="Noticias y Comunidad" onClick={() => setVisibleNavBar(false)} />
-        <NavLinkMobile href="/areaPersonal" label="Mi Aprendizaje" onClick={() => setVisibleNavBar(false)} />
+        <NavLinkMobile href="/" label={t("Label1")} onClick={() => setVisibleNavBar(false)} />
+        <NavLinkMobile href="/cursos" label={t("Label2")} onClick={() => setVisibleNavBar(false)} />
+        <NavLinkMobile href="/comunidad" label={t("Label3")} onClick={() => setVisibleNavBar(false)} />
+        <NavLinkMobile href="/areaPersonal" label={t("Label4")} onClick={() => setVisibleNavBar(false)} />
       </div>
     </div>
   );

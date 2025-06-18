@@ -1,1 +1,33 @@
-{}
+{
+  "HeroHeader": {
+    "Title": "Hebamme Marion:",
+    "Text1": "Lerne, eine ",
+    "Text2": " sanfte Geburt \nzu erleben.",
+    "Text3": "Registriere dich",
+    "Text4": " und erhalte Zugang zu den Kursen!"
+  },
+  "HomeContent": {
+  "Title": "Was du hier finden wirst...",
+  "Text1": "Ich bin ",
+  "Text2": "Marion Striegel",
+  "Text3": ", Hebamme mit über 40 Jahren Erfahrung. Ich habe hunderte Frauen bei der Geburt begleitet – mit Vertrauen, Liebe und Kraft. Ich möchte all mein Wissen mit dir teilen, damit du deine Schwangerschaft und Geburt als eine transformative Erfahrung erleben kannst."
+  },
+  "HomeAbout": {
+  "Title": "Über mich...",
+  "Text1": "Ich habe mein Studium zur <span>Hebamme</span> im Jahr 1984 in <span>Deutschland</span> abgeschlossen und in den folgenden Jahren in einer großen Klinik gearbeitet, wo ich meine Fähigkeiten weiterentwickeln konnte.",
+  "Text2": "1989 beschloss ich, einen neuen Weg einzuschlagen, und begann in einer <span>eigenen Praxis</span> zu arbeiten, wo ich <span>Geburtsvorbereitungskurse und Rückbildungskurse</span> gab, <span>ambulante Geburten</span> begleitete und <span>Mütter</span> mit ihren <span>Neugeborenen</span> zu Hause unterstützte. Aufgrund der steigenden Nachfrage begann ich 1990 mit <span>Hausgeburten</span>.",
+  "Text3": "1996 wanderte ich mit meiner Familie nach <span>Argentinien</span> aus, wo ich weiterhin meine <span>Leidenschaft</span> ausübe: Frauen zu beraten, zu begleiten und <span>Vertrauen</span> in <span>Schwangerschaft, Geburt und Wochenbett</span> aufzubauen.",
+  "Text4": "Vor einigen Jahren hat ein <span>einzigartiger und herausfordernder Moment</span> die Welt erschüttert: die COVID-Pandemie. Plötzlich kam alles zum Stillstand... Aber die <span>Babys</span> wuchsen weiter, die <span>Schwangerschaften</span> entwickelten sich, und die <span>Mütter</span> sahen sich mit <span>Unsicherheiten und Fragen</span> konfrontiert:",
+  "Q1": "Wie <span>bereiten</span> wir uns vor?",
+  "Q2": "Wo finden wir <span>Antworten?</span>",
+  "Q3": "Was <span>erwartet</span> uns in der <span>Schwangerschaft</span>, bei der <span>Geburt</span> und im <span>Wochenbett</span>?",
+  "Text5": "So entstand die Idee zu diesem <span>Projekt</span>.",
+  "Text6": "Ein <span>Online-Raum</span>, um <span>dich zu begleiten</span> – in jeder Phase – und mehr Müttern in diesem <span>besonderen Prozess</span> zu helfen!",
+  "Text7": "Heute, mit <span>Erfahrung und Berufung</span>, verwirkliche ich diesen <span>Traum</span>, um <span>dir näher zu sein</span>."
+  },
+  "HomeBanner": {
+  "CTA": "Registriere dich, um Zugang zu Kursen und unserer Community zu erhalten.",
+  "btn": "Hier registrieren"
+  }
+
+}
