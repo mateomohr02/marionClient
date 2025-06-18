@@ -17,6 +17,7 @@ import { useLogout } from '@/hooks/useLogout';
 import { useRouter } from 'next/navigation';
 import UserInfo from './profile/UserInfo';
 import UsersManager from './UsersManager';
+import { useTranslations } from 'next-intl';
 
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState(null);
@@ -32,6 +33,8 @@ const AdminPanel = () => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
 
+  const t = useTranslations("Profile")
+
   const renderContent = () => {
     switch (activeView) {
       case 'addCourse':
@@ -45,7 +48,7 @@ const AdminPanel = () => {
       case 'manageUsers':
         return <UsersManager/>;
       default:
-        return <div className="text-gray-500">Seleccioná una acción del menú superior.</div>;
+        return <div className="text-gray-500 py-2 px-8">{t("AdminPanel.Placeholder")}</div>;
     }
   };
 
@@ -53,7 +56,7 @@ const AdminPanel = () => {
     <div className="min-h-screen flex flex-col">
       {/* Barra de navegación superior */}
       <nav className="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200 shadow-sm relative">
-        <h1 className="text-xl font-bold">Panel de Administrador</h1>
+        <h1 className="text-xl font-bold">{t("AdminPanel.Title")}</h1>
         <div className="flex gap-8 items-center">
           {/* BLOG */}
           <div className="relative">
@@ -61,7 +64,7 @@ const AdminPanel = () => {
               onClick={() => toggleDropdown('blog')}
               className="flex items-center gap-1 font-medium hover:text-blue-600"
             >
-              Blog <ChevronDown size={16} />
+              {t("AdminPanel.btn1")} <ChevronDown size={16} />
             </button>
             {openDropdown === 'blog' && (
               <div className="absolute top-10 left-0 bg-white border rounded shadow-md z-10 min-w-max">
@@ -73,7 +76,7 @@ const AdminPanel = () => {
                   className="block px-4 py-2 text-left w-full hover:bg-gray-100"
                 >
                   <PenLine size={16} className="inline mr-2" />
-                  Agregar Publicación
+                  {t("AdminPanel.btn1dd1")}
                 </button>
               </div>
             )}
@@ -85,7 +88,7 @@ const AdminPanel = () => {
               onClick={() => toggleDropdown('educacion')}
               className="flex items-center gap-1 font-medium hover:text-blue-600"
             >
-              Educación <ChevronDown size={16} />
+              {t("AdminPanel.btn2")} <ChevronDown size={16} />
             </button>
             {openDropdown === 'educacion' && (
               <div className="absolute top-10 left-0 bg-white border rounded shadow-md z-10 min-w-max">
@@ -97,7 +100,7 @@ const AdminPanel = () => {
                   className="block px-4 py-2 text-left w-full hover:bg-gray-100"
                 >
                   <PlusCircle size={16} className="inline mr-2" />
-                  Agregar Curso
+                  {t("AdminPanel.btn2dd1")}
                 </button>
                 <button
                   onClick={() => {
@@ -107,7 +110,7 @@ const AdminPanel = () => {
                   className="block px-4 py-2 text-left w-full hover:bg-gray-100"
                 >
                   <ListChecks size={16} className="inline mr-2" />
-                  Agregar Clase
+                  {t("AdminPanel.btn2dd2")}
                 </button>
                 <button
                   onClick={() => {
@@ -117,7 +120,7 @@ const AdminPanel = () => {
                   className="block px-4 py-2 text-left w-full hover:bg-gray-100"
                 >
                   <List size={16} className="inline mr-2" />
-                  Ver Cursos
+                  {t("AdminPanel.btn2dd3")}
                 </button>
               </div>
             )}
@@ -129,7 +132,7 @@ const AdminPanel = () => {
               onClick={() => toggleDropdown('usuarios')}
               className="flex items-center gap-1 font-medium hover:text-blue-600"
             >
-              Usuarios <ChevronDown size={16} />
+             {t("AdminPanel.btn3")} <ChevronDown size={16} />
             </button>
             {openDropdown === 'usuarios' && (
               <div className="absolute top-10 left-0 bg-white border rounded shadow-md z-10 min-w-max">
@@ -141,7 +144,7 @@ const AdminPanel = () => {
                   className="block px-4 py-2 text-left w-full hover:bg-gray-100"
                 >
                   <Users size={16} className="inline mr-2" />
-                  Gestionar Usuarios
+                  {t("AdminPanel.btn3dd1")}
                 </button>
               </div>
             )}
@@ -153,7 +156,7 @@ const AdminPanel = () => {
             className="flex items-center gap-2 text-red-600 hover:underline"
           >
             <LogOut size={16} />
-            Cerrar sesión
+            {t("AdminPanel.LogOut")}
           </button>
         </div>
       </nav>

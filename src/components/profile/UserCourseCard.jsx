@@ -1,15 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from 'framer-motion';
+import { useTranslations } from "next-intl";
 
 const UserCourseCard = ({
   title,
   courseId,
   description,
   poster,
-  languages = "Español - Alemán",
+  languages = "Español - Deutsch",
 }) => {
   const courseSlug = title.replace(/\s+/g, "-");
+
+  const t = useTranslations("Profile")
 
   return (
     <motion.div className="w-full mb-10"
@@ -40,7 +43,7 @@ const UserCourseCard = ({
                 {title}
               </h2>
               <p className="mt-2 text-lg font-poppins">
-                Idiomas disponibles:{" "}
+                {t("UserCourseCard.Lang")}
                 <span className="font-semibold text-gray-900">
                   {languages}
                 </span>
@@ -49,7 +52,7 @@ const UserCourseCard = ({
                 {description.slice(0, 490)}...
                 <Link href={`/courses/${courseSlug}`}>
                   <span className="text-primary hover:underline ml-1 font-semibold">
-                    Ver Más
+                    {t("UserCourseCard.Btn1")}
                   </span>
                 </Link>
               </p>
@@ -66,7 +69,7 @@ const UserCourseCard = ({
 
                 {/* Contenido del botón */}
                 <span className="relative z-10 px-6 py-2 bg-white/80 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
-                  📚 Ir al Curso
+                  📚 {t("UserCourseCard.Btn2")}
                 </span>
               </Link>
             </div>

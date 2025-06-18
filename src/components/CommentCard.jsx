@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { CornerDownRight } from "lucide-react";
 import FormAddComment from "./FormAddComment"; // Ajustá el path si es necesario
+import { useTranslations } from "next-intl";
 
 const CommentCard = ({ data, level = 0, postId }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
 
   // Solo aplicar padding hasta el nivel 1
   const paddingLeft = level === 1 ? 20 : 0;
+
+  const t = useTranslations("Blog")
 
   return (
     <div className="my-4" style={{ paddingLeft }}>
@@ -22,7 +25,7 @@ const CommentCard = ({ data, level = 0, postId }) => {
           className="font-poppins text-sm hover:bg-snow px-2 py-1 rounded-full flex items-center gap-1"
         >
           <CornerDownRight size={16} />
-          Responder
+          {t("CommentCard.Btn1")}
         </button>
       </div>
 

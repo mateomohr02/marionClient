@@ -1,0 +1,25 @@
+{
+  "Page": {
+    "NoPosts": "Keine Beiträge verfügbar"
+  },
+  "PostCard": {
+    "Text1": "Beitrag von: ",
+    "Btn1": "Beitrag ansehen"
+  },
+  "PostDetail": {
+    "Text1": "Beitrag von: ",
+    "Error": "Fehler beim Laden des Beitragsinhalts",
+    "Subtitle": "Kommentare"
+  },
+  "CommentCard": {
+    "Btn1": "Antworten"
+  },
+  "FormAddComment": {
+    "Cancel": "Abbrechen",
+    "PlaceholderTextAreaReply": "Füge deine Antwort hinzu",
+    "PlaceholderTextAreaComment": "Füge einen Kommentar hinzu",
+    "SubmitBtn": "Kommentieren",
+    "ErrorMsg": "Fehler beim Kommentieren",
+    "LoginQ": "Um einen Kommentar zu schreiben, musst du dich einloggen."
+  }
+}

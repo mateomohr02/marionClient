@@ -5,10 +5,13 @@ import CommentSection from "./CommentSection";
 import FormAddComment from "./FormAddComment";
 import { useRouter } from "next/navigation";
 import { motion } from 'framer-motion';
+import { useTranslations } from "next-intl";
 
 
 const PostDetail = ({ data }) => {
   const router = useRouter();
+
+  const t = useTranslations("Blog")
 
   return (
     <div className=" relative max-w-[calc(60vw)] mx-auto p-10">
@@ -34,7 +37,7 @@ const PostDetail = ({ data }) => {
             <h2 className="text-3xl font-bold text-black">{data?.title}</h2>
             {data.User?.name && (
               <p className="text-sm sm:text-base text-black font-poppins mt-1">
-                Publicación de:{" "}
+                {t("PostDetail.Text1")}{" "}
                 <span className="font-medium">{data.User.name}</span>
               </p>
             )}
@@ -76,7 +79,7 @@ const PostDetail = ({ data }) => {
             } else {
               return (
                 <div key={index} className="text-red-500 text-center">
-                  Error al obtener el contenido de la publicación
+                  {t("PostDetail.Error")}
                 </div>
               );
             }
@@ -84,7 +87,7 @@ const PostDetail = ({ data }) => {
 
           {/* Comentarios */}
           <div className="p-4 bg-snow/20 rounded-md shadow-lg">
-            <h3 className="text-2xl font-poppins">Comentarios</h3>
+            <h3 className="text-2xl font-poppins">{t("PostDetail.Subtitle")}</h3>
             <FormAddComment postId={data?.id} />
             <CommentSection data={data?.Replies} postId={data?.id} />
           </div>

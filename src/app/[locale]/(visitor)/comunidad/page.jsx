@@ -4,6 +4,7 @@ import Loading from "@/components/Loading";
 import useGetPosts from "@/hooks/useGetPosts";
 import PostCard from "@/components/PostCard";
 import { motion } from 'framer-motion';
+import { useTranslations } from "next-intl";
 
 
 const Page = () => {
@@ -11,6 +12,8 @@ const Page = () => {
   const limit = 10;
 
   const { posts, loading, error } = useGetPosts(page, limit);
+
+  const t = useTranslations("Blog");
 
   return (
     <motion.div className="min-h-[calc(100vh-8rem)]"
@@ -21,7 +24,7 @@ const Page = () => {
       {loading && <Loading/>}
       {error && <p className="text-red-500">{error}</p>}
       {!loading && posts.length === 0 && (
-        <p>No hay publicaciones disponibles.</p>
+        <p>{t("Page.NoPosts")}</p>
       )}
 
       {posts.map((post) => (

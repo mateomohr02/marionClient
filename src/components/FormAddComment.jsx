@@ -7,12 +7,15 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addReplyToPostDetail } from "@/redux/slices/blogSlice";
 import { showAlert } from "@/redux/slices/alertSlice";
+import { useTranslations } from "next-intl";
 
 
 
 const FormAddComment = ({ postId, parentId = null, onCancel }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const t = useTranslations("Blog")
 
   const [focused, setFocused] = useState(false);
   const [content, setContent] = useState("");
@@ -26,7 +29,7 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      dispatch(showAlert("Para realizar un comentario necesita iniciar sesión."));
+      dispatch(showAlert(t("FormAddComment.LoginQ")));
       router.push("/login");
       return;
     }
@@ -50,11 +53,11 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
         setFocused(false);
         if (onCancel) onCancel();
       } else {
-        dispatch(showAlert("Error al comentar"));
+        dispatch(showAlert("FormAddComment.ErrorMsg"));
       }
     } catch (err) {
       console.error(err);
-      dispatch(showAlert("Error al comentar"));
+      dispatch(showAlert("FormAddComment.ErrorMsg"));
     } finally {
       setLoading(false);
     }
@@ -74,7 +77,7 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
             onFocus={() => setFocused(true)}
             className="w-full p-2 resize-none border-b border-black bg-transparent text-black focus:outline-none focus:border-black transition-all min-h-[40px]"
             rows={focused ? 3 : 1}
-            placeholder={parentId ? "Añade tu respuesta" : "Añade un comentario"}
+            placeholder={parentId ? t("FormAddComment.PlaceholderTextAreaReply") : t("FormAddComment.PlaceholderTextAreaComment")}
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
@@ -86,7 +89,7 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
                 onClick={handleCancel}
                 className="px-4 py-1 text-sm font-medium text-black hover:text-black transition-all"
               >
-                Cancelar
+                {t("FormAddComment.Cancel")}
               </button>
               <button
                 type="submit"
@@ -96,7 +99,7 @@ const FormAddComment = ({ postId, parentId = null, onCancel }) => {
                 }`}
               >
                 <Forward size={16} />
-                Comentar
+                {t("FormAddComment.SubmitBtn")}
               </button>
             </div>
           )}

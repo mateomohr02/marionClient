@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight, Image, Video } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const PostCard = ({ post }) => {
   const pathname = usePathname();
@@ -16,6 +17,8 @@ const PostCard = ({ post }) => {
 
   let showingText = true;
 
+  const t = useTranslations("Blog")
+
   return (
     <div className="w-full my-6 px-4 md:px-0">
       <div className="relative flex justify-center">
@@ -28,7 +31,7 @@ const PostCard = ({ post }) => {
 
           {post.User?.name && (
             <p className="text-sm sm:text-base text-black font-poppins -mt-4">
-              Publicación de:{" "}
+              {t("PostCard.Text1")}
               <span className="font-medium">{post.User.name}</span>
             </p>
           )}
@@ -77,7 +80,7 @@ const PostCard = ({ post }) => {
               {/* Contenido del botón */}
               <span className="relative z-10 flex items-center gap-2 px-6 py-2 bg-white/80 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
                 <ArrowRight size={18} />
-                Ver publicación
+                {t("PostCard.Btn1")}
               </span>
             </Link>
           </div>

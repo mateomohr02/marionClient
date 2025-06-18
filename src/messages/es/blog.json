@@ -1,0 +1,25 @@
+{
+    "Page":{
+        "NoPosts":"No hay publicaciones disponibles"
+    },
+    "PostCard":{
+        "Text1":"Publicación de: ",
+        "Btn1":"Ver Publicación"
+    },
+    "PostDetail":{
+        "Text1":"Publicación de: ",
+        "Error": "Error al obtener el contenido de la publicación"
+        ,"Subtitle":"Comentarios"
+    },
+    "CommentCard":{
+        "Btn1":"Responder"
+    },
+    "FormAddComment":{
+        "Cancel":"Cancelar",
+        "PlaceholderTextAreaReply":"Añade tu respuesta",
+        "PlaceholderTextAreaComment":"Añade un comentario",
+        "SubmitBtn":"Comentar",
+        "ErrorMsg":"Error al comentar",
+        "LoginQ":"Para realizar un comentario necesita iniciar sesión."
+    }
+}

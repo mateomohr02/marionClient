@@ -1,1 +1,31 @@
-{}
+{
+    "UserInfo":{
+        "Title": "Mis Cursos",
+        "LogOut": "Cerrar Sesión"
+    },
+    "UserCourseCard":{
+        "Lang":"Idiomas Disponibles: ",
+        "Btn1":"Ver Más",
+        "Btn2":"Ir al curso"
+    },
+    "UserNoCourses":{
+        "Title":"Aún no formas parte de ningún curso",
+        "Text1":"Explora nuestros cursos y empieza a aprender hoy mismo.",
+        "Btn1":"Ver Cursos Disponibles",
+        "LogOut":"Cerrar Sesión"
+    },
+    "AdminPanel":{
+        "Placeholder":"Seleccioná una acción del menú superior.",
+        "Title":"Panel de Administrador",
+        "btn1":"Blog",
+        "btn1dd1":"Agregar Publicación",
+        "btn2":"Educación",
+        "btn2dd1": "Agregar Curso",
+        "btn2dd2": "Agregar Clase",
+        "btn2dd3": "Ver Cursos",
+        "btn3":"Usuarios",
+        "btn3dd1":"Gestionar Usuarios",
+        "LogOut":"Cerrar Sesión"
+    }
+
+}
