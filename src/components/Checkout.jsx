@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import Loading from "./Loading";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 import { ArrowLeft } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 

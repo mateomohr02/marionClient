@@ -1,15 +1,15 @@
 'use client';
+
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation'; // Link que maneja locales
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from './LocaleSwitcher';
 
-
-
 const NavBar = () => {
   const [visibleNavBar, setVisibleNavBar] = useState(false);
-  const t = useTranslations("Navbar")
+  const t = useTranslations("Navbar");
+
   return (
     <div className="w-full top-0 left-0 z-50 shadow-md relative bg-transparent">
       {/* Bordes arriba y abajo */}

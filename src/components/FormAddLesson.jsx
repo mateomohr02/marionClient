@@ -3,7 +3,6 @@
 import { useState } from "react";
 import useFetchCourses from "@/hooks/useFetchCourses";
 import axios from "axios";
-import { Plus } from "lucide-react";
 import LessonCard from "./profile/LessonCard";
 import { useLocale } from "next-intl";
 

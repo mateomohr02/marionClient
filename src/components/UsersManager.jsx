@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import axios from "axios";
 import Loading from "./Loading";
 import { setUsers, setUserActivity, deleteUser } from "@/redux/slices/adminSlice";

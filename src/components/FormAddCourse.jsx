@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import useAddCourse from "@/hooks/useAddCourse";
-import { Plus } from "lucide-react";
 import LessonCard from "@/components/profile/LessonCard";
 
 const FormAddCourse = () => {

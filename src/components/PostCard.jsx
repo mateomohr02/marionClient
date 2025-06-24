@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 import { ArrowRight, Image, Video } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";

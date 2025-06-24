@@ -1,6 +1,6 @@
 import { SiYoutube } from "react-icons/si";
 import { PiInstagramLogoBold } from "react-icons/pi";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from "next-intl";
 
 const Footer = () => {
