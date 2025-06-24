@@ -20,10 +20,11 @@ const LocaleSwitcher = () => {
   const current = locales.find((l) => l.code === currentLocale);
 
   const handleSelect = () => {
-    const newPath = pathname.replace(`/${currentLocale}`, `/${switchTo.code}`);
-    router.push(newPath);
-    setOpen(false);
-  };
+  document.cookie = `preferredLocale=${switchTo.code}; path=/; max-age=31536000`;
+  const newPath = pathname.replace(`/${currentLocale}`, `/${switchTo.code}`);
+  router.push(newPath);
+  setOpen(false);
+};
 
   return (
     <div className="relative">
