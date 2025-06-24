@@ -1,8 +1,15 @@
-import {defineRouting} from 'next-intl/routing';
- 
-export const routing = defineRouting({
+import { NextRequest } from 'next/server';
 
+export const routing = {
   locales: ['es', 'de'],
+  defaultLocale: 'es',
+  getLocale: (request: NextRequest): string => {
+    const acceptLanguage = request.headers.get('accept-language');
+    const userLang = acceptLanguage?.split(',')[0] || 'es';
 
-  defaultLocale: 'es'
-});
+    if (userLang.startsWith('de')) {
+      return 'de';
+    }
+    return 'es';
+  },
+};

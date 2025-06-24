@@ -7,9 +7,17 @@ import { useSetCourseDetail } from "@/hooks/useSetCourseDetail";
 import { ShoppingBag } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-const CourseCard = ({ course, index }) => {
+const CourseCard = ({ course, index, locale}) => {
+
+  let courseSlug = "";
+
   const pathname = usePathname();
-  const courseSlug = course.name.replace(/\s+/g, "-");
+  if (locale === 'de') {
+     courseSlug = course?.name?.de.replace(/\s+/g, "-");
+  }else{
+      courseSlug = course?.name?.es.replace(/\s+/g, "-");
+  }
+ 
   const setCourseDetail = useSetCourseDetail();
 
   const handleClick = () => {
@@ -32,8 +40,8 @@ const CourseCard = ({ course, index }) => {
           {/* Imagen */}
           <div className="w-full md:w-[275px] h-[275px] relative flex-shrink-0 overflow-hidden shadow-md">
             <Image
-              src={course.poster}
-              alt={`Imagen del curso ${course.name}`}
+              src={locale === "de" ? course?.poster?.de : course?.poster?.es} 
+              alt={`Imagen del curso ${locale === "de" ? course?.name?.de : course?.name?.es}`}
               fill
               className="object-cover"
             />
@@ -42,13 +50,13 @@ const CourseCard = ({ course, index }) => {
           {/* Texto */}
           <div className="flex flex-col justify-between h-full text-black max-w-3xl w-full">
             <div>
-              <h2 className="text-3xl font-bold font-poppins">{course.name}</h2>
+              <h2 className="text-3xl font-bold font-poppins">{locale === 'de' ? course?.name?.de : course?.name?.es}</h2>
               <p className="mt-2 text-lg font-poppins">
                 {t("CourseCard.Lang")}{" "}
                 <span className="font-semibold ">Español - Deutsch</span>
               </p>
               <p className="mt-3 text-base text-justify leading-relaxed font-poppins ">
-                {course.description.slice(0, 490)}...
+                {locale === "de" ? course?.description?.de.slice(0, 490) : course?.description?.es.slice(0, 490)}...
                 <Link href={`${pathname}/${courseSlug}`}>
                   <span className="text-primary hover:underline ml-1 font-semibold">
                     {t("CourseCard.Btn1")}

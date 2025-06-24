@@ -8,10 +8,8 @@ import { useTranslations } from "next-intl";
 const UserNoCourses = () => {
   const router = useRouter();
 
-  const logout = () => {
-    useLogout();
-    router.push("/");
-  };
+   const logout = useLogout(); 
+
 
   const t = useTranslations("Profile")
 

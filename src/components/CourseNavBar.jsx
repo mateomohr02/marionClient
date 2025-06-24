@@ -7,14 +7,17 @@ import { useState, useRef } from "react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "use-intl";
 
-const CourseNavBar = () => {
+const CourseNavBar = ({locale}) => {
   const dispatch = useDispatch();
   const pathname = usePathname();
   const lessons = useSelector((state) => state.course.courseLessons);
   const currentLesson = useSelector((state) => state.course.currentLesson);
   const currentLessonDetail = useSelector((state) => state.course.lessonDetail);
   const courseTitle = useSelector((state) => state.course.courseDetail.name);
+
+  const t = useTranslations("Lessons");
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const timeoutRef = useRef(null); // ← Para manejar el temporizador
@@ -39,7 +42,7 @@ const CourseNavBar = () => {
   const closeDropdownWithDelay = () => {
     timeoutRef.current = setTimeout(() => {
       setDropdownOpen(false);
-    }, 300); // 300ms de gracia
+    }, 300); 
   };
 
   return (
@@ -49,7 +52,7 @@ const CourseNavBar = () => {
           onClick={handleBackToFirstLesson}
           className="text-gray-800 font-semibold text-xl hover:underline"
         >
-          {courseTitle}
+          {locale === "de" ? courseTitle.de : courseTitle.es}
         </button>
 
         <span>
@@ -62,8 +65,8 @@ const CourseNavBar = () => {
           onMouseLeave={closeDropdownWithDelay}
         >
           <button className="text-gray-800 font-semibold hover:underline  text-xl ">
-            Clase N° {lessons.findIndex((l) => l.id === currentLesson) + 1}:{" "}
-            {currentLessonDetail?.title}
+            {t("NavBar.Text1")} {lessons.findIndex((l) => l.id === currentLesson) + 1}:{" "}
+            {locale === "de" ? currentLessonDetail.title.de : currentLessonDetail.title.es}
           </button>
 
           {dropdownOpen && (
@@ -76,7 +79,7 @@ const CourseNavBar = () => {
                     currentLesson === lesson.id ? "bg-gray-50 font-bold" : ""
                   }`}
                 >
-                  Clase N° {index + 1}: {lesson.title}
+                  {t("NavBar.Text1")} {index + 1}: {locale === "de" ? lesson.title.de : lesson.title.es}
                 </button>
               ))}
             </div>
@@ -93,7 +96,7 @@ const CourseNavBar = () => {
 
         {/* Contenido del botón */}
         <span className="relative z-10 px-6 py-2 text-base sm:text-lg bg-white/80 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
-          🗪 Foro del Curso
+          🗪 {t("NavBar.Forum")}
         </span>
       </Link>
     </div>

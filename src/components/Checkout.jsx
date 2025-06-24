@@ -4,14 +4,14 @@ import { useState } from "react";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import Loading from "./Loading";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE); // 👈 stripe client
 
 const Checkout = ({ item }) => {
+  const locale = useLocale();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const t = useTranslations("Cursos")
@@ -24,8 +24,8 @@ const Checkout = ({ item }) => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_ROUTE}/api/mercado-pago/create-preference-id`,
         {
-          title: item.name,
-          unit_price: item.price,
+          title: item?.name?.es,
+          unit_price: item?.price?.ars,
           quantity: 1,
           courseId: item.id,
         },
@@ -55,8 +55,8 @@ const Checkout = ({ item }) => {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_ROUTE}/api/stripe/create-checkout-session`,
         {
-          price: item.price,
-          name: item.name,
+          price: item?.price?.eur,
+          name: item?.name?.de,
           courseId: item.id,
         },
         {
@@ -84,7 +84,7 @@ const Checkout = ({ item }) => {
     <div className="flex flex-col md:flex-row p-1 gap-1 max-w-screen-xl min-h-[calc(100vh-31rem)] mx-auto bg-gradient-to-br from-gradientLeft to-gradientRight rounded-[0.75rem] my-4">
       <div className="flex-1 bg-snow/75 rounded-lg p-6 shadow-md">
         <Link
-          href={`/cursos/${item.name.replace(/\s+/g, "-").toLowerCase()}`}
+          href={`/cursos/${locale === 'de' ? item?.name?.de?.replace(/\s+/g, "-").toLowerCase() : item?.name?.es?.replace(/\s+/g, "-").toLowerCase()}`}
           className="text-sm hover:underline"
         >
           <div className="flex items-center">
@@ -96,16 +96,16 @@ const Checkout = ({ item }) => {
         <div className="flex">
           <div className="flex-1 flex flex-col">
             <h2 className="text-2xl font-bold mt-2 text-gray-800">
-              {item.name}
+              {locale === 'de' ? item?.name?.de : item?.name?.es}
             </h2>
             <p className="text-gray-700 text-base leading-relaxed text-justify mt-2">
-              {item.description}
+              {locale === 'de' ? item?.description?.de : item?.description?.es}
             </p>
           </div>
 
           <div className="ml-6 w-2/5">
             <img
-              src={item.poster}
+              src={locale === 'de' ? item?.poster?.de : item?.poster?.es}
               alt={t("Checkout.AltPoster")}
               className="h-full w-full object-cover rounded-lg shadow-md"
             />
@@ -120,17 +120,17 @@ const Checkout = ({ item }) => {
 
         <div className="flex justify-between mb-2 text-gray-600">
           <span>{t("Checkout.ProductLabel")}</span>
-          <span className="font-medium">{item.name}</span>
+          <span className="font-medium">{locale === 'de' ? item?.name?.de : item?.name?.es}</span>
         </div>
 
         <div className="flex justify-between mb-6 text-gray-600">
           <span>{t("Checkout.PriceLabel")}</span>
-          <span className="font-semibold text-gray-800">${item.price}</span>
+          <span className="font-semibold text-gray-800">{locale === 'de' ? `€${item?.price?.eur}` : `$${item?.price?.ars}`}</span>
         </div>
 
         <div className="flex justify-between text-xl font-bold text-gray-900 mb-6">
           <span>{t("Checkout.Total")}</span>
-          <span>${item.price}</span>
+          <span>{locale === 'de' ? `€${item?.price?.eur}` : `$${item?.price?.ars}`}</span>
         </div>
 
         {/* Botón Mercado Pago */}

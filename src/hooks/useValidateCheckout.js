@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export const useValidateCheckout = (itemName) => {
+export const useValidateCheckout = (itemName, locale) => {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,13 +21,14 @@ export const useValidateCheckout = (itemName) => {
 
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/get-course-by-name?name=${itemName}`,
+          `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/get-course-by-name?name=${itemName}&lang=${locale}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
-        );        
+        );
+        
         setItem(response.data.course);
         setSuccess(true);
       } catch (err) {

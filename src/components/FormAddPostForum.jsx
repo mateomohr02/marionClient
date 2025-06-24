@@ -5,8 +5,13 @@ import useAddPost from "@/hooks/useAddPost";
 import { Forward } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addPostToForum } from "@/redux/slices/blogSlice"; // <--- NUEVO
+import { useTranslations } from "next-intl";
+
 
 const FormAddPostForum = ({ courseId }) => {
+
+  const t = useTranslations("Lessons");
+
   const dispatch = useDispatch();
   const { addPost, loading, error, success } = useAddPost();
 
@@ -48,11 +53,11 @@ const FormAddPostForum = ({ courseId }) => {
           onSubmit={handleSubmit}
           className="relative z-10 w-full max-w-4xl rounded-2xl p-6 sm:p-8 shadow-sm backdrop-blur flex flex-col gap-4"
         >
-          <h3 className="text-xl sm:text-2xl font-semibold font-poppins text-black">Haz tu consulta</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold font-poppins text-black">{t("Forum.CreatePost")}</h3>
 
           <input
             type="text"
-            placeholder="Título de la publicación"
+            placeholder={t("Forum.PlaceholderTitle")}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full p-2 border-b border-black bg-transparent text-black focus:outline-none focus:border-black transition-all"
@@ -62,7 +67,7 @@ const FormAddPostForum = ({ courseId }) => {
             onFocus={() => setFocused(true)}
             className="w-full p-2 resize-none border-b border-black bg-transparent text-black focus:outline-none focus:border-black transition-all min-h-[40px]"
             rows={focused ? 4 : 2}
-            placeholder="Escribe el contenido de tu publicación..."
+            placeholder={t("Forum.PlaceholderText")}
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
@@ -74,7 +79,7 @@ const FormAddPostForum = ({ courseId }) => {
                 onClick={handleCancel}
                 className="px-4 py-1 text-sm font-medium text-black hover:text-black transition-all"
               >
-                Cancelar
+                {t("Forum.CancelBtn")}
               </button>
               <button
                 type="submit"
@@ -84,13 +89,13 @@ const FormAddPostForum = ({ courseId }) => {
                 }`}
               >
                 <Forward size={16} />
-                Publicar
+                {t("Forum.SubmitBtn")}
               </button>
             </div>
           )}
 
-          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-          {success && <p className="text-green-500 text-sm mt-1">Publicación agregada exitosamente</p>}
+          {error && <p className="text-red-500 text-sm mt-1">{t("Forum.AlertMsgError")}</p>}
+          {success && <p className="text-green-500 text-sm mt-1">{t("Forum.AlertMsgSuccess")}</p>}
         </form>
       </div>
     </div>

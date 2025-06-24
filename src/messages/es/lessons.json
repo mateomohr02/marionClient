@@ -1,0 +1,20 @@
+{
+    "NavBar": {
+        "Text1":"Clase N°",
+        "Forum":"Foro del Curso"
+    },
+    "Pagination": {
+        "Prev":"Ir a la Clase Anterior",
+        "Next":"Ir a la Clase Siguiente"
+    },
+    "Forum":{
+        "NoPosts":"Aún no hay publicaciones en este foro.",
+        "CreatePost":"Crear una Publicación",
+        "PlaceholderTitle":"Título de la Publicación",
+        "PlaceholderText":"Escribe el contenido de la publicación...",
+        "CancelBtn":"Cancelar",
+        "SubmitBtn":"Enviar",
+        "AlertMsgSuccess":"Publicación agregada exitosamente",
+        "AlertMsgError":"Error al agregar la publicación. Por favor, inténtalo de nuevo."
+    }
+}

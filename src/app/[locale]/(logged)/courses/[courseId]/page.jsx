@@ -6,8 +6,11 @@ import { useParams } from "next/navigation";
 import LessonCard from "@/components/profile/LessonCard";
 import LessonFooterNavigation from "@/components/LessonFooterNavigation";
 import Loading from "@/components/Loading";
+import { useLocale } from "next-intl";
+
 
 const page = () => {
+  const locale = useLocale();
   const params = useParams();
   const paramsId = params.courseId;
   const { lessons, loading, error } = useGetCourseLessons(paramsId);
@@ -18,7 +21,7 @@ const page = () => {
 
   return (
     <div>
-      <CourseNavBar />
+      <CourseNavBar locale={locale}/>
       <LessonCard />
       <LessonFooterNavigation/>
     </div>

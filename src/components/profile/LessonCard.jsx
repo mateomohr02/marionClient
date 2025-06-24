@@ -1,7 +1,9 @@
 "use client";
+import { useLocale } from "next-intl";
 import { useSelector } from "react-redux";
 
 const LessonCard = ({ lesson: lessonProp }) => {
+  const locale = useLocale();
   const lessonRedux = useSelector((state) => state.course.lessonDetail);
   const lesson = lessonProp || lessonRedux;
 
@@ -16,146 +18,149 @@ const LessonCard = ({ lesson: lessonProp }) => {
   return (
     <div className="px-8">
       <h1 className="text-4xl font-semibold mb-4 w-3/5 m-auto">
-        {lesson.title}
+        {locale === "de" ? lesson?.title?.de : lesson?.title?.es}
       </h1>
       <div className="flex flex-col gap-4">
-        {lesson?.content?.map((cont, index) => {
-          if (cont.contentType === "text") {
-            return (
-              <p
-                key={index}
-                className="mt-3 text-base text-justify leading-relaxed font-poppins w-3/5 m-auto"
-              >
-                {cont.value}
-              </p>
-            );
-          }
+        {Array.isArray(lesson?.content?.[locale]) &&
+          lesson.content[locale].map((cont, index) => {
+            if (cont.contentType === "text") {
+              return (
+                <p
+                  key={index}
+                  className="mt-3 text-base text-justify leading-relaxed font-poppins w-3/5 m-auto"
+                >
+                  {cont.value}
+                </p>
+              );
+            }
 
-          if (cont.contentType === "image") {
-            return (
-              <div key={index} className="flex justify-center">
-                <img
-                  src={cont.value || placeholder}
-                  alt={`Imagen-${index}`}
-                  onError={(e) => (e.target.src = placeholder)}
-                  className="w-3/5 mx-auto object-cover shadow-lg"
-                />
-              </div>
-            );
-          }
-
-          if (cont.contentType === "video") {
-            return (
-              <div key={index} className="flex justify-center">
-                <div className="w-3/5 aspect-video mx-auto my-4">
-                  {cont.value ? (
-                    <video
-                      controls
-                      controlsList="nodownload"
-                      className="w-full h-full shadow-lg"
-                      src={cont.value}
-                    >
-                      Tu navegador no soporta la reproducción de video.
-                    </video>
-                  ) : (
-                    <img
-                      src={videoPlaceholder}
-                      onError={(e) => (e.target.src = placeholder)}
-                      className="w-full h-full shadow-lg"
-                    />
-                  )}
+            if (cont.contentType === "image") {
+              return (
+                <div key={index} className="flex justify-center">
+                  <img
+                    src={cont.value || placeholder}
+                    alt={`Imagen-${index}`}
+                    onError={(e) => (e.target.src = placeholder)}
+                    className="w-3/5 mx-auto object-cover shadow-lg"
+                  />
                 </div>
-              </div>
-            );
-          }
+              );
+            }
 
-          if (cont.contentType === "section") {
-            const qImages = parseInt(cont.qImages || "0", 10);
-            const isMultipleImages = qImages > 1;
-            const textContent = cont.value.find(
-              (v) => v.contentType === "text"
-            );
-            const images = cont.value.filter((v) => v.contentType === "image");
-            const video = cont.value.find((v) => v.contentType === "video");
+            if (cont.contentType === "video") {
+              return (
+                <div key={index} className="flex justify-center">
+                  <div className="w-3/5 aspect-video mx-auto my-4">
+                    {cont.value ? (
+                      <video
+                        controls
+                        controlsList="nodownload"
+                        className="w-full h-full shadow-lg"
+                        src={cont.value}
+                      >
+                        Tu navegador no soporta la reproducción de video.
+                      </video>
+                    ) : (
+                      <img
+                        src={videoPlaceholder}
+                        onError={(e) => (e.target.src = placeholder)}
+                        className="w-full h-full shadow-lg"
+                      />
+                    )}
+                  </div>
+                </div>
+              );
+            }
 
-            return (
-              <div key={index} className="flex flex-col gap-2 w-3/5 m-auto">
-                {cont.subtitle && (
-                  <h2 className="text-3xl mb-2">{cont.subtitle}</h2>
-                )}
+            if (cont.contentType === "section") {
+              const qImages = parseInt(cont.qImages || "0", 10);
+              const isMultipleImages = qImages > 1;
+              const textContent = cont.value.find(
+                (v) => v.contentType === "text"
+              );
+              const images = cont.value.filter(
+                (v) => v.contentType === "image"
+              );
+              const video = cont.value.find((v) => v.contentType === "video");
 
-                {isMultipleImages ? (
-                  <div className="flex flex-col md:flex-row gap-8">
-                    <div className="w-[calc(100vw/8*5)]">
+              return (
+                <div key={index} className="flex flex-col gap-2 w-3/5 m-auto">
+                  {cont.subtitle && (
+                    <h2 className="text-3xl mb-2">{cont.subtitle}</h2>
+                  )}
+
+                  {isMultipleImages ? (
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="w-[calc(100vw/8*5)]">
+                        {textContent && (
+                          <p className="text-base text-justify leading-relaxed font-poppins">
+                            {textContent.value}
+                          </p>
+                        )}
+                      </div>
+                      <div className="w-[calc(100vw/8*3)] flex flex-col gap-8">
+                        {images.map((img, imgIdx) => (
+                          <img
+                            key={imgIdx}
+                            src={cont.value || placeholder}
+                            alt={`Sección-Imagen-${imgIdx}`}
+                            onError={(e) => (e.target.src = placeholder)}
+                            className="object-cover shadow-lg"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <>
                       {textContent && (
-                        <p className="text-base text-justify leading-relaxed font-poppins">
+                        <p className="text-base leading-relaxed text-left">
                           {textContent.value}
                         </p>
                       )}
-                    </div>
-                    <div className="w-[calc(100vw/8*3)] flex flex-col gap-8">
-                      {images.map((img, imgIdx) => (
-                        <img
-                          key={imgIdx}
-                          src={cont.value || placeholder}
-                          alt={`Sección-Imagen-${imgIdx}`}
-                          onError={(e) => (e.target.src = placeholder)}
-                          className="object-cover shadow-lg"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    {textContent && (
-                      <p className="text-base leading-relaxed text-left">
-                        {textContent.value}
-                      </p>
-                    )}
-                    {images.length === 1 && (
-                      <div className="flex justify-center">
-                        <img
-                          src={images[0].value || placeholder}
-                          alt="Sección-Imagen-0"
-                          onError={(e) => (e.target.src = placeholder)}
-                          className="w-[calc(100vw/8*3)] mx-auto rounded-lg object-cover shadow-lg"
-                        />
-                      </div>
-                    )}
-                  </>
-                )}
-
-                {video && (
-                  <div className="flex justify-center">
-                    <div className="w-full aspect-video mx-auto my-4">
-                      {video.value === "" ? (
-                        <img
-                          key={index * 15}
-                          src={videoPlaceholder}
-                          alt={`Sección-Imagen-${index}`}
-                          onError={(e) => (e.target.src = placeholder)}
-                          className="w-full h-full shadow-lg"
-                        />
-                      ) : (
-                        <video
-                          key={index * 10}
-                          controls
-                          controlsList="nodownload"
-                          className="w-full h-full shadow-lg"
-                          src={video.value}
-                        >
-                          Tu navegador no soporta la reproducción de video.
-                        </video>
+                      {images.length === 1 && (
+                        <div className="flex justify-center">
+                          <img
+                            src={images[0].value || placeholder}
+                            alt="Sección-Imagen-0"
+                            onError={(e) => (e.target.src = placeholder)}
+                            className="w-[calc(100vw/8*3)] mx-auto rounded-lg object-cover shadow-lg"
+                          />
+                        </div>
                       )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          }
+                    </>
+                  )}
 
-          return null;
-        })}
+                  {video && (
+                    <div className="flex justify-center">
+                      <div className="w-full aspect-video mx-auto my-4">
+                        {video.value === "" ? (
+                          <img
+                            key={index * 15}
+                            src={videoPlaceholder}
+                            alt={`Sección-Imagen-${index}`}
+                            onError={(e) => (e.target.src = placeholder)}
+                            className="w-full h-full shadow-lg"
+                          />
+                        ) : (
+                          <video
+                            key={index * 10}
+                            controls
+                            controlsList="nodownload"
+                            className="w-full h-full shadow-lg"
+                            src={video.value}
+                          >
+                            Tu navegador no soporta la reproducción de video.
+                          </video>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return null;
+          })}
       </div>
     </div>
   );

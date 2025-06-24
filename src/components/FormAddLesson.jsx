@@ -5,12 +5,19 @@ import useFetchCourses from "@/hooks/useFetchCourses";
 import axios from "axios";
 import { Plus } from "lucide-react";
 import LessonCard from "./profile/LessonCard";
+import { useLocale } from "next-intl";
 
 const FormAddLesson = () => {
+  const locale = useLocale();
   const { courses, loading, error } = useFetchCourses();
-  const [title, setTitle] = useState("");
   const [courseId, setCourseId] = useState("");
-  const [contentBlocks, setContentBlocks] = useState([]);
+
+  const [titleES, setTitleES] = useState("");
+  const [contentES, setContentES] = useState([]);
+
+  const [showGerman, setShowGerman] = useState(false);
+  const [titleDE, setTitleDE] = useState("");
+  const [contentDE, setContentDE] = useState([]);
 
   const uploadVideoToCloudinary = async (file) => {
     const formData = new FormData();
@@ -20,10 +27,7 @@ const FormAddLesson = () => {
     try {
       const res = await fetch(
         `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
+        { method: "POST", body: formData }
       );
       const data = await res.json();
       return data.secure_url;
@@ -33,83 +37,78 @@ const FormAddLesson = () => {
     }
   };
 
-  const handleContentChange = (index, field, value) => {
-    const updated = [...contentBlocks];
-    updated[index][field] = value;
-    setContentBlocks(updated);
-  };
+  const createHandlers = (lang) => {
+    const blocks = lang === "es" ? contentES : contentDE;
+    const setBlocks = lang === "es" ? setContentES : setContentDE;
 
-  const handleSectionChange = (index, subField, value) => {
-    const updated = [...contentBlocks];
-    updated[index][subField] = value;
-    setContentBlocks(updated);
-  };
-
-  const handleSectionInnerChange = (index, innerIndex, field, value) => {
-    const updated = [...contentBlocks];
-    updated[index].value[innerIndex][field] = value;
-    setContentBlocks(updated);
-  };
-
-  const addBlock = (type) => {
-    if (type === "section") {
-      setContentBlocks([
-        ...contentBlocks,
-        {
-          contentType: "section",
-          subtitle: "",
-          qImages: "0",
-          value: [{ contentType: "text", value: "" }],
-        },
-      ]);
-    } else {
-      setContentBlocks([...contentBlocks, { contentType: type, value: "" }]);
-    }
-  };
-
-  const addSectionInnerBlock = (index, type) => {
-    const updated = [...contentBlocks];
-    updated[index].value.push({ contentType: type, value: "" });
-
-    if (type === "image") {
-      updated[index].qImages = (parseInt(updated[index].qImages) || 0) + 1;
-    }
-
-    setContentBlocks(updated);
-  };
-
-  const removeBlock = (index) => {
-    const updated = contentBlocks.filter((_, i) => i !== index);
-    setContentBlocks(updated);
-  };
-
-  const removeSectionInnerBlock = (index, innerIndex) => {
-    const updated = [...contentBlocks];
-    const removed = updated[index].value[innerIndex];
-
-    updated[index].value = updated[index].value.filter(
-      (_, i) => i !== innerIndex
-    );
-
-    if (removed.contentType === "image") {
-      updated[index].qImages = Math.max(
-        (parseInt(updated[index].qImages) || 1) - 1,
-        0
-      );
-    }
-
-    setContentBlocks(updated);
+    return {
+      handleContentChange: (index, field, value) => {
+        const updated = [...blocks];
+        updated[index][field] = value;
+        setBlocks(updated);
+      },
+      handleSectionChange: (index, subField, value) => {
+        const updated = [...blocks];
+        updated[index][subField] = value;
+        setBlocks(updated);
+      },
+      handleSectionInnerChange: (index, innerIndex, field, value) => {
+        const updated = [...blocks];
+        updated[index].value[innerIndex][field] = value;
+        setBlocks(updated);
+      },
+      addBlock: (type) => {
+        const updated = [...blocks];
+        if (type === "section") {
+          updated.push({
+            contentType: "section",
+            subtitle: "",
+            qImages: "0",
+            value: [{ contentType: "text", value: "" }],
+          });
+        } else {
+          updated.push({ contentType: type, value: "" });
+        }
+        setBlocks(updated);
+      },
+      addSectionInnerBlock: (index, type) => {
+        const updated = [...blocks];
+        updated[index].value.push({ contentType: type, value: "" });
+        if (type === "image") {
+          updated[index].qImages = (parseInt(updated[index].qImages) || 0) + 1;
+        }
+        setBlocks(updated);
+      },
+      removeBlock: (index) => {
+        const updated = blocks.filter((_, i) => i !== index);
+        setBlocks(updated);
+      },
+      removeSectionInnerBlock: (index, innerIndex) => {
+        const updated = [...blocks];
+        const removed = updated[index].value[innerIndex];
+        updated[index].value = updated[index].value.filter(
+          (_, i) => i !== innerIndex
+        );
+        if (removed.contentType === "image") {
+          updated[index].qImages = Math.max(
+            (parseInt(updated[index].qImages) || 1) - 1,
+            0
+          );
+        }
+        setBlocks(updated);
+      },
+      blocks,
+    };
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const token = localStorage.getItem("token");
 
     const lessonData = {
-      title,
       courseId,
-      content: contentBlocks,
+      title: { es: titleES, de: titleDE },
+      content: { es: contentES, de: contentDE },
     };
 
     try {
@@ -117,16 +116,17 @@ const FormAddLesson = () => {
         `${process.env.NEXT_PUBLIC_API_ROUTE}/api/lessons/`,
         lessonData,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
       alert("Lección creada con éxito.");
-      setTitle("");
       setCourseId("");
-      setContentBlocks([]);
+      setTitleES("");
+      setTitleDE("");
+      setContentES([]);
+      setContentDE([]);
+      setShowGerman(false);
     } catch (err) {
       alert("Error al crear la lección.");
       console.error(err);
@@ -136,250 +136,222 @@ const FormAddLesson = () => {
   if (loading) return <p>Cargando cursos...</p>;
   if (error) return <p>{error}</p>;
 
+  const renderContentEditor = (lang, title, setTitle, handlers) => (
+    <div className="mt-4">
+      <h3 className="text-lg font-bold text-center">
+        Contenido en {lang === "es" ? "Español" : "Alemán"}
+      </h3>
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder={`Título en ${lang === "es" ? "Español" : "Alemán"}`}
+        className="p-2 border rounded w-full my-2"
+      />
+
+      {handlers.blocks.map((block, index) => (
+        <div key={index} className="border p-2 rounded my-2">
+          <label className="text-sm text-gray-600">
+            {block.contentType.toUpperCase()}
+          </label>
+          {block.contentType === "text" && (
+            <textarea
+              value={block.value}
+              onChange={(e) =>
+                handlers.handleContentChange(index, "value", e.target.value)
+              }
+              className="p-2 border rounded w-full"
+              placeholder="Texto"
+            />
+          )}
+          {block.contentType === "image" && (
+            <input
+              type="text"
+              value={block.value}
+              onChange={(e) =>
+                handlers.handleContentChange(index, "value", e.target.value)
+              }
+              className="p-2 border rounded w-full"
+              placeholder="URL de imagen"
+            />
+          )}
+          {block.contentType === "video" && (
+            <div className="flex flex-col gap-2">
+              <input
+                type="file"
+                accept="video/*"
+                onChange={async (e) => {
+                  const file = e.target.files[0];
+                  if (!file) return;
+                  const url = await uploadVideoToCloudinary(file);
+                  if (url) {
+                    handlers.handleContentChange(index, "value", url);
+                  }
+                }}
+                className="p-2 border rounded w-full"
+              />
+              {block.value && (
+                <video src={block.value} controls className="w-full max-h-64" />
+              )}
+            </div>
+          )}
+          {block.contentType === "section" && (
+            <>
+              <input
+                value={block.subtitle}
+                onChange={(e) =>
+                  handlers.handleSectionChange(
+                    index,
+                    "subtitle",
+                    e.target.value
+                  )
+                }
+                placeholder="Subtítulo"
+                className="p-2 border rounded w-full my-1"
+              />
+              {block.value.map((inner, i) => (
+                <div key={i} className="ml-4">
+                  {inner.contentType === "text" && (
+                    <textarea
+                      value={inner.value}
+                      onChange={(e) =>
+                        handlers.handleSectionInnerChange(
+                          index,
+                          i,
+                          "value",
+                          e.target.value
+                        )
+                      }
+                      className="p-2 border rounded w-full my-1"
+                      placeholder="Texto"
+                    />
+                  )}
+                  {inner.contentType === "image" && (
+                    <input
+                      type="text"
+                      value={inner.value}
+                      onChange={(e) =>
+                        handlers.handleSectionInnerChange(
+                          index,
+                          i,
+                          "value",
+                          e.target.value
+                        )
+                      }
+                      className="p-2 border rounded w-full my-1"
+                      placeholder="URL de imagen"
+                    />
+                  )}
+                  <button
+                    type="button"
+                    className="text-red-500 text-xs"
+                    onClick={() => handlers.removeSectionInnerBlock(index, i)}
+                  >
+                    Eliminar bloque
+                  </button>
+                </div>
+              ))}
+              <div className="flex gap-2 mt-2">
+                {["text", "image"].map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => handlers.addSectionInnerBlock(index, type)}
+                    className="px-2 py-1 border rounded text-blue-600"
+                  >
+                    + {type}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+          <button
+            type="button"
+            className="text-red-500 text-xs mt-2"
+            onClick={() => handlers.removeBlock(index)}
+          >
+            Eliminar bloque
+          </button>
+        </div>
+      ))}
+
+      <div className="flex gap-2 my-2">
+        {["text", "image", "video", "section"].map((type) => (
+          <button
+            key={type}
+            type="button"
+            onClick={() => handlers.addBlock(type)}
+            className="px-2 py-1 border rounded text-blue-600"
+          >
+            + {type}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded shadow-md max-w-5xl mx-auto"
+        className="p-4 bg-white rounded shadow-md max-w-5xl mx-auto"
       >
-        <h3 className="mx-auto font-semibold text-xl">Añadir Clase</h3>
-        <hr />
+        <h2 className="text-xl font-semibold mb-4 text-center">Añadir Clase</h2>
         <select
           value={courseId}
           onChange={(e) => setCourseId(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded mb-4 w-full"
         >
-          <option value="">
-            Seleccionar el curso al que pertenece la clase
-          </option>
+          <option value="">Seleccionar curso</option>
           {courses.map((course) => (
             <option key={course.id} value={course.id}>
-              {course.name}
+              {locale === "de" ? course.name.de : course.name.es}
             </option>
           ))}
         </select>
 
-        <input
-          placeholder="Título de la Clase"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="p-2 border rounded"
-        />
+        {renderContentEditor("es", titleES, setTitleES, createHandlers("es"))}
 
-        {contentBlocks.map((block, index) => (
-          <div key={index} className="border p-2 rounded bg-gray-50">
-            <label className="text-sm text-gray-600">
-              {block.contentType.toUpperCase()}
-            </label>
-
-            {block.contentType === "text" && (
-              <textarea
-                value={block.value}
-                onChange={(e) =>
-                  handleContentChange(index, "value", e.target.value)
-                }
-                className="p-2 border rounded w-full"
-                placeholder="Texto"
-              />
-            )}
-
-            {["image"].includes(block.contentType) && (
-              <input
-                type="text"
-                value={block.value}
-                onChange={(e) =>
-                  handleContentChange(index, "value", e.target.value)
-                }
-                className="p-2 border rounded w-full"
-                placeholder={`URL de ${block.contentType}`}
-              />
-            )}
-            {block.contentType === "video" && (
-              <div className="flex flex-col gap-2">
-                <input
-                  type="file"
-                  accept="video/*"
-                  onChange={async (e) => {
-                    const file = e.target.files[0];
-                    if (!file) return;
-                    const url = await uploadVideoToCloudinary(file);
-                    if (url) {
-                      handleContentChange(index, "value", url);
-                    }
-                  }}
-                  className="p-2 border rounded w-full"
-                />
-                {block.value && (
-                  <video
-                    src={block.value}
-                    controls
-                    controlsList="nodownload"
-                    className="rounded w-full max-h-64"
-                  />
-                )}
-              </div>
-            )}
-
-            {block.contentType === "section" && (
-              <div className="flex flex-col gap-2">
-                <input
-                  type="text"
-                  value={block.subtitle}
-                  onChange={(e) =>
-                    handleSectionChange(index, "subtitle", e.target.value)
-                  }
-                  placeholder="Subtítulo"
-                  className="p-2 border rounded"
-                />
-                {block.value.map((inner, innerIndex) => (
-                  <div key={innerIndex} className="flex flex-col gap-1 ml-4">
-                    <label className="text-xs">{inner.contentType}</label>
-                    {inner.contentType === "text" && (
-                      <textarea
-                        value={inner.value}
-                        onChange={(e) =>
-                          handleSectionInnerChange(
-                            index,
-                            innerIndex,
-                            "value",
-                            e.target.value
-                          )
-                        }
-                        placeholder="Texto"
-                        className="p-2 border rounded"
-                      />
-                    )}
-                    {["image"].includes(inner.contentType) && (
-                      <input
-                        type="text"
-                        value={inner.value}
-                        onChange={(e) =>
-                          handleSectionInnerChange(
-                            index,
-                            innerIndex,
-                            "value",
-                            e.target.value
-                          )
-                        }
-                        placeholder={`URL de ${inner.contentType}`}
-                        className="p-2 border rounded"
-                      />
-                    )}
-                    {block.contentType === "video" && (
-                      <div className="flex flex-col gap-2">
-                        <input
-                          type="file"
-                          accept="video/*"
-                          onChange={async (e) => {
-                            const file = e.target.files[0];
-                            if (!file) return;
-                            const url = await uploadVideoToCloudinary(file);
-                            if (url) {
-                              handleContentChange(index, "value", url);
-                            }
-                          }}
-                          className="p-2 border rounded w-full"
-                        />
-                        {block.value && (
-                          <video
-                            src={block.value}
-                            controls
-                            controlsList="nodownload"
-                            className="rounded w-full max-h-64"
-                          />
-                        )}
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={() => removeSectionInnerBlock(index, innerIndex)}
-                      className="text-red-500 text-xs self-end"
-                    >
-                      Descartar
-                    </button>
-                  </div>
-                ))}
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => addSectionInnerBlock(index, "text")}
-                    className="px-2 py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
-                  >
-                    <Plus className="p-1" />
-                    Añadir Texto
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => addSectionInnerBlock(index, "image")}
-                    className="px-2 py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
-                  >
-                    <Plus className="p-1" /> Imagen
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => addSectionInnerBlock(index, "video")}
-                    className="px-2 py-1 flex items-center gap-1 border hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
-                  >
-                    <Plus className="p-1" /> Video
-                  </button>
-                </div>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => removeBlock(index)}
-              className="px-2 py-1 flex items-center gap-1 border hover:bg-red-100 text-red-600 hover:border-red-600 rounded transition-all ease-in-out duration-300 mt-2"
-            >
-              Descartar
-            </button>
-          </div>
-        ))}
-
-        <div className="flex gap-2">
+        {!showGerman && (
           <button
             type="button"
-            onClick={() => addBlock("text")}
-            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            onClick={() => setShowGerman(true)}
           >
-            <Plus className="p-1" /> Texto
+            + Añadir traducción al alemán
           </button>
-          <button
-            type="button"
-            onClick={() => addBlock("image")}
-            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
-          >
-            <Plus className="p-1" /> Imagen
-          </button>
-          <button
-            type="button"
-            onClick={() => addBlock("video")}
-            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
-          >
-            <Plus className="p-1" /> Video
-          </button>
-          <button
-            type="button"
-            onClick={() => addBlock("section")}
-            className="px-2 py-1 flex items-center gap-1 border bg-white hover:bg-blue-100 text-blue-600 hover:border-blue-600 rounded transition-all ease-in-out duration-300"
-          >
-            <Plus className="p-1" /> Sección
-          </button>
-        </div>
-        <hr />
+        )}
+
+        {showGerman && (
+          <>
+            <hr className="mt-6" />
+            {renderContentEditor(
+              "de",
+              titleDE,
+              setTitleDE,
+              createHandlers("de")
+            )}
+          </>
+        )}
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          className="mt-6 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full"
         >
-          Añadir Clase
+          Guardar Lección
         </button>
       </form>
-      <h3 className="text-2xl font-semibold text-center my-4">
-        Vista Previa de la Clase:
+
+      <h3 className="text-xl font-semibold text-center mt-6">
+        Vista Previa (Español)
       </h3>
-      <LessonCard lesson={{ title, content: contentBlocks }} />
+      <LessonCard lesson={{ title: titleES, content: contentES }} />
+      {showGerman && (
+        <>
+          <h3 className="text-xl font-semibold text-center mt-6">
+            Vista Previa (Alemán)
+          </h3>
+          <LessonCard lesson={{ title: titleDE, content: contentDE }} />
+        </>
+      )}
     </>
   );
 };

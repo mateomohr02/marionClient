@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from 'next-intl';
 import Loading from "@/components/Loading";
 import useFetchCourses from "@/hooks/useFetchCourses";
 import CourseCard from "@/components/CourseCard";
@@ -7,6 +8,8 @@ import { motion } from "framer-motion";
 
 const CoursesPage = () => {
   const { courses, loading, error } = useFetchCourses();
+  const locale = useLocale();
+
 
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
@@ -19,7 +22,7 @@ const CoursesPage = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {courses.map((course, index) => (
-        <CourseCard key={course.id} course={course} index={index} />
+        <CourseCard key={course.id} course={course} index={index} locale={locale}/>
       ))}
     </motion.div>
   );

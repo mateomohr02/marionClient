@@ -5,9 +5,12 @@ import {
 } from "@/redux/slices/courseSlice";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const LessonFooterNavigation = () => {
   const dispatch = useDispatch();
+
+  const t = useTranslations("Lessons")
 
   const lessons = useSelector((state) => state.course.courseLessons);
   const currentLessonId = useSelector((state) => state.course.currentLesson);
@@ -42,7 +45,7 @@ const LessonFooterNavigation = () => {
             className="text-xl text-black font-semibold px-4 py-2 rounded-full bg-snow/70 hover:bg-snow transition-all ease-in-out duration-300 flex items-center gap-2"
           >
             <ChevronLeft />
-            Clase Anterior
+            {t("Pagination.Prev")}
           </button>
         </div>
       ) : <div />}
@@ -54,7 +57,7 @@ const LessonFooterNavigation = () => {
             onClick={handleNextLesson}
             className="text-xl text-black font-semibold px-4 py-2 rounded-full bg-snow/70 hover:bg-snow transition-all ease-in-out duration-300 flex items-center gap-2"
           >
-            Clase Siguiente 
+            {t("Pagination.Next")}
             <ChevronRight />
           </button>
         </div>

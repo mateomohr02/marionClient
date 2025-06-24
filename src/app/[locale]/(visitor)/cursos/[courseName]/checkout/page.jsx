@@ -4,12 +4,16 @@ import Checkout from "@/components/Checkout";
 import { useValidateCheckout } from "@/hooks/useValidateCheckout";
 import { useParams } from "next/navigation";
 import Loading from "@/components/Loading";
+import { useLocale } from "next-intl";
 
 const Page = () => {
+  const locale = useLocale()
+
   const { courseName } = useParams();
+
   const formattedSlug = courseName.replace(/-/g, " ");
 
-  const { item, loading, error } = useValidateCheckout(formattedSlug);
+  const { item, loading, error } = useValidateCheckout(formattedSlug, locale);
 
   if (loading) return <Loading />;
   if (error) return <div>{error}</div>;

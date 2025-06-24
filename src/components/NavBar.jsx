@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import LocaleSwitcher from './LocaleSwitcher';
+
+
 
 const NavBar = () => {
   const [visibleNavBar, setVisibleNavBar] = useState(false);
@@ -26,6 +29,7 @@ const NavBar = () => {
           <NavLink href="/cursos" label={t("Label2")} />
           <NavLink href="/comunidad" label={t("Label3")} />
           <NavLink href="/areaPersonal" label={t("Label4")} />
+          <LocaleSwitcher />
         </div>
       </div>
 

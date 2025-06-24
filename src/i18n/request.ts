@@ -15,6 +15,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     Navbar: (await import(`../messages/${locale}/navbar.json`)).default,
     Cursos: (await import(`../messages/${locale}/cursos.json`)).default,
     Blog: (await import(`../messages/${locale}/blog.json`)).default,
+    Lessons: (await import(`../messages/${locale}/lessons.json`)).default,
   };
 
   return {

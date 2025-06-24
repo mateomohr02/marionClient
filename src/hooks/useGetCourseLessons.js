@@ -16,7 +16,7 @@ export const useGetCourseLessons = (courseId) => {
 
   const existingLessons = useSelector((state) => state.course.courseLessons);
   const currentCourseId = useSelector((state) => state.course.currentCourse);
-  const hasFetched = useRef(false); // previene que se vuelva a llamar
+  const hasFetched = useRef(false);
 
   useEffect(() => {
     const fetchLessons = async () => {

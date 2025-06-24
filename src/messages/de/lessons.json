@@ -1,0 +1,20 @@
+{
+  "NavBar": {
+    "Text1": "Klasse Nr.",
+    "Forum": "Kursforum"
+  },
+  "Pagination": {
+    "Prev": "Zur vorherigen Lektion",
+    "Next": "Zur nächsten Lektion"
+  },
+  "Forum":{
+    "NoPosts": "Es gibt noch keine Beiträge in diesem Forum.",
+    "CreatePost": "Erstelle einen Beitrag",
+    "PlaceholderTitle": "Titel des Beitrags",
+  "PlaceholderText": "Schreibe den Inhalt des Beitrags...",
+  "CancelBtn":"Abbrechen",
+  "SubmitBtn":"Absenden",
+  "AlertMsgSuccess":"Beitrag erfolgreich hinzugefügt",
+  "AlertMsgError":"Fehler beim Hinzufügen des Beitrags. Bitte versuche es erneut."
+  }
+}

@@ -14,7 +14,6 @@ import FormAddCourse from './FormAddCourse';
 import FormAddLesson from './FormAddLesson';
 import FormAddPost from './FormAddPost';
 import { useLogout } from '@/hooks/useLogout';
-import { useRouter } from 'next/navigation';
 import UserInfo from './profile/UserInfo';
 import UsersManager from './UsersManager';
 import { useTranslations } from 'next-intl';
@@ -22,12 +21,8 @@ import { useTranslations } from 'next-intl';
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const Router = useRouter();
-
-  const logout = () => {
-    useLogout();
-    Router.push('/');
-  };
+  
+  const logout = useLogout();
 
   const toggleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
