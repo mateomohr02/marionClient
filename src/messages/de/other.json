@@ -24,6 +24,13 @@
     "LinkBtn": "Anmelden",
     "SuccessAlert": "Benutzer erfolgreich erstellt 🙂",
     "ErrorAlert": "Fehler beim Erstellen des Benutzers 😕",
-    "Load": "Registrierung läuft..."
-}
+    "Load": "Registrierung läuft...",
+    "AlertMsgs": {
+        "RegisterError": "Fehler bei der Registrierung",
+        "NetworkError": "Netzwerkfehler, bitte versuche es später erneut",
+        "RegisterSuccess": "Benutzer erfolgreich erstellt 🙂",
+        "EmailInUse": "Diese E-Mail-Adresse ist bereits registriert",
+        "InvalidFields": "Einige Felder sind ungültig."
+    }
+    }
 }

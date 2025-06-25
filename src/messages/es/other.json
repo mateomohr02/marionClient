@@ -24,6 +24,13 @@
         "LinkBtn":"Iniciar Sesión",
         "SuccessAlert":"Usuario creado con éxito 🙂",
         "ErrorAlert":"Error al crear el usuario 😕",
-        "Load": "Registrando..."
+        "Load": "Registrando...",
+        "AlertMsgs": {
+            "RegisterError": "Error al registrarse",
+            "NetworkError": "Error de red, por favor intenta más tarde",
+            "RegisterSuccess": "Usuario creado con éxito 🙂",
+            "EmailInUse": "El correo electrónico ya está registrado",
+            "InvalidFields": "Alguno de los campos es inválido."
+        }
     }
 }

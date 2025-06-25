@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from '@/i18n/navigation';
+import { Link } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { useRegister } from "@/hooks/register";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ import { validateRegisterForm } from "@/utils/validationRegLogForms.js";
 import { showAlert } from "@/redux/slices/alertSlice";
 import { useDispatch } from "react-redux";
 import { Eye, EyeClosed } from "lucide-react";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export default function Register() {
   const router = useRouter();
@@ -26,7 +26,19 @@ export default function Register() {
 
   const t = useTranslations("Other");
 
-  const { register, loading, error } = useRegister();
+  const {
+    register: registerUser,
+    loading,
+    error,
+  } = useRegister({
+    messages: {
+      success: t("Register.SuccessAlert"),
+      register: t("Register.AlertMsgs.RegisterError"),
+      network: t("Register.AlertMsgs.NetworkError"),
+      emailConflict: t("Register.AlertMsgs.EmailInUse"),
+      invalidFields: t("Register.AlertMsgs.InvalidFields")
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,19 +58,17 @@ export default function Register() {
       password,
     };
 
-    const user = await register(userSend);
+    const result = await registerUser(userSend);
 
-    if (user) {
-      dispatch(showAlert(t("Register.SuccessAlert")));
+    if (result && result.status === "success") {
+      dispatch(showAlert(result.message));
       router.push("/login");
-    } else {
-      dispatch(showAlert(t("Register.ErrorAlert")));
     }
   };
 
   useEffect(() => {
     if (error) {
-      dispatch(showAlert(t("Register.ErrorAlert")));
+      dispatch(showAlert(error));
     }
   }, [error, dispatch]);
 
