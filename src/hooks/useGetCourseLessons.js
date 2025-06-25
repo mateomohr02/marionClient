@@ -43,7 +43,6 @@ export const useGetCourseLessons = (courseId) => {
 
         hasFetched.current = true;
       } catch (err) {
-        console.error("Error al obtener las lecciones:", err.message);
         setError(err);
       } finally {
         setLoading(false);

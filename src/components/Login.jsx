@@ -9,6 +9,7 @@ import { validateLoginForm } from "@/utils/validationRegLogForms.js";
 import { showAlert } from "@/redux/slices/alertSlice.js";
 import { useDispatch } from "react-redux";
 import { Eye, EyeClosed } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+
+  const t = useTranslations("Other");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ export default function Login() {
   useEffect(() => {
     if (error) {
       dispatch(
-        showAlert("No se ha podido iniciar sesión. Inténtalo nuevamente.")
+        showAlert(t("Login.ErrorAlert"))
       );
     }
   }, [error, dispatch]);
@@ -58,7 +61,7 @@ export default function Login() {
           className="p-8 rounded-xl w-[calc(24rem-1rem)] bg-pastelPink/70"
         >
           <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800 font-poppins">
-            Iniciar Sesión
+            {t("Login.Title")}
           </h2>
 
           <div className="mb-4">
@@ -66,7 +69,7 @@ export default function Login() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 font-poppins mb-1"
             >
-              Correo electrónico
+              {t("Login.Email")}
             </label>
             <input
               id="email"
@@ -77,7 +80,7 @@ export default function Login() {
                   : "border-gray-300 focus:ring-blue-400 focus:border-blue-400"
               }`}
               value={email}
-              placeholder="Ingresar Email"
+              placeholder={t("Login.EmailPlaceholder")}
               onChange={(e) => setEmail(e.target.value)}
             />
             {formErrors.email && (
@@ -90,7 +93,7 @@ export default function Login() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700 font-poppins mb-1"
             >
-              Contraseña
+              {t("Login.Password")}
             </label>
             <input
               id="password"
@@ -123,19 +126,19 @@ export default function Login() {
               disabled={loading}
               className="relative z-10 w-full inline-block px-10 py-3 bg-snow/90 hover:bg-snow text-base font-bold font-poppins rounded-md backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300 ease-in-out whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Iniciando Sesión..." : "Iniciar Sesión"}
+              {loading ? t("Login.Load") : t("Login.Title")}
             </button>
           </div>
 
           <div className="text-center mt-4 font-poppins text-gray-700">
-            <span className="my-4">¿No tienes una cuenta?</span>
+            <span className="my-4">{t("Login.RegisterQ")}</span>
             <div className="relative w-full mx-auto group mt-4">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 blur-sm opacity-70 group-hover:blur-md group-hover:opacity-90 transition-all duration-500 rounded-md" />
               <Link
                 href="/register"
                 className="relative z-10 block w-full text-center px-10 py-3 bg-snow/90 hover:bg-snow text-base font-bold font-poppins rounded-md backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300 ease-in-out no-underline"
               >
-                Regístrate
+                {t("Login.LinkBtn")}
               </Link>
             </div>
           </div>

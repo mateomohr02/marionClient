@@ -1,0 +1,29 @@
+{
+    "Error":{
+        "ReturnBtn": "Volver a la página de inicio"
+    },
+    "Login":{
+        "Title":"Iniciar Sesión",
+        "Email":"Correo Electrónico",
+        "EmailPlaceholder":"Introduce tu correo electrónico",
+        "Password":"Contraseña",
+        "RegisterQ":"¿No tienes una cuenta?",
+        "LinkBtn":"Regístrate",
+        "ErrorAlert":"No se ha podido iniciar sesión. Inténtalo nuevamente.",
+        "Load": "Iniciando sesión..."
+    },
+    "Register":{
+        "Title":"Registrarse",
+        "Name": "Nombre",
+        "LastName": "Apellido",
+        "Email":"Correo Electrónico",
+        "EmailPlaceholder":"Introduce tu correo electrónico",
+        "Password":"Contraseña",
+        "RepeatPassword":"Confirmar Contraseña",
+        "LoginQ":"¿Ya tienes una cuenta?",
+        "LinkBtn":"Iniciar Sesión",
+        "SuccessAlert":"Usuario creado con éxito 🙂",
+        "ErrorAlert":"Error al crear el usuario 😕",
+        "Load": "Registrando..."
+    }
+}

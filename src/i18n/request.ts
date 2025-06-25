@@ -16,6 +16,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     Cursos: (await import(`../messages/${locale}/cursos.json`)).default,
     Blog: (await import(`../messages/${locale}/blog.json`)).default,
     Lessons: (await import(`../messages/${locale}/lessons.json`)).default,
+    Other: (await import(`../messages/${locale}/other.json`)).default,
   };
 
   return {

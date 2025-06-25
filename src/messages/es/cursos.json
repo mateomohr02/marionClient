@@ -1,4 +1,8 @@
-{
+{   
+    "Page": {
+        "NoCourses":"No hay cursos disponibles",
+        "Error":"Error al cargar los cursos. Por favor, inténtalo de nuevo más tarde."
+    },
     "CourseCard":{
         "Lang":"Idiomas disponibles:",
         "Btn1":"Ver Más",

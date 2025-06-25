@@ -13,7 +13,6 @@ const useFetchCourses = () => {
         setCourses(res.data);
       } catch (err) {
         setError('Error al obtener los cursos');
-        console.error(err);
       } finally {
         setLoading(false);
       }

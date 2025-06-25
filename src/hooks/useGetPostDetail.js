@@ -36,7 +36,6 @@ const useGetPostDetail = (postId, courseId = null) => {
 
         hasFetched.current = true;
       } catch (err) {
-        console.error("Error al obtener el post:", err.message);
         setError(err);
       } finally {
         setLoading(false);

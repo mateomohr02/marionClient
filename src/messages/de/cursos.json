@@ -1,4 +1,8 @@
 {
+  "Page": {
+    "NoCourses": "Keine Kurse verfügbar",
+    "Error": "Fehler beim Laden der Kurse. Bitte versuche es später erneut"
+    },
   "CourseCard": {
     "Lang": "Verfügbare Sprachen:",
     "Btn1": "Mehr anzeigen",

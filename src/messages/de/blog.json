@@ -1,6 +1,7 @@
 {
   "Page": {
-    "NoPosts": "Keine Beiträge verfügbar"
+    "NoPosts": "Keine Beiträge verfügbar",
+    "Error": "Fehler beim Laden der Beiträge. Bitte versuche es später erneut."
   },
   "PostCard": {
     "Text1": "Beitrag von: ",

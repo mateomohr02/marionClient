@@ -9,6 +9,7 @@ import { validateRegisterForm } from "@/utils/validationRegLogForms.js";
 import { showAlert } from "@/redux/slices/alertSlice";
 import { useDispatch } from "react-redux";
 import { Eye, EyeClosed } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
 export default function Register() {
   const router = useRouter();
@@ -22,6 +23,8 @@ export default function Register() {
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+
+  const t = useTranslations("Other");
 
   const { register, loading, error } = useRegister();
 
@@ -46,16 +49,16 @@ export default function Register() {
     const user = await register(userSend);
 
     if (user) {
-      dispatch(showAlert("Usuario creado con éxito 🙂"));
+      dispatch(showAlert(t("Register.SuccessAlert")));
       router.push("/login");
     } else {
-      dispatch(showAlert("Error al crear el usuario 😕"));
+      dispatch(showAlert(t("Register.ErrorAlert")));
     }
   };
 
   useEffect(() => {
     if (error) {
-      dispatch(showAlert("No se pudo crear el usuario. Intenta nuevamente."));
+      dispatch(showAlert(t("Register.ErrorAlert")));
     }
   }, [error, dispatch]);
 
@@ -72,7 +75,7 @@ export default function Register() {
           className="p-8 rounded-xl w-full bg-pastelPink/70"
         >
           <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800 font-poppins">
-            Registrarse
+            {t("Register.Title")}
           </h2>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -81,12 +84,12 @@ export default function Register() {
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 font-poppins mb-1"
               >
-                Nombre
+                {t("Register.Name")}
               </label>
               <input
                 id="name"
                 type="text"
-                placeholder="Nombre"
+                placeholder={t("Register.Name")}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 font-poppins ${
                   formErrors.name
                     ? "border-red-500 focus:ring-red-400"
@@ -105,12 +108,12 @@ export default function Register() {
                 htmlFor="lastName"
                 className="block text-sm font-medium text-gray-700 font-poppins mb-1"
               >
-                Apellido
+                {t("Register.LastName")}
               </label>
               <input
                 id="lastName"
                 type="text"
-                placeholder="Apellido"
+                placeholder={t("Register.LastName")}
                 className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 font-poppins ${
                   formErrors.lastName
                     ? "border-red-500 focus:ring-red-400"
@@ -132,12 +135,12 @@ export default function Register() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 font-poppins mb-1"
             >
-              Correo electrónico
+              {t("Register.Email")}
             </label>
             <input
               id="email"
               type="email"
-              placeholder="Ingresar Email"
+              placeholder={t("Register.EmailPlaceholder")}
               className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 font-poppins ${
                 formErrors.email
                   ? "border-red-500 focus:ring-red-400"
@@ -156,7 +159,7 @@ export default function Register() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700 font-poppins mb-1"
             >
-              Contraseña
+              {t("Register.Password")}
             </label>
             <input
               id="password"
@@ -187,7 +190,7 @@ export default function Register() {
               htmlFor="repeatPassword"
               className="block text-sm font-medium text-gray-700 font-poppins mb-1"
             >
-              Repetir Contraseña
+              {t("Register.RepeatPassword")}
             </label>
             <input
               id="repeatPassword"
@@ -222,12 +225,12 @@ export default function Register() {
               disabled={loading}
               className="relative z-10 w-full inline-block px-10 py-3 bg-snow/90 hover:bg-snow text-base font-bold font-poppins rounded-md backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300 ease-in-out whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Registrando..." : "Registrarse"}
+              {loading ? t("Register.Load") : t("Register.Title")}
             </button>
           </div>
 
           <p className="text-center mt-4 text-gray-700 font-poppins">
-            ¿Ya tienes una cuenta?
+            {t("Register.LoginQ")}
           </p>
           <div className="relative w-1/2 mx-auto group mt-4">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 blur-sm opacity-70 group-hover:blur-md group-hover:opacity-90 transition-all duration-500 rounded-md" />
@@ -235,7 +238,7 @@ export default function Register() {
               href="/login"
               className="relative z-10 block w-full text-center px-10 py-3 bg-snow/90 hover:bg-snow text-base font-bold font-poppins rounded-md backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300 ease-in-out no-underline"
             >
-              Iniciar Sesión
+              {t("Register.LinkBtn")}
             </Link>
           </div>
         </form>

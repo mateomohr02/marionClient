@@ -14,13 +14,11 @@ export const useAddComment = () => {
       );
 
       if (response.data.status !== "success" || !response.data.data) {
-        console.error("Error al añadir comentario:", response.data);
         return { success: false };
       }
 
       return { success: true, newComment: response.data.data };
     } catch (error) {
-      console.error("Error al añadir comentario:", error);
       return { success: false };
     }
   };

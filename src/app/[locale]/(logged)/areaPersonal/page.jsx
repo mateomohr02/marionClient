@@ -24,7 +24,6 @@ const Page = () => {
       const parsedUser = JSON.parse(userData);
       setUser(parsedUser);
     } catch (error) {
-      console.error("Error parsing user data:", error);
       router.push('/login');
     } finally {
       setCheckingAuth(false);

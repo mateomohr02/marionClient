@@ -1,0 +1,29 @@
+{
+    "Error":{
+        "ReturnBtn":"Zurück zur Startseite"
+    },
+    "Login": {
+    "Title": "Anmelden",
+    "Email": "E-Mail Adresse",
+    "EmailPlaceholder": "Gib deine E-Mail Adresse ein",
+    "Password": "Passwort",
+    "RegisterQ": "Du hast noch kein Konto?",
+    "LinkBtn": "Registrieren",
+    "ErrorAlert": "Anmeldung fehlgeschlagen. Bitte versuche es erneut.",
+    "Load": "Anmeldung läuft..."
+},
+    "Register": {
+    "Title": "Registrieren",
+    "Name": "Vorname",
+    "LastName": "Nachname",
+    "Email": "E-Mail-Adresse",
+    "EmailPlaceholder": "Gib deine E-Mail-Adresse ein",
+    "Password": "Passwort",
+    "RepeatPassword": "Passwort bestätigen",
+    "LoginQ": "Hast du schon ein Konto?",
+    "LinkBtn": "Anmelden",
+    "SuccessAlert": "Benutzer erfolgreich erstellt 🙂",
+    "ErrorAlert": "Fehler beim Erstellen des Benutzers 😕",
+    "Load": "Registrierung läuft..."
+}
+}

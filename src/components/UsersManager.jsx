@@ -50,7 +50,14 @@ const UsersManager = () => {
   const users = useSelector((state) => state.admin.users);
   const activity = useSelector((state) => state.admin.activity);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [activityLoading, setActivityLoading] = useState(false);
+
+  const {
+    userActivity,
+    loading: activityLoading,
+    error,
+    fetchUserActivity,
+  } = useGetUserActivity();
+
   const token = typeof window !== "undefined" && localStorage.getItem("token");
 
   const handleSync = async () => {
@@ -89,16 +96,19 @@ const UsersManager = () => {
 
   const handleUserActivityDisplay = async (userId) => {
     setSelectedUserId(userId);
-    setActivityLoading(true);
     try {
-      const data = await useGetUserActivity(userId);
-      dispatch(setUserActivity(data));
+      await fetchUserActivity(userId);
     } catch (err) {
       console.error("Error fetching user activity:", err);
-    } finally {
-      setActivityLoading(false);
     }
   };
+
+  // Actualiza el estado global cuando se carga userActivity
+  useEffect(() => {
+    if (userActivity) {
+      dispatch(setUserActivity(userActivity));
+    }
+  }, [userActivity, dispatch]);
 
   return (
     <div className="p-4">

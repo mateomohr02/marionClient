@@ -35,7 +35,6 @@ export const validateRegisterForm = ({
 
 export const validateLoginForm = ({ email, password }) => {
   const errors = {};
-
   if (!validateEmail(email)) errors.email = "Correo electrónico inválido";
   if (!password) errors.password = "La contraseña es obligatoria";
 

@@ -5,7 +5,7 @@ import useGetPosts from "@/hooks/useGetPosts";
 import PostCard from "@/components/PostCard";
 import { motion } from 'framer-motion';
 import { useTranslations } from "next-intl";
-
+import Error from "@/components/Error";
 
 const Page = () => {
   const page = 1;
@@ -22,9 +22,9 @@ const Page = () => {
     transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       {loading && <Loading/>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500"><Error msj={t("Page.Error")}/></p>}
       {!loading && posts.length === 0 && (
-        <p>{t("Page.NoPosts")}</p>
+        <Error msj={t("Page.NoPosts")}/>
       )}
 
       {posts.map((post) => (
