@@ -10,7 +10,12 @@
         "RegisterQ":"¿No tienes una cuenta?",
         "LinkBtn":"Regístrate",
         "ErrorAlert":"No se ha podido iniciar sesión. Inténtalo nuevamente.",
-        "Load": "Iniciando sesión..."
+        "Load": "Iniciando sesión...",
+        "AlertMsgs": {
+            "InvalidCredentials": "Email o contraseña incorrectos",
+            "MissingFields": "Debes completar ambos campos",
+            "NetworkError": "Error de red, intenta más tarde"
+        }
     },
     "Register":{
         "Title":"Registrarse",

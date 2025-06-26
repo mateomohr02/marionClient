@@ -1,35 +1,39 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const useAuth = () => {
+export const useAuth = ({ messages }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const login = async ( email, password ) => {
+  const login = async (email, password) => {
     setLoading(true);
     setError(null);
 
     try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_ROUTE}/api/auth/login`,
+        { email, password }
+      );
 
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/auth/login`, {
-        email,
-        password,
-      });      
+      const { token, userData } = res.data.data;
 
-      const token = res.data.data.token;
-      const userData = res.data.data.userData;
-
-      // Guardar el token en localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("userData", JSON.stringify(userData));
 
-      return res.data; // Podés devolver user info si está en el response
-
+      return res.data;
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.message || "Credenciales incorrectas");
+        const status = err.response.status;
+
+        if (status === 401) {
+          setError(messages.invalidCredentials || "Credenciales inválidas");
+        } else if (status === 400) {
+          setError(messages.missingFields || "Campos requeridos faltantes");
+        } else {
+          setError(messages.network || "Error de red o del servidor");
+        }
       } else {
-        setError("Error de red o del servidor");
+        setError(messages.network || "Error de red o del servidor");
       }
       return null;
     } finally {

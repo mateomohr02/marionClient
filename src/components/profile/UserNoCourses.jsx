@@ -4,14 +4,31 @@ import { useLogout } from "@/hooks/useLogout";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useDispatch } from "react-redux";
+import { showAlert } from "@/redux/slices/alertSlice";
 
 const UserNoCourses = () => {
+  const t = useTranslations("Profile");
+
   const router = useRouter();
+  const dispatch = useDispatch();
 
-   const logout = useLogout(); 
+  const { logout, loading, error } = useLogout({
+    messages: {
+      success: t("UserNoCourses.SuccessLogout"),
+      error: t("UserNoCourses.ErrorLogout"),
+    },
+  });
 
-
-  const t = useTranslations("Profile")
+  const handleLogout = () => {
+    const result = logout();
+    if (result && result.status === "success") {
+      router.push("/");
+      dispatch(showAlert(result.message));
+    } else {
+      dispatch(showAlert(result.message || t("UserNoCourses.ErrorLogout")));
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center text-center px-5 py-10 min-h-[calc(100vh-8rem)] -translate-y-20">
@@ -19,9 +36,7 @@ const UserNoCourses = () => {
       <h2 className="text-2xl font-semibold mb-2">
         {t("UserNoCourses.Title")}
       </h2>
-      <p className="mb-4 text-gray-600">
-        {t("UserNoCourses.Text1")}
-      </p>
+      <p className="mb-4 text-gray-600">{t("UserNoCourses.Text1")}</p>
 
       <Link
         href={`/cursos`}
@@ -36,7 +51,7 @@ const UserNoCourses = () => {
         </span>
       </Link>
       <button
-        onClick={() => logout()}
+        onClick={handleLogout}
         className="flex items-center gap-2 text-left mt-4 hover:text-red-600 transition hover:rounded-full hover:bg-red-200 p-2 rounded-full hover:border-red-400 "
       >
         <LogOut className="w-5 h-5" />

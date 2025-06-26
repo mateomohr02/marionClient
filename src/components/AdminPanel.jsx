@@ -14,21 +14,45 @@ import FormAddCourse from './FormAddCourse';
 import FormAddLesson from './FormAddLesson';
 import FormAddPost from './FormAddPost';
 import { useLogout } from '@/hooks/useLogout';
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import UserInfo from './profile/UserInfo';
 import UsersManager from './UsersManager';
 import { useTranslations } from 'next-intl';
+import { showAlert } from "@/redux/slices/alertSlice";
 
 const AdminPanel = () => {
+
+  const t = useTranslations("Profile")
+  
   const [activeView, setActiveView] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(null);
   
-  const logout = useLogout();
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+
+  const { logout, loading, error } = useLogout({
+    messages: {
+      success: t("AdminPanel.SuccessLogout"),
+      error: t("AdminPanel.ErrorLogout"),
+    },
+  });
+
+  const handleLogout = () => {
+    const result = logout();
+    if (result && result.status === "success") {
+      router.push("/");
+      dispatch(showAlert(result.message));
+    } else {
+      dispatch(showAlert(result.message || t("AdminPanel.ErrorLogout")));
+    }
+  };
 
   const toggleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
 
-  const t = useTranslations("Profile")
 
   const renderContent = () => {
     switch (activeView) {
@@ -147,7 +171,7 @@ const AdminPanel = () => {
 
           {/* CERRAR SESIÓN */}
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="flex items-center gap-2 text-red-600 hover:underline"
           >
             <LogOut size={16} />

@@ -12,16 +12,27 @@ import { Eye, EyeClosed } from "lucide-react";
 import { useTranslations } from 'next-intl';
 
 export default function Login() {
+  const t = useTranslations("Other");
   const dispatch = useDispatch();
   const router = useRouter();
-  const { login, error, loading } = useAuth();
+  const {
+  login,
+  error,
+  loading,
+} = useAuth({
+  messages: {
+    invalidCredentials: t("Login.AlertMsgs.InvalidCredentials"),
+    missingFields: t("Login.AlertMsgs.MissingFields"),
+    network: t("Login.AlertMsgs.NetworkError"),
+  },
+});
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
-  const t = useTranslations("Other");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,12 +52,11 @@ export default function Login() {
 
   // Mostrar alerta si hay error de autenticación
   useEffect(() => {
-    if (error) {
-      dispatch(
-        showAlert(t("Login.ErrorAlert"))
-      );
-    }
-  }, [error, dispatch]);
+  if (error) {
+    dispatch(showAlert(error)); // Ya está traducido desde el hook
+  }
+}, [error, dispatch]);
+
 
   return (
     <motion.div

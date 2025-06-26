@@ -1,7 +1,9 @@
 {
     "UserInfo":{
         "Title": "Mis Cursos",
-        "LogOut": "Cerrar Sesión"
+        "LogOut": "Cerrar Sesión",
+        "SuccessLogout": "Sesión cerrada exitosamente.",
+        "ErrorLogout": "Error al cerrar sesión. Por favor, intenta nuevamente."
     },
     "UserCourseCard":{
         "Lang":"Idiomas Disponibles: ",
@@ -12,7 +14,9 @@
         "Title":"Aún no formas parte de ningún curso",
         "Text1":"Explora nuestros cursos y empieza a aprender hoy mismo.",
         "Btn1":"Ver Cursos Disponibles",
-        "LogOut":"Cerrar Sesión"
+        "LogOut":"Cerrar Sesión",
+        "SuccessLogout": "Sesión cerrada exitosamente.",
+        "ErrorLogout": "Error al cerrar sesión. Por favor, intenta nuevamente."
     },
     "AdminPanel":{
         "Placeholder":"Seleccioná una acción del menú superior.",
@@ -25,7 +29,9 @@
         "btn2dd3": "Ver Cursos",
         "btn3":"Usuarios",
         "btn3dd1":"Gestionar Usuarios",
-        "LogOut":"Cerrar Sesión"
+        "LogOut":"Cerrar Sesión",
+        "SuccessLogout": "Sesión cerrada exitosamente.",
+        "ErrorLogout": "Error al cerrar sesión. Por favor, intenta nuevamente."
     }
 
 }

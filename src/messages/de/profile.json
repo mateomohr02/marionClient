@@ -1,7 +1,9 @@
 {
   "UserInfo": {
     "Title": "Meine Kurse",
-    "LogOut": "Abmelden"
+    "LogOut": "Abmelden",
+    "SuccessLogout": "Erfolgreich abgemeldet.",
+    "ErrorLogout": "Fehler beim Abmelden. Bitte versuche es erneut."
   },
   "UserCourseCard": {
     "Lang": "Verfügbare Sprachen: ",
@@ -12,7 +14,9 @@
     "Title": "Du bist noch keinem Kurs beigetreten",
     "Text1": "Entdecke unsere Kurse und beginne noch heute mit dem Lernen.",
     "Btn1": "Verfügbare Kurse ansehen",
-    "LogOut": "Abmelden"
+    "LogOut": "Abmelden",
+    "SuccessLogout": "Erfolgreich abgemeldet.",
+    "ErrorLogout": "Fehler beim Abmelden. Bitte versuche es erneut."
   },
   "AdminPanel": {
     "Placeholder": "Wähle eine Aktion aus dem oberen Menü.",
@@ -25,6 +29,8 @@
     "btn2dd3": "Kurse anzeigen",
     "btn3": "Benutzer",
     "btn3dd1": "Benutzer verwalten",
-    "LogOut": "Abmelden"
+    "LogOut": "Abmelden",
+    "SuccessLogout": "Erfolgreich abgemeldet.",
+    "ErrorLogout": "Fehler beim Abmelden. Bitte versuche es erneut."
   }
 }

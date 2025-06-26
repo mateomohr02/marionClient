@@ -4,20 +4,28 @@ import { LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useGetUserCourses } from "@/hooks/useGetUserCourses";
 import { useLogout } from "@/hooks/useLogout";
-import UserCourseCard from "./UserCourseCard";
+import { showAlert } from "@/redux/slices/alertSlice";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import UserNoCourses from "./UserNoCourses";
+import UserCourseCard from "./UserCourseCard";
 import { useLocale, useTranslations } from "next-intl";
 import Loading from "../Loading";
+import UserNoCourses from "./UserNoCourses";
 
 const UserInfo = ({ userData }) => {
-  const [userCourses, setUserCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const dispatch = useDispatch();
   const router = useRouter();
-  const locale = useLocale();
   const t = useTranslations("Profile");
-  const logout = useLogout(); // ✅ Llamado del hook directamente
+  const [userCourses, setUserCourses] = useState([]);
+  const [loadingCourses, setLoading] = useState(true);
+
+  const locale = useLocale();
+  const { logout, loading, error } = useLogout({
+    messages: {
+      success: t("UserNoCourses.SuccessLogout"),
+      error: t("UserNoCourses.ErrorLogout"),
+    },
+  });
 
   useEffect(() => {
     const fetchUserCourses = async () => {
@@ -31,9 +39,19 @@ const UserInfo = ({ userData }) => {
     fetchUserCourses();
   }, []);
 
+  const handleLogout = () => {
+    const result = logout();
+    if (result && result.status === "success") {
+      dispatch(showAlert(result.message));
+      router.push("/");
+    } else {
+      dispatch(showAlert(result.message || t("UserInfo.ErrorLogout")));
+    }
+  };
+
   return (
     <div className="min-h-[calc(100vh-8rem)]">
-      {loading ? (
+      {loadingCourses || loading ? (
         <Loading />
       ) : userCourses.length === 0 ? (
         <UserNoCourses />
@@ -47,10 +65,7 @@ const UserInfo = ({ userData }) => {
             </h2>
             <div className="px-20 pt-2">
               <button
-                onClick={() => {
-                  logout(); // ✅ ya no se llama el hook dentro de esta función
-                  router.push("/");
-                }}
+                onClick={handleLogout}
                 className="flex items-center gap-2 text-left hover:text-red-600 transition hover:rounded-full hover:bg-red-200 p-2 rounded-full border border-black/20 hover:border-red-400"
               >
                 <LogOut className="w-5 h-5" />

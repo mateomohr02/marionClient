@@ -40,7 +40,7 @@ const CourseCard = ({ course, index, locale}) => {
           {/* Imagen */}
           <div className="w-full md:w-[275px] h-[275px] relative flex-shrink-0 overflow-hidden shadow-md">
             <Image
-              src={locale === "de" ? course?.poster?.de : course?.poster?.es} 
+              src={locale === "de" ? course?.poster?.de : course?.poster?.es || placeholder} 
               alt={`Imagen del curso ${locale === "de" ? course?.name?.de : course?.name?.es}`}
               fill
               className="object-cover"

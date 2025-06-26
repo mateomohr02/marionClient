@@ -10,7 +10,13 @@
     "RegisterQ": "Du hast noch kein Konto?",
     "LinkBtn": "Registrieren",
     "ErrorAlert": "Anmeldung fehlgeschlagen. Bitte versuche es erneut.",
-    "Load": "Anmeldung läuft..."
+    "Load": "Anmeldung läuft...",
+    "AlertMsgs": {
+        "InvalidCredentials": "E-Mail oder Passwort sind falsch",
+        "MissingFields": "Beide Felder müssen ausgefüllt werden",
+        "NetworkError": "Netzwerkfehler, bitte versuche es später erneut"
+    }       
+
 },
     "Register": {
     "Title": "Registrieren",

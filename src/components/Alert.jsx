@@ -14,8 +14,8 @@ const Alert = () => {
       setShow(true);
       const timer = setTimeout(() => {
         setShow(false);
-        setTimeout(() => dispatch(hideAlert()), 500);
-      }, 5000);
+        setTimeout(() => dispatch(hideAlert()), 300);
+      }, 3000); 
       return () => clearTimeout(timer);
     }
   }, [visible, dispatch]);
