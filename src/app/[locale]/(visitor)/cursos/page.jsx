@@ -4,14 +4,14 @@ import { useLocale, useTranslations } from 'next-intl';
 import Loading from "@/components/Loading";
 import useFetchCourses from "@/hooks/useFetchCourses";
 import CourseCard from "@/components/CourseCard";
-import { motion, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Error from "@/components/Error";
 
 
 const CoursesPage = () => {
+  const t = useTranslations("Cursos");
   const { courses, loading, error } = useFetchCourses();
   const locale = useLocale();
-  const t = useTranslations("Cursos");
   
   return (
     <motion.div

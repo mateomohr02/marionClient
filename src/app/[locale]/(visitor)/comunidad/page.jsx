@@ -22,10 +22,8 @@ const Page = () => {
     transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       {loading && <Loading/>}
-      {error && <p className="text-red-500"><Error msj={t("Page.Error")}/></p>}
-      {!loading && posts.length === 0 && (
-        <Error msj={t("Page.NoPosts")}/>
-      )}
+      {error && <Error msj={t("Page.Error")}/>}
+      {!loading && posts.length === 0 && <Error msj={t("Page.NoPosts")}/>}
 
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />

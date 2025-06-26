@@ -1,4 +1,8 @@
 {
+  "Page": {
+        "NoLessons": "Für diesen Kurs gibt es noch keine Lektionen.",
+        "Error": "❌ Serverfehler. Bitte versuche es später erneut."
+  },  
   "NavBar": {
     "Text1": "Klasse Nr.",
     "Forum": "Kursforum"

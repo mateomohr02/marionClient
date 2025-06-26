@@ -1,31 +1,47 @@
 "use client";
 
 import CourseNavBar from "@/components/CourseNavBar";
-import { useGetCourseLessons } from "@/hooks/useGetCourseLessons"; // ajustá la ruta
+import { useGetCourseLessons } from "@/hooks/useGetCourseLessons";
 import { useParams } from "next/navigation";
+import { motion } from 'framer-motion';
 import LessonCard from "@/components/profile/LessonCard";
 import LessonFooterNavigation from "@/components/LessonFooterNavigation";
 import Loading from "@/components/Loading";
-import { useLocale } from "next-intl";
-
+import { useLocale, useTranslations } from "next-intl";
+import Error from "@/components/Error";
 
 const page = () => {
+  const t = useTranslations("Lessons");
+
   const locale = useLocale();
   const params = useParams();
+  
   const paramsId = params.courseId;
   const { lessons, loading, error } = useGetCourseLessons(paramsId);
 
-  if (loading) return <Loading/>;
-  if (lessons.length === 0) return <p>Todavía no hay clases para el curso.</p>;
-
-
   return (
-    <div>
-      <CourseNavBar locale={locale}/>
-      <LessonCard />
-      <LessonFooterNavigation/>
-    </div>
-  );
+  <motion.div
+    key={paramsId}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    className="min-h-[calc(100vh-8rem)]"
+  >
+    {loading ? (
+      <Loading />
+    ) : error ? (
+      <Error msj={t("Page.Error")} />
+    ) : lessons.length === 0 ? (
+      <Error msj={t("Page.NoLessons")} />
+    ) : (
+      <>
+        <CourseNavBar locale={locale} />
+        <LessonCard />
+        <LessonFooterNavigation />
+      </>
+    )}
+  </motion.div>
+);
 };
 
 export default page;

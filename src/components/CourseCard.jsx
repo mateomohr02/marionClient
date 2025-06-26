@@ -12,6 +12,7 @@ const CourseCard = ({ course, index, locale}) => {
   let courseSlug = "";
 
   const pathname = usePathname();
+  
   if (locale === 'de') {
      courseSlug = course?.name?.de.replace(/\s+/g, "-");
   }else{

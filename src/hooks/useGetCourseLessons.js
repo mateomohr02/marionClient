@@ -10,7 +10,7 @@ import {
 } from "@/redux/slices/courseSlice";
 
 export const useGetCourseLessons = (courseId) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
@@ -20,6 +20,8 @@ export const useGetCourseLessons = (courseId) => {
 
   useEffect(() => {
     const fetchLessons = async () => {
+      setLoading(true);
+
       const token = localStorage.getItem("token");
 
       try {

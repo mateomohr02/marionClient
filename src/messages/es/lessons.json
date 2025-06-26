@@ -1,4 +1,8 @@
-{
+{   
+    "Page": {
+        "NoLessons":"Aún no hay clases para este curso.",
+        "Error":"❌ Error de Servidor. Por favor, inténtalo de nuevo más tarde. "
+    },
     "NavBar": {
         "Text1":"Clase N°",
         "Forum":"Foro del Curso"
