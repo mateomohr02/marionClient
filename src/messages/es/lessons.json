@@ -1,4 +1,9 @@
 {   
+    "Hook":{
+        "ServerError":"Error del servidor. Por favor, intenta nuevamente más tarde.",
+        "NoPosts":"No se encontraron publicaciones."
+    },
+
     "Page": {
         "NoLessons":"Aún no hay clases para este curso.",
         "Error":"❌ Error de Servidor. Por favor, inténtalo de nuevo más tarde. "

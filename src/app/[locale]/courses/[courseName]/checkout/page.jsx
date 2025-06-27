@@ -11,9 +11,7 @@ const Page = () => {
 
   const { courseName } = useParams();
 
-  const formattedSlug = courseName.replace(/-/g, " ");
-
-  const { item, loading, error } = useValidateCheckout(formattedSlug, locale);
+  const { item, loading, error } = useValidateCheckout(courseName, locale);
 
   if (loading) return <Loading />;
   if (error) return <div>{error}</div>;

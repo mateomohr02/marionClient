@@ -1,4 +1,8 @@
-{
+{ 
+  "Hook": {
+    "ServerError": "Serverfehler. Bitte versuche es später erneut.",
+    "NoPosts": "Keine Beiträge gefunden."
+  },
   "Page": {
         "NoLessons": "Für diesen Kurs gibt es noch keine Lektionen.",
         "Error": "❌ Serverfehler. Bitte versuche es später erneut."

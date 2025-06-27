@@ -1,4 +1,8 @@
-{
+{   
+    "Hook":{
+        "ServerError":"Error del servidor. Por favor, intenta nuevamente más tarde.",
+        "NotFound":"No se encontraron publicaciones."
+    },
     "Page":{
         "NoPosts":"No hay publicaciones disponibles",
         "Error":"Error al cargar las publicaciones. Por favor, inténtalo de nuevo más tarde."

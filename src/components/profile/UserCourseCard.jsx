@@ -7,10 +7,10 @@ const UserCourseCard = ({
   title,
   courseId,
   description,
+  slug,
   poster,
   languages = "Español - Deutsch",
 }) => {
-  const courseSlug = title.replace(/\s+/g, "-");
 
   const t = useTranslations("Profile")
 
@@ -50,7 +50,7 @@ const UserCourseCard = ({
               </p>
               <p className="mt-3 text-base text-justify leading-relaxed font-poppins text-gray-800">
                 {description.slice(0, 490)}...
-                <Link href={`/courses/${courseSlug}`}>
+                <Link href={`/courses/${slug}`}>
                   <span className="text-primary hover:underline ml-1 font-semibold">
                     {t("UserCourseCard.Btn1")}
                   </span>
@@ -61,7 +61,7 @@ const UserCourseCard = ({
             {/* Botón */}
             <div className="mt-6">
               <Link
-                href={`/courses/${courseId}`}
+                href={`/courses/${slug}/lessons`}
                 className="relative inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group"
               >
                 {/* Fondo animado */}

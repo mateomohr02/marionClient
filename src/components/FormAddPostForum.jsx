@@ -4,14 +4,11 @@ import { useState } from "react";
 import useAddPost from "@/hooks/useAddPost";
 import { Forward } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { addPostToForum } from "@/redux/slices/blogSlice"; // <--- NUEVO
+import { addPostToForum } from "@/redux/slices/blogSlice";
 import { useTranslations } from "next-intl";
 
-
-const FormAddPostForum = ({ courseId }) => {
-
+const FormAddPostForum = ({ courseName }) => {
   const t = useTranslations("Lessons");
-
   const dispatch = useDispatch();
   const { addPost, loading, error, success } = useAddPost();
 
@@ -28,10 +25,10 @@ const FormAddPostForum = ({ courseId }) => {
       content: [{ contentType: "text", value: content.trim() }],
     };
 
-    const response = await addPost(postData, courseId);
+    const response = await addPost(postData, courseName); // <- courseName, no courseId
 
     if (response?.status === "success" && response.data) {
-      dispatch(addPostToForum(response.data)); 
+      dispatch(addPostToForum(response.data));
       setTitle("");
       setContent("");
       setFocused(false);
@@ -95,7 +92,6 @@ const FormAddPostForum = ({ courseId }) => {
           )}
 
           {error && <p className="text-red-500 text-sm mt-1">{t("Forum.AlertMsgError")}</p>}
-          {success && <p className="text-green-500 text-sm mt-1">{t("Forum.AlertMsgSuccess")}</p>}
         </form>
       </div>
     </div>

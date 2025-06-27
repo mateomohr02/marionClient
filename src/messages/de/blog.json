@@ -1,4 +1,8 @@
 {
+  "Hook": {
+    "ServerError": "Serverfehler. Bitte versuche es später erneut.",
+    "NotFound": "Keine Beiträge gefunden."
+  },
   "Page": {
     "NoPosts": "Keine Beiträge verfügbar",
     "Error": "Fehler beim Laden der Beiträge. Bitte versuche es später erneut."

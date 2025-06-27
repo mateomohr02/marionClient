@@ -84,7 +84,7 @@ const Checkout = ({ item }) => {
     <div className="flex flex-col md:flex-row p-1 gap-1 max-w-screen-xl min-h-[calc(100vh-31rem)] mx-auto bg-gradient-to-br from-gradientLeft to-gradientRight rounded-[0.75rem] my-4">
       <div className="flex-1 bg-snow/75 rounded-lg p-6 shadow-md">
         <Link
-          href={`/cursos/${locale === 'de' ? item?.name?.de?.replace(/\s+/g, "-").toLowerCase() : item?.name?.es?.replace(/\s+/g, "-").toLowerCase()}`}
+          href={`/courses/${locale === 'de' ? item?.name?.de?.replace(/\s+/g, "-").toLowerCase() : item?.slug}`}
           className="text-sm hover:underline"
         >
           <div className="flex items-center">

@@ -15,13 +15,12 @@ const page = () => {
 
   const locale = useLocale();
   const params = useParams();
-  
-  const paramsId = params.courseId;
-  const { lessons, loading, error } = useGetCourseLessons(paramsId);
+  const courseSlug = params.courseName
+  const { lessons, loading, error } = useGetCourseLessons(courseSlug, locale);
 
   return (
   <motion.div
-    key={paramsId}
+    key={params.courseName}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, ease: "easeOut" }}

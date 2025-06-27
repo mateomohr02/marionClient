@@ -12,7 +12,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Loading from "../Loading";
 import UserNoCourses from "./UserNoCourses";
 
-const UserInfo = ({ userData }) => {
+const UserInfo = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const t = useTranslations("Profile");
@@ -83,6 +83,7 @@ const UserInfo = ({ userData }) => {
               key={course.id}
               title={course.name?.[locale] || "Sin título"}
               courseId={course.id}
+              slug={course.slug}
               description={course.description?.[locale] || ""}
               poster={course.poster?.[locale] || placeholder}
             />

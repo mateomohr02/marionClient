@@ -15,6 +15,8 @@ const Page = () => {
 
   const t = useTranslations("Blog");
 
+  console.log(posts, 'POSTS');
+
   return (
     <motion.div className="min-h-[calc(100vh-8rem)]"
     initial={{ opacity: 0, y: 20 }}
@@ -26,7 +28,7 @@ const Page = () => {
       {!loading && posts.length === 0 && <Error msj={t("Page.NoPosts")}/>}
 
       {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
+        <PostCard key={post.id} post={post}/>
       ))}
     </motion.div>
   );

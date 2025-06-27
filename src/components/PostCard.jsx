@@ -1,13 +1,16 @@
-import React from "react";
-import { Link } from '@/i18n/navigation';
-import { ArrowRight, Image, Video } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
+"use client";
 
-const PostCard = ({ post }) => {
-  const pathname = usePathname();
+import React from "react";
+import { Link } from "@/i18n/navigation";
+import { ArrowRight, Image, Video } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+
+const PostCard = ({ post, courseName = "" }) => {
+  const t = useTranslations("Blog");
+  const locale = useLocale();
 
   const contentPreview = (post.content || []).slice(0, 3);
+  
   const imageCount =
     post.content?.filter((c) => c.contentType === "image" && c.value?.trim())
       .length || 0;
@@ -15,9 +18,9 @@ const PostCard = ({ post }) => {
     (c) => c.contentType === "video" && c.value?.trim()
   );
 
-  let showingText = true;
+  const postSlug = post?.slug;
 
-  const t = useTranslations("Blog")
+  let showingText = true;
 
   return (
     <div className="w-full my-6 px-4 md:px-0">
@@ -31,7 +34,7 @@ const PostCard = ({ post }) => {
 
           {post.User?.name && (
             <p className="text-sm sm:text-base text-black font-poppins -mt-4">
-              {t("PostCard.Text1")}
+              {t("PostCard.Text1")}{" "}
               <span className="font-medium">{post.User.name}</span>
             </p>
           )}
@@ -71,13 +74,12 @@ const PostCard = ({ post }) => {
             </div>
 
             <Link
-              href={`${pathname}/${post.id}`}
+              href={courseName !== "" ? `/courses/${courseName}/lessons/forum/${postSlug}` : `/comunidad/${postSlug}`}
+              locale={locale}
               className="relative inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group"
             >
-              {/* Fondo animado */}
               <div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-fuchsia-500 to-rose-400 rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
 
-              {/* Contenido del botón */}
               <span className="relative z-10 flex items-center gap-2 px-6 py-2 bg-white/80 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
                 <ArrowRight size={18} />
                 {t("PostCard.Btn1")}

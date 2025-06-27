@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import HeroHeader from "../../../components/HeroHeader";
-import HomeContent from "../../../components/HomeContent";
-import HomeAbout from "../../../components/HomeAbout";
-import HomeBanner from "../../../components/HomeBanner";
+import HeroHeader from "../../components/HeroHeader";
+import HomeContent from "../../components/HomeContent";
+import HomeAbout from "../../components/HomeAbout";
+import HomeBanner from "../../components/HomeBanner";
 
 const Page = () => {
   const [scrollProgress, setScrollProgress] = useState(0);

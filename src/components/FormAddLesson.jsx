@@ -4,11 +4,21 @@ import { useState } from "react";
 import useFetchCourses from "@/hooks/useFetchCourses";
 import axios from "axios";
 import LessonCard from "./profile/LessonCard";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations  } from "next-intl";
+
 
 const FormAddLesson = () => {
+  
+  
+  const t = useTranslations("Cursos");
   const locale = useLocale();
-  const { courses, loading, error } = useFetchCourses();
+  
+  const { courses, loading, error } = useFetchCourses({
+    messages: {
+      noRecord: t("Page.NoCourses"),
+      error: t("Hook.Error"),
+    },
+  });
   const [courseId, setCourseId] = useState("");
 
   const [titleES, setTitleES] = useState("");
@@ -31,7 +41,6 @@ const FormAddLesson = () => {
       const data = await res.json();
       return data.secure_url;
     } catch (error) {
-      console.error("Error al subir video:", error);
       return null;
     }
   };

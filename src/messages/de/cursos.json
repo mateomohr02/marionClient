@@ -1,4 +1,11 @@
 {
+  "Hook": {
+    "unauthorized": "Du bist nicht autorisiert, um diese Aktion durchzuführen.",
+    "badRequest": "Ungültige Anfrage. Bitte überprüfe die eingegebenen Daten.",
+    "noRecord": "Kein passender Datensatz gefunden.",
+    "serverError": "Serverfehler. Bitte versuche es später erneut.",
+    "Error": "Fehler beim Laden der Kurse. Bitte versuche es später erneut"
+  },
   "Page": {
     "NoCourses": "Keine Kurse verfügbar",
     "Error": "Fehler beim Laden der Kurse. Bitte versuche es später erneut"

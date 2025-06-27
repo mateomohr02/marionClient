@@ -5,9 +5,13 @@ import {
   setPostDetail,
   setCurrentPost
 } from "@/redux/slices/blogSlice";
+import { useLocale } from "next-intl";
+import slugify from "@/utils/slugify";
 
-const useGetPostDetail = (postId, courseId = null) => {
+
+const useGetPostDetail = (postSlug, courseName = null, { messages } = {}) => {
   const dispatch = useDispatch();
+  const locale = useLocale();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,9 +24,15 @@ const useGetPostDetail = (postId, courseId = null) => {
     const fetchPost = async () => {
       const token = localStorage.getItem("token");
 
-      const route = courseId
-        ? `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/forum/${courseId}/${postId}`
-        : `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/get-post/${postId}`;
+      let formattedCourseName;
+
+      courseName ? formattedCourseName = slugify(courseName) : null;
+
+      const formattedPostSlug = slugify(postSlug);     
+
+      const route = courseName
+        ? `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/forum/${formattedCourseName}/${formattedPostSlug}?lang=${locale}`
+        : `${process.env.NEXT_PUBLIC_API_ROUTE}/api/blog/get-post/${formattedPostSlug}`;
 
       try {
         const response = await axios.get(route, {
@@ -32,26 +42,29 @@ const useGetPostDetail = (postId, courseId = null) => {
         });
 
         dispatch(setPostDetail(response.data.data));
-        dispatch(setCurrentPost(postId));
-
+        dispatch(setCurrentPost(postSlug));
         hasFetched.current = true;
       } catch (err) {
-        setError(err);
+        if (err.response?.status === 404) {
+          setError(messages?.notFound || "Publicación no encontrada.");
+        } else {
+          setError(messages?.serverError || "Error al obtener la publicación.");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     if (
-      postId &&
+      postSlug &&
       !hasFetched.current &&
-      (currentPostId !== postId || !postDetail || Object.keys(postDetail).length === 0)
+      (currentPostId !== postSlug || !postDetail || Object.keys(postDetail).length === 0)
     ) {
       fetchPost();
     } else {
-      setLoading(false); // ya había datos
+      setLoading(false);
     }
-  }, [postId, courseId, currentPostId, postDetail]);
+  }, [postSlug, courseName, currentPostId, postDetail, locale, messages]);
 
   return { post: postDetail, loading, error };
 };

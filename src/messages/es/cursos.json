@@ -1,4 +1,11 @@
 {   
+    "Hook": {
+        "unauthorized": "No estás autorizado para realizar esta acción.",
+        "badRequest": "Solicitud incorrecta. Por favor revisa los datos ingresados.",
+        "noRecord": "No se encontró ningún registro coincidente.",
+        "serverError": "Error del servidor. Por favor, intenta nuevamente más tarde.",
+        "Error": "Error al cargar los cursos. Por favor, intenta nuevamente más tarde."
+    },
     "Page": {
         "NoCourses":"No hay cursos disponibles",
         "Error":"Error al cargar los cursos. Por favor, inténtalo de nuevo más tarde."

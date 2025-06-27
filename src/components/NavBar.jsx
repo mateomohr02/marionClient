@@ -26,7 +26,7 @@ const NavBar = () => {
         {/* Navegación en escritorio */}
         <div className="hidden lg:flex lg:w-[80%] lg:items-center lg:justify-between">
           <NavLink href="/" label={t("Label1")} />
-          <NavLink href="/cursos" label={t("Label2")} />
+          <NavLink href="/courses" label={t("Label2")} />
           <NavLink href="/comunidad" label={t("Label3")} />
           <NavLink href="/areaPersonal" label={t("Label4")} />
           <LocaleSwitcher />
@@ -40,7 +40,7 @@ const NavBar = () => {
         }`}
       >
         <NavLinkMobile href="/" label={t("Label1")} onClick={() => setVisibleNavBar(false)} />
-        <NavLinkMobile href="/cursos" label={t("Label2")} onClick={() => setVisibleNavBar(false)} />
+        <NavLinkMobile href="/courses" label={t("Label2")} onClick={() => setVisibleNavBar(false)} />
         <NavLinkMobile href="/comunidad" label={t("Label3")} onClick={() => setVisibleNavBar(false)} />
         <NavLinkMobile href="/areaPersonal" label={t("Label4")} onClick={() => setVisibleNavBar(false)} />
       </div>

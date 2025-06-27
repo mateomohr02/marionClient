@@ -6,7 +6,6 @@ import { NextIntlClientProvider } from "next-intl";
 import Alert from "@/components/Alert";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-
 import "@/app/globals.css";
 
 import { Dancing_Script, Poppins } from "next/font/google";
@@ -24,12 +23,11 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Partera Marion",
-  description:
-    "Formaciones diseñadas especialmente para acompañarte en cada etapa del embarazo: desde la gestación, hasta el posparto.",
+  title:"Partera Marion",
+  description:"Formaciones diseñadas especialmente para acompañarte en cada etapa del embarazo: desde la gestación, hasta el posparto.",
 };
 
-export default async function RootLayout({ children }) {
+export default async function LoggedLayout({ children }) {
   const locale = await getLocale();
   const messages = await getMessages();
 
