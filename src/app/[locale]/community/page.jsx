@@ -1,15 +1,15 @@
 import { getTranslations } from 'next-intl/server';
-import Courses from "@/components/pages/courses";
+import Community from "@/components/pages/community";
 
 export async function generateMetadata({ params }) {
   const t = await getTranslations({ locale: params.locale, namespace: 'Metadata' });
 
   return {
-    title: t('Courses.Page.Title'),
-    description: t('Courses.Page.Description'),
+    title: t('Blog.Page.Title'),
+    description: t('Blog.Page.Description'),
   };
 }
 
 export default function Page() {
-  return <Courses />;
+  return <Community />;
 }

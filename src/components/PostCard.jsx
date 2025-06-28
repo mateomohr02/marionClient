@@ -74,7 +74,7 @@ const PostCard = ({ post, courseName = "" }) => {
             </div>
 
             <Link
-              href={courseName !== "" ? `/courses/${courseName}/lessons/forum/${postSlug}` : `/comunidad/${postSlug}`}
+              href={courseName !== "" ? `/courses/${courseName}/lessons/forum/${postSlug}` : `/community/${postSlug}`}
               locale={locale}
               className="relative inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group"
             >

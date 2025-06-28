@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { useTranslations } from "next-intl";
 import Error from "@/components/Error";
 
-const Page = () => {
+const Community = () => {
   const page = 1;
   const limit = 10;
 
@@ -32,4 +32,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Community;

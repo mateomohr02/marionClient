@@ -1,0 +1,23 @@
+{
+    "Home":{
+
+    },
+    "Courses":{
+        "Page":{
+            "Title":"Kurse",
+            "Description":"Entdecke unsere Online-Kurse für jede Phase der Schwangerschaft – von der frühen Schwangerschaft über die Geburt bis zum Wochenbett. Wähle den passenden Kurs und erlebe diese Reise mit Vertrauen und Unterstützung."
+        }
+    },
+    "Blog":{
+        "Page": {
+            "Title": "Community",
+            "Description": "Entdecke Artikel über Schwangerschaft, Geburt und Wochenbett, geschrieben von Marion. Lerne, lass dich inspirieren und teile deine Erfahrungen."
+        }
+    },
+    "Lessons":{
+
+    },
+    "Profile":{
+        
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "Home":{
+
+    },
+    "Courses":{
+        "Page":{
+            "Title":"Cursos",
+            "Description":"Descubrí nuestros cursos online diseñados para acompañarte en cada etapa del embarazo: desde la gestación, el parto, hasta el posparto. Elegí el curso ideal para vos y viví este camino con confianza y contención."
+        }
+    },
+    "Blog":{
+        "Page":{
+            "Title":"Comunidad",
+            "Description":"Explorá artículos sobre embarazo, parto y posparto escritos por Marion. Aprendé, inspirate y compartí tu experiencia."
+        }
+    },
+    "Lessons":{
+
+    },
+    "Profile":{
+        
+    }
+}

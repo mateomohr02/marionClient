@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import { Link } from '@/i18n/navigation'; // Link que maneja locales
@@ -27,8 +27,8 @@ const NavBar = () => {
         <div className="hidden lg:flex lg:w-[80%] lg:items-center lg:justify-between">
           <NavLink href="/" label={t("Label1")} />
           <NavLink href="/courses" label={t("Label2")} />
-          <NavLink href="/comunidad" label={t("Label3")} />
-          <NavLink href="/areaPersonal" label={t("Label4")} />
+          <NavLink href="/community" label={t("Label3")} />
+          <NavLink href="/profile" label={t("Label4")} />
           <LocaleSwitcher />
         </div>
       </div>
@@ -41,8 +41,8 @@ const NavBar = () => {
       >
         <NavLinkMobile href="/" label={t("Label1")} onClick={() => setVisibleNavBar(false)} />
         <NavLinkMobile href="/courses" label={t("Label2")} onClick={() => setVisibleNavBar(false)} />
-        <NavLinkMobile href="/comunidad" label={t("Label3")} onClick={() => setVisibleNavBar(false)} />
-        <NavLinkMobile href="/areaPersonal" label={t("Label4")} onClick={() => setVisibleNavBar(false)} />
+        <NavLinkMobile href="/community" label={t("Label3")} onClick={() => setVisibleNavBar(false)} />
+        <NavLinkMobile href="/profile" label={t("Label4")} onClick={() => setVisibleNavBar(false)} />
       </div>
     </div>
   );
