@@ -5,7 +5,7 @@ const useGetCourseDetail = (slug, locale, { messages }) => {
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-    
+
   useEffect(() => {
     if (!slug || !locale) {
       setCourse(null);
@@ -19,13 +19,13 @@ const useGetCourseDetail = (slug, locale, { messages }) => {
       setError(null);
       const token = localStorage.getItem("token");
 
-      try {
-        if (!token) {
-          setError(messages.unauthorized || "Unauthorized");
-          setLoading(false);
-          return;
-        }
+      if (!token) {
+        setError(messages.unauthorized || "Unauthorized");
+        setLoading(false);
+        return;
+      }
 
+      try {
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_ROUTE}/api/courses/get-course-by-name?name=${slug}&lang=${locale}`,
           {
@@ -35,19 +35,31 @@ const useGetCourseDetail = (slug, locale, { messages }) => {
           }
         );
 
-        
-
         if (!res.data || !res.data.course) {
           setError(messages.noRecord || "No records found");
           setCourse(null);
-          setLoading(false);
-          return;
+        } else {
+          setCourse(res.data.course);
+        }
+      } catch (err) {
+        if (axios.isAxiosError(err) && err.response) {
+          const { status, data } = err.response;
+
+          if (data?.code === "COURSE_NOT_FOUND") {
+            setError(messages.noRecord || "No records found");
+          } else if (data?.code === "BAD_REQUEST") {
+            setError(messages.badRequest || "Bad Request");
+          } else if (data?.code === "SERVER_ERROR") {
+            setError(messages.serverError || "Server Error");
+          } else if (status === 401) {
+            setError(messages.unauthorized || "Unauthorized");
+          } else {
+            setError(messages.serverError || "Server Error");
+          }
+        } else {
+          setError(messages.serverError || "Server Error");
         }
 
-        setCourse(res.data.course);
-      } catch (err) {
-        console.error("Fetch error:", err);
-        setError(messages.serverError || "Server Error");
         setCourse(null);
       } finally {
         setLoading(false);

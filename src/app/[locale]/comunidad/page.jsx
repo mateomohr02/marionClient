@@ -15,8 +15,6 @@ const Page = () => {
 
   const t = useTranslations("Blog");
 
-  console.log(posts, 'POSTS');
-
   return (
     <motion.div className="min-h-[calc(100vh-8rem)]"
     initial={{ opacity: 0, y: 20 }}
