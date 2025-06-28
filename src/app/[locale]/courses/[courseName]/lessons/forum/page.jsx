@@ -34,7 +34,7 @@ const Page = () => {
       {error && <Error msj={error}/>}
 
       {/* Crear CTA PARA NO POSTS */}
-      {!loading && posts.length === 0 && <Error msj={t("Forum.NoPosts")}/>} 
+      {!loading && posts.length === 0 && <p className="text-center mt-6 font-poppins">{t("Forum.NoPosts")}</p>} 
       <FormAddPostForum courseName={courseName} />
       {posts.map((post) => (
         <PostCard key={post.id} post={post} courseName={courseName}/>

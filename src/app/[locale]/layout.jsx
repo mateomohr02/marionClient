@@ -23,11 +23,14 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title:"Partera Marion",
-  description:"Formaciones diseñadas especialmente para acompañarte en cada etapa del embarazo: desde la gestación, hasta el posparto.",
+  title:{default: "Partera Marion", template:"%s - Partera Marion"},
+  description:"Cursos sobre embarazo, parto y posparto diseñados para brindarte contención, información confiable y preparación emocional.",
+  twitter: {
+    card:"summary_large_image"
+  }
 };
 
-export default async function LoggedLayout({ children }) {
+export default async function RootLayout({ children }) {
   const locale = await getLocale();
   const messages = await getMessages();
 

@@ -36,7 +36,7 @@ const LessonFooterNavigation = () => {
   };
 
   return (
-    <div className="flex justify-between items-center px-8 mt-12">
+    <div className="flex justify-between items-center px-8 mt-12 mb-6">
       {/* Botón Anterior (solo si no estamos en la primera lección) */}
       {currentIndex > 0 ? (
         <div className="p-[2px] rounded-full bg-gradient-to-r from-gradientLeft to-gradientRight">

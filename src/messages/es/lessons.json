@@ -5,7 +5,9 @@
     },
 
     "Page": {
-        "NoLessons":"Aún no hay clases para este curso.",
+        "VideoNotSupported":"Tu navegador no soporta la reproducción de video. Prueba ingresando desde otro.",
+        "NoContent":"Aún no hay contenido para esta clase. Por favor vuelve más adelante."
+        ,"NoLessons":"Aún no hay clases para este curso.",
         "Error":"❌ Error de Servidor. Por favor, inténtalo de nuevo más tarde. "
     },
     "NavBar": {
@@ -17,7 +19,7 @@
         "Next":"Ir a la Clase Siguiente"
     },
     "Forum":{
-        "NoPosts":"Aún no hay publicaciones en este foro.",
+        "NoPosts":"Aún no hay publicaciones en este foro. Sé la primer persona en publicar Algo!",
         "CreatePost":"Crear una Publicación",
         "PlaceholderTitle":"Título de la Publicación",
         "PlaceholderText":"Escribe el contenido de la publicación...",

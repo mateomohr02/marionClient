@@ -4,9 +4,12 @@
     "NoPosts": "Keine Beiträge gefunden."
   },
   "Page": {
-        "NoLessons": "Für diesen Kurs gibt es noch keine Lektionen.",
-        "Error": "❌ Serverfehler. Bitte versuche es später erneut."
-  },  
+    "VideoNotSupported": "Dein Browser unterstützt die Videowiedergabe nicht. Versuche es mit einem anderen.",
+    "NoContent": "Für diese Lektion ist noch kein Inhalt verfügbar. Bitte schaue später wieder vorbei.",
+    "NoLessons": "Für diesen Kurs gibt es noch keine Lektionen.",
+    "Error": "❌ Serverfehler. Bitte versuche es später erneut."
+  },
+  
   "NavBar": {
     "Text1": "Klasse Nr.",
     "Forum": "Kursforum"
@@ -16,7 +19,7 @@
     "Next": "Zur nächsten Lektion"
   },
   "Forum":{
-    "NoPosts": "Es gibt noch keine Beiträge in diesem Forum.",
+    "NoPosts": "Es gibt noch keine Beiträge in diesem Forum. Sei die erste Person, die etwas veröffentlicht!",
     "CreatePost": "Erstelle einen Beitrag",
     "PlaceholderTitle": "Titel des Beitrags",
   "PlaceholderText": "Schreibe den Inhalt des Beitrags...",
