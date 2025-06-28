@@ -11,7 +11,7 @@ import { useLocale } from "next-intl";
 import useGetCourseDetail from "@/hooks/useGetCourseDetail";
 import Error from "@/components/Error";
 import { showAlert } from "@/redux/slices/alertSlice";
-
+import { ChevronLeft } from "lucide-react";
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const Page = () => {
 
   if (loading || !authorization) return <Loading />;
 
-  if (error) return <Error msj={error}/>;
+  if (error) return <Error msj={error} />;
 
   const placeholder = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg..."; // Reemplazá con el real
 
@@ -62,10 +62,15 @@ const Page = () => {
     <div className="max-w-[62.5vw] mx-auto my-10 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         <div className="flex flex-col flex-grow basis-3/5">
-          <h1 className="text-4xl font-bold font-poppins mb-6 text-gray-900">
-            {locale === "de" ? course?.name?.de : course?.name?.es}
-          </h1>
-          <p className="text-lg font-poppins text-justify leading-relaxed pr-0 sm:pr-8">
+          <div className="flex flex-row items-center gap-2">
+            <button onClick={() => router.back()} className="hover:scale-125">
+              <ChevronLeft />
+            </button>
+            <h1 className="text-4xl font-bold font-poppins text-gray-900">
+              {locale === "de" ? course?.name?.de : course?.name?.es}
+            </h1>
+          </div>
+          <p className="text-lg font-poppins pl-9 text-justify leading-relaxed pr-0 sm:pr-8">
             {locale === "de"
               ? course?.description?.de
               : course?.description?.es}

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import CommentSection from "./CommentSection";
 import FormAddComment from "./FormAddComment";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 const PostDetail = ({ data }) => {
-
   const router = useRouter();
 
   const t = useTranslations("Blog");
@@ -23,29 +22,34 @@ const PostDetail = ({ data }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 space-y-6"
+        className="relative z-10"
       >
         {/* Contenedor superior con título y botón */}
-        <div className="flex justify-between items-center gap-5 mb-6 px-10 py-10">
+        <div className="flex justify-between items-center px-10">
           {/* Título y autor */}
-          <button onClick={() => router.back()}>
-            <ArrowLeft/>
-          </button>
           <div className="flex-1">
-            <h2 className="text-3xl font-bold text-black">{data?.title}</h2>
-            {data.User?.name && (
-              <p className="text-sm sm:text-base text-black font-poppins mt-1">
-                {t("PostDetail.Text1")}{" "}
-                <span className="font-medium">{data.User.name}</span>
-              </p>
-            )}
+            <div className="flex flex-row mt-6">
+              <button
+                onClick={() => router.back()}
+                className="hover:scale-125 transition-transform mr-2"
+              >
+                <ChevronLeft />
+              </button>
+              <h2 className="text-3xl font-bold text-black">{data?.title}</h2>
+            </div>
           </div>
         </div>
+        {data.User?.name && (
+          <p className="text-sm sm:text-base text-black font-poppins px-20">
+            {t("PostDetail.Text1")}{" "}
+            <span className="font-medium">{data.User.name}</span>
+          </p>
+        )}
 
         <div className="flex flex-col gap-5">
           {/* Contenido dinámico */}
 
-          <div className="min-h-[calc(100vh-25rem)] px-12">
+          <div className="min-h-[calc(100vh-25rem)] px-20 my-6">
             {data?.content?.map((cont, index) => {
               if (cont.contentType === "text") {
                 return (
