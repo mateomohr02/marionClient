@@ -47,7 +47,7 @@ export default function Login() {
     setFormErrors({}); // Limpiar errores anteriores
 
     const user = await login(email, password);
-    if (user) router.push("/areaPersonal");
+    if (user) router.push("/profile");
   };
 
   // Mostrar alerta si hay error de autenticación

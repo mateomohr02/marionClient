@@ -1,5 +1,5 @@
 import { StoreProvider } from "@/redux/store/StoreProvider";
-
+import { getTranslations } from 'next-intl/server';
 import { getMessages, getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
@@ -9,6 +9,15 @@ import NavBar from "@/components/NavBar";
 import "@/app/globals.css";
 
 import { Dancing_Script, Poppins } from "next/font/google";
+
+export async function generateMetadata({ params }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Metadata' });
+
+  return {
+    title: { default: t("Title"), template:`%s - ${t("Title")}` },
+    description: t('Description'),
+  };
+}
 
 const dancingScript = Dancing_Script({
   subsets: ["latin"],
@@ -21,14 +30,6 @@ const poppins = Poppins({
   weight: ["400", "700"],
   variable: "--font-poppins",
 });
-
-export const metadata = {
-  title:{default: "Partera Marion", template:"%s - Partera Marion"},
-  description:"Cursos sobre embarazo, parto y posparto diseñados para brindarte contención, información confiable y preparación emocional.",
-  twitter: {
-    card:"summary_large_image"
-  }
-};
 
 export default async function RootLayout({ children }) {
   const locale = await getLocale();

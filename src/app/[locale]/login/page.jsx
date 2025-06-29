@@ -1,4 +1,15 @@
+import { getTranslations } from 'next-intl/server';
 import Login from "@/components/Login"
+
+export async function generateMetadata({ params }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Metadata' });
+
+  return {
+    title: t('Profile.Login.Title'),
+    description: t('Profile.Login.Description'),
+  };
+}
+
 
 const page = () => {
   return (

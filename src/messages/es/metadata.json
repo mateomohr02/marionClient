@@ -1,4 +1,6 @@
-{
+{   
+    "Title":"Partera Marion",
+    "Description":"Cursos sobre embarazo, parto y posparto diseñados para brindarte contención, información confiable y preparación emocional.",
     "Home":{
 
     },
@@ -18,6 +20,17 @@
 
     },
     "Profile":{
-        
+        "Page":{
+            "Title":"Area Personal",
+            "Description":"Ingresa a tus cursos. Tu espacio personal para acompañarte en el embarazo y posparto."
+        },
+        "Login":{
+            "Title":"Iniciar Sesión",
+            "Description":"Iniciá sesión para acceder a tus cursos, comentar en la comunidad y continuar tu camino de aprendizaje en embarazo, parto y posparto."
+        },
+        "Register":{
+            "Title":"Registrarse",
+            "Description":"Registrate para acceder a tus cursos, comentar en la comunidad y continuar tu camino de aprendizaje en embarazo, parto y posparto."
+        }
     }
 }

@@ -1,4 +1,6 @@
-{
+{   
+    "Title":"Hebamme Marion",
+    "Description":"Kurse zu Schwangerschaft, Geburt und Wochenbett, die dir Unterstützung, verlässliche Informationen und emotionale Vorbereitung bieten.",
     "Home":{
 
     },
@@ -18,6 +20,17 @@
 
     },
     "Profile":{
-        
+        "Page": {
+            "Title": "Persönlicher Bereich",
+            "Description": "Greife auf deine Kurse zu. Dein persönlicher Bereich, um dich während Schwangerschaft und Wochenbett zu begleiten."
+            },
+        "Login": {
+            "Title": "Anmelden",
+            "Description": "Melde dich an, um auf deine Kurse zuzugreifen, in der Community zu kommentieren und deinen Lernweg zu Schwangerschaft, Geburt und Wochenbett fortzusetzen."
+        },
+        "Register":{
+            "Title":"Registrieren",
+            "Description":"Registriere dich, um auf deine Kurse zuzugreifen, in der Community zu kommentieren und deinen Lernweg zu Schwangerschaft, Geburt und Wochenbett fortzusetzen."
+        }
     }
 }

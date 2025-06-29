@@ -1,46 +1,15 @@
-'use client';
+import { getTranslations } from 'next-intl/server';
+import Profile from "@/components/pages/profile";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import AdminPanel from '@/components/AdminPanel';
-import UserInfo from '@/components/profile/UserInfo';
-import Loading from '@/components/Loading';
+export async function generateMetadata({ params }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Metadata' });
 
-const Page = () => {
-  const [user, setUser] = useState(null);
-  const [checkingAuth, setCheckingAuth] = useState(true);
-  const router = useRouter();
+  return {
+    title: t('Profile.Page.Title'),
+    description: t('Profile.Page.Description'),
+  };
+}
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('userData');
-
-    if (!token || !userData) {
-      router.push('/login');
-      return;
-    }
-
-    try {
-      const parsedUser = JSON.parse(userData);
-      setUser(parsedUser);
-    } catch (error) {
-      router.push('/login');
-    } finally {
-      setCheckingAuth(false);
-    }
-  }, [router]);
-
-  if (checkingAuth) return <Loading />;
-
-  return (
-    <div className="min-h-[calc(100vh-8rem)]">
-      {user?.userType === '0' ? (
-        <AdminPanel />
-      ) : (
-        <UserInfo userData={user} />
-      )}
-    </div>
-  );
-};
-
-export default Page;
+export default function Page() {
+  return <Profile />;
+}
