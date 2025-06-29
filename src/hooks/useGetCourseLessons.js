@@ -27,9 +27,6 @@ export const useGetCourseLessons = (courseName, lang) => {
 
       const token = localStorage.getItem("token");
 
-      console.log(courseName, lang, 'HOOK USEGETCOURSELESSONS');
-      
-
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_ROUTE}/api/lessons/?name=${courseName}&lang=${lang}`,
