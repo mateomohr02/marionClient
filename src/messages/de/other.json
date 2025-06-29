@@ -38,5 +38,12 @@
         "EmailInUse": "Diese E-Mail-Adresse ist bereits registriert",
         "InvalidFields": "Einige Felder sind ungültig."
     }
+    },
+    "NotFound": {
+        "t1": "Seite nicht gefunden",
+        "t2": "Ups... du scheinst dich verlaufen zu haben.",
+        "t3": "Die Seite, die du suchst, existiert nicht oder wurde verschoben.",
+        "returnBtn": "Zur Startseite zurückkehren"
     }
+
 }

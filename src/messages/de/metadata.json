@@ -1,6 +1,10 @@
 {   
     "Title":"Hebamme Marion",
     "Description":"Kurse zu Schwangerschaft, Geburt und Wochenbett, die dir Unterstützung, verlässliche Informationen und emotionale Vorbereitung bieten.",
+    "NotFound": {
+        "Title":"404",
+        "Description":"Not Found"
+    },
     "Home":{
 
     },

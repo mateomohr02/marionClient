@@ -37,5 +37,11 @@
             "EmailInUse": "El correo electrónico ya está registrado",
             "InvalidFields": "Alguno de los campos es inválido."
         }
+    },
+    "NotFound":{
+        "t1":"Página no encontrada",
+        "t2":"Ups... parece que te has perdido.",
+        "t3":"La página que buscás no existe o fue movida.",
+        "returnBtn":"Volver al inicio"
     }
 }

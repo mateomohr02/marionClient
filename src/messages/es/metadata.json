@@ -1,6 +1,10 @@
 {   
     "Title":"Partera Marion",
     "Description":"Cursos sobre embarazo, parto y posparto diseñados para brindarte contención, información confiable y preparación emocional.",
+    "NotFound": {
+        "Title":"404",
+        "Description":"Not Found"
+    },
     "Home":{
 
     },
