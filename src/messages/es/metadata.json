@@ -8,16 +8,41 @@
         "Page":{
             "Title":"Cursos",
             "Description":"Descubrí nuestros cursos online diseñados para acompañarte en cada etapa del embarazo: desde la gestación, el parto, hasta el posparto. Elegí el curso ideal para vos y viví este camino con confianza y contención."
+        },
+        "Detail":{
+            "Title":"Introducción al recorrido",
+            "Description":"Comenzá tu recorrido con la clase introductoria del curso. Conocé los objetivos, el enfoque y cómo te vamos a acompañar en cada etapa de este proceso."
+            ,"Checkout":{
+                "Title":"Finalizá tu compra",
+                "Description":"Revisá los detalles de tu pedido y completá el pago de tu curso. Tu camino de aprendizaje comienza aquí."
+            }
         }
     },
     "Blog":{
         "Page":{
             "Title":"Comunidad",
             "Description":"Explorá artículos sobre embarazo, parto y posparto escritos por Marion. Aprendé, inspirate y compartí tu experiencia."
+        },
+        "Detail": {
+            "Title": "Artículo",
+            "Description": "Leé el artículo completo y participá en los comentarios. Comunidad activa sobre embarazo, parto y posparto."
         }
     },
     "Lessons":{
-
+        "Page":{
+            "Title":"Clases",
+            "Description":"Accedé al contenido completo de tus clases: textos, videos e imágenes pensados para acompañarte en cada etapa del embarazo, parto y posparto."
+        },
+        "Forum":{
+            "Title":"Foro del Curso",
+            "Description":"Interactúa con la comunidad, despeja tus dudas y comparte tu experiencia!",
+            "Detail":{
+                "Title": "Publicación",
+            "Description": "Interactúa con la comunidad, despeja tus dudas y comparte tu experiencia!"
+        
+            }
+        }
+        
     },
     "Profile":{
         "Page":{

@@ -1,46 +1,15 @@
-"use client";
+import { getTranslations } from 'next-intl/server';
+import Lessons from "@/components/pages/lessons";
 
-import CourseNavBar from "@/components/CourseNavBar";
-import { useGetCourseLessons } from "@/hooks/useGetCourseLessons";
-import { useParams } from "next/navigation";
-import { motion } from 'framer-motion';
-import LessonCard from "@/components/profile/LessonCard";
-import LessonFooterNavigation from "@/components/LessonFooterNavigation";
-import Loading from "@/components/Loading";
-import { useLocale, useTranslations } from "next-intl";
-import Error from "@/components/Error";
+export async function generateMetadata({ params }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Metadata' });
 
-const page = () => {
-  const t = useTranslations("Lessons");
+  return {
+    title: t('Lessons.Page.Title'),
+    description: t('Lessons.Page.Description'),
+  };
+}
 
-  const locale = useLocale();
-  const params = useParams();
-  const courseSlug = params.courseName
-  const { lessons, loading, error } = useGetCourseLessons(courseSlug, locale);
-
-  return (
-  <motion.div
-    key={params.courseName}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-    className="min-h-[calc(100vh-8rem)]"
-  >
-    {loading ? (
-      <Loading />
-    ) : error ? (
-      <Error msj={t("Page.Error")} />
-    ) : lessons.length === 0 ? (
-      <Error msj={t("Page.NoLessons")} />
-    ) : (
-      <>
-        <CourseNavBar locale={locale} />
-        <LessonCard />
-        <LessonFooterNavigation />
-      </>
-    )}
-  </motion.div>
-);
-};
-
-export default page;
+export default function Page() {
+  return <Lessons />;
+}

@@ -1,28 +1,15 @@
-"use client";
+import { getTranslations } from 'next-intl/server';
+import CheckoutPage from "@/components/pages/checkoutPage";
 
-import Checkout from "@/components/Checkout";
-import { useValidateCheckout } from "@/hooks/useValidateCheckout";
-import { useParams } from "next/navigation";
-import Loading from "@/components/Loading";
-import { useLocale } from "next-intl";
+export async function generateMetadata({ params }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Metadata' });
 
-const Page = () => {
-  const locale = useLocale()
+  return {
+    title: t('Courses.Detail.Checkout.Title'),
+    description: t('Courses.Detail.Checkout.Description'),
+  };
+}
 
-  const { courseName } = useParams();
-
-  const { item, loading, error } = useValidateCheckout(courseName, locale);
-
-  if (loading) return <Loading />;
-  if (error) return <div>{error}</div>;
-
-  console.log(item);
-  
-  return (
-    <div>
-      <Checkout item={item} />
-    </div>
-  );
-};
-
-export default Page;
+export default function Page() {
+  return <CheckoutPage />;
+}

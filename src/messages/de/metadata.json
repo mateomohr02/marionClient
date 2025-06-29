@@ -8,16 +8,39 @@
         "Page":{
             "Title":"Kurse",
             "Description":"Entdecke unsere Online-Kurse für jede Phase der Schwangerschaft – von der frühen Schwangerschaft über die Geburt bis zum Wochenbett. Wähle den passenden Kurs und erlebe diese Reise mit Vertrauen und Unterstützung."
+        },
+        "Detail":{
+            "Title":"Einführung in deinen Weg",
+            "Description":"Starte deinen Weg mit der Einführungseinheit des Kurses. Erfahre mehr über die Ziele, den Ansatz und wie wir dich in jeder Phase begleiten werden."
+            ,"Checkout":{
+                "Title":"Kauf abschließen",
+                "Description":"Überprüfe deine Bestellung und schließe den Kauf deines Kurses ab. Dein Lernweg beginnt jetzt."
+            }
         }
     },
     "Blog":{
         "Page": {
             "Title": "Community",
             "Description": "Entdecke Artikel über Schwangerschaft, Geburt und Wochenbett, geschrieben von Marion. Lerne, lass dich inspirieren und teile deine Erfahrungen."
+        },
+        "Detail": {
+            "Title": "Artikel",
+            "Description": "Lies den vollständigen Artikel und beteilige dich an den Kommentaren. Aktive Community rund um Schwangerschaft, Geburt und Wochenbett."
         }
     },
     "Lessons":{
-
+        "Page": {
+            "Title": "Lektionen",
+            "Description": "Greife auf den vollständigen Inhalt deiner Lektionen zu: Texte, Videos und Bilder, die dich in jeder Phase der Schwangerschaft, Geburt und des Wochenbetts begleiten."
+        },
+        "Forum": {
+            "Title": "Kursforum",
+            "Description": "Tausche dich mit der Community aus, kläre deine Fragen und teile deine Erfahrungen!",
+            "Detail":{
+                "Title": "Beitrag",
+                "Description": "Tausche dich mit der Community aus, kläre deine Fragen und teile deine Erfahrungen!"
+            }
+        }
     },
     "Profile":{
         "Page": {
