@@ -20,10 +20,15 @@ export default {
           "0%": { transform: "translateY(0%)" },
           "100%": { transform: "translateY(-50%)" },
         },
+         scrollLeft: {
+        "0%": { transform: "translateX(0)" },
+        "100%": { transform: "translateX(-50%)" },
+      },
       },
       animation: {
         underlineGrow: "underlineGrow 0.3s ease-out forwards",
         scrollUp: "scrollUp 80s linear infinite",
+        scrollLeft: "scrollLeft 80s linear infinite",
       },
       colors: {
         background: "var(--background)",

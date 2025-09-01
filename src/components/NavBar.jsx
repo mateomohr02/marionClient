@@ -15,16 +15,16 @@ const NavBar = () => {
       {/* Bordes arriba y abajo */}
       <div className="before:absolute before:top-0 before:left-0 before:w-full before:h-[3px] before:bg-gradient-to-r before:from-gradientLeft before:to-gradientRight after:absolute after:bottom-0 after:left-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-gradientLeft after:to-gradientRight" />
 
-      <div className="px-4 pt-4 lg:pt-0 flex justify-evenly h-16 lg:h-32">
+      <div className="px-4 pt-4 xl:pt-0 flex justify-evenly h-16 xl:h-32">
         {/* Ícono hamburguesa (solo en móvil) */}
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           <button onClick={() => setVisibleNavBar(!visibleNavBar)} className="text-gradientLeft">
             {visibleNavBar ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
         {/* Navegación en escritorio */}
-        <div className="hidden lg:flex lg:w-[80%] lg:items-center lg:justify-between">
+        <div className="hidden xl:flex xl:w-[80%] xl:items-center xl:justify-between">
           <NavLink href="/" label={t("Label1")} />
           <NavLink href="/courses" label={t("Label2")} />
           <NavLink href="/community" label={t("Label3")} />
@@ -35,7 +35,7 @@ const NavBar = () => {
 
       {/* Menú desplegable en móvil */}
       <div
-        className={`lg:hidden flex flex-col gap-4 items-center px-6 transition-all duration-300 ease-in-out overflow-hidden ${
+        className={`xl:hidden flex flex-col gap-4 items-center px-6 transition-all duration-300 ease-in-out overflow-hidden ${
           visibleNavBar ? 'max-h-96 pb-4 px-4 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
