@@ -39,7 +39,7 @@ const UserNoCourses = () => {
       <p className="mb-4 text-gray-600">{t("UserNoCourses.Text1")}</p>
 
       <Link
-        href={`/cursos`}
+        href={`/courses`}
         className="relative inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group"
       >
         {/* Fondo animado */}

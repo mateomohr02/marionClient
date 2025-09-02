@@ -13,9 +13,9 @@ const PostDetail = ({ data }) => {
   const t = useTranslations("Blog");
 
   return (
-    <div className=" relative max-w-[calc(60vw)] mx-auto">
+    <div className=" relative xl:max-w-[calc(60vw)] mx-auto">
       {/* Fondo degradado con opacidad */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gradientRight to-gradientLeft  opacity-20"></div>
+      <div className="absolute inset-0 xl:bg-gradient-to-br from-gradientRight to-gradientLeft  opacity-20"></div>
 
       {/* Contenido por encima del fondo */}
       <motion.div
@@ -25,7 +25,7 @@ const PostDetail = ({ data }) => {
         className="relative z-10"
       >
         {/* Contenedor superior con título y botón */}
-        <div className="flex justify-between items-center px-10">
+        <div className="flex justify-between items-center px-6 xl:px-10">
           {/* Título y autor */}
           <div className="flex-1">
             <div className="flex flex-row mt-6">
@@ -35,12 +35,12 @@ const PostDetail = ({ data }) => {
               >
                 <ChevronLeft />
               </button>
-              <h2 className="text-3xl font-bold text-black">{data?.title}</h2>
+              <h2 className="text-xl xl:text-3xl font-bold text-black">{data?.title}</h2>
             </div>
           </div>
         </div>
         {data.User?.name && (
-          <p className="text-sm sm:text-base text-black font-poppins px-20">
+          <p className="text-sm sm:text-base text-black font-poppins pl-14 xl:px-20">
             {t("PostDetail.Text1")}{" "}
             <span className="font-medium">{data.User.name}</span>
           </p>
@@ -49,7 +49,7 @@ const PostDetail = ({ data }) => {
         <div className="flex flex-col gap-5">
           {/* Contenido dinámico */}
 
-          <div className="min-h-[calc(100vh-25rem)] px-20 my-6">
+          <div className="min-h-[calc(100vh-25rem)] px-6 xl:px-20 my-2 xl:my-6">
             {data?.content?.map((cont, index) => {
               if (cont.contentType === "text") {
                 return (
