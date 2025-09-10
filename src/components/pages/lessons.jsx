@@ -12,7 +12,6 @@ import Error from "@/components/Error";
 
 const Lessons = () => {
   const t = useTranslations("Lessons");
-
   const locale = useLocale();
   const params = useParams();
   const courseSlug = params.courseName
@@ -37,6 +36,7 @@ const Lessons = () => {
         <CourseNavBar locale={locale} />
         <LessonCard />
         <LessonFooterNavigation />
+        
       </>
     )}
   </motion.div>
