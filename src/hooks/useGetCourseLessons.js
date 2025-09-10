@@ -14,9 +14,6 @@ export const useGetCourseLessons = (courseName, lang) => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
-  console.log(courseName, 'SLUG');
-  
-
   const existingLessons = useSelector((state) => state.course.courseLessons);
   const currentCourseName = useSelector((state) => state.course.currentCourse);
   const hasFetched = useRef(false);

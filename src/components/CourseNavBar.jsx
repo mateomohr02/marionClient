@@ -46,11 +46,11 @@ const CourseNavBar = ({locale}) => {
   };
 
   return (
-    <div className="w-full py-3 px-8 flex justify-between items-center text-sm font-medium z-10 relative">
+    <div className="w-full py-2 my-2 lg:my-0lg:py-3 px-2 lg:px-8 flex flex-col lg:flex-row justify-between items-center z-10 relative">
       <div className="flex items-center gap-2">
         <button
           onClick={handleBackToFirstLesson}
-          className="text-gray-800 font-semibold text-xl hover:underline"
+          className="text-gray-800 font-semibold text-xs lg:text-xl hover:underline"
         >
           {locale === "de" ? courseTitle.de : courseTitle.es}
         </button>
@@ -64,19 +64,19 @@ const CourseNavBar = ({locale}) => {
           onMouseEnter={openDropdown}
           onMouseLeave={closeDropdownWithDelay}
         >
-          <button className="text-gray-800 font-semibold hover:underline  text-xl ">
+          <button className="text-gray-800 font-semibold hover:underline text-xs lg:text-xl ">
             {t("NavBar.Text1")} {lessons.findIndex((l) => l.id === currentLesson) + 1}:{" "}
             {locale === "de" ? currentLessonDetail.title.de : currentLessonDetail.title.es}
           </button>
 
           {dropdownOpen && (
-            <div className="absolute top-full left-0 mt-1 w-72 bg-white border border-gray-300 rounded shadow-lg z-50">
+            <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded shadow-lg z-50">
               {lessons.map((lesson, index) => (
                 <button
                   key={lesson.id}
                   onClick={() => handleSelectLesson(lesson)}
-                  className={`block w-full text-left px-4 py-2 hover:bg-gray-100 ${
-                    currentLesson === lesson.id ? "bg-gray-50 font-bold" : ""
+                  className={`block w-full text-left px-2 lg:px-4 py-2 hover:bg-gray-100 ${
+                    currentLesson === lesson.id ? "bg-gray-50 text-xs lg:text-lg text-center lg:font-bold" : ""
                   }`}
                 >
                   {t("NavBar.Text1")} {index + 1}: {locale === "de" ? lesson.title.de : lesson.title.es}
@@ -89,13 +89,13 @@ const CourseNavBar = ({locale}) => {
 
       <Link
         href={`${pathname.replace(/^\/(es|de)/, '')}/forum`}
-        className="relative inline-flex items-center justify-center p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group"
+        className="relative inline-flex items-center justify-center my-2 lg:my-0 p-[2px] font-medium font-poppins text-black transition duration-300 ease-in-out rounded-full overflow-hidden group"
       >
         {/* Fondo animado */}
         <div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-fuchsia-500 to-rose-400 rounded-full blur-md opacity-70 group-hover:blur-lg group-hover:opacity-90 transition-all duration-500 animate-pulse" />
 
         {/* Contenido del botón */}
-        <span className="relative z-10 px-6 py-2 text-base sm:text-lg bg-white/80 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
+        <span className="relative z-10 px-6 py-2 lg:text-base sm:text-lg bg-white/80 hover:bg-white rounded-full backdrop-blur-sm transition-colors duration-300">
           🗪 {t("NavBar.Forum")}
         </span>
       </Link>

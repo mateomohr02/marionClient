@@ -20,18 +20,19 @@ const LessonCard = ({ lesson: lessonProp }) => {
   if (!lesson) return <Error msj={t("Page.NoContent")}/>;
 
   return (
-    <div className="px-8">
-      <h1 className="text-4xl font-semibold mb-4 w-3/5 m-auto">
+    <div className="px-2 lg:px-8">
+      <h1 className="text-center lg:text-left lg:text-4xl font-semibold mb-4 lg:my-6 lg:w-4/5 lg:m-auto">
         {locale === "de" ? lesson?.title?.de : lesson?.title?.es}
       </h1>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 px-2 lg:px-0 lg:gap-4">
         {Array.isArray(lesson?.content?.[locale]) &&
-          lesson.content[locale].map((cont, index) => {
+          lesson.content[locale].map((cont, index) => {            
+
             if (cont.contentType === "text") {
               return (
                 <p
                   key={index}
-                  className="mt-3 text-base text-justify leading-relaxed font-poppins w-3/5 m-auto"
+                  className="lg:mt-3 text-base text-justify leading-relaxed font-poppins lg:w-4/5 lg:m-auto"
                 >
                   {cont.value}
                 </p>
@@ -45,7 +46,7 @@ const LessonCard = ({ lesson: lessonProp }) => {
                     src={cont.value || placeholder}
                     alt={`Imagen-${index}`}
                     onError={(e) => (e.target.src = placeholder)}
-                    className="w-3/5 mx-auto object-cover shadow-lg"
+                    className="w-[calc(100vw-0.5rem)] lg:w-4/5 lg:mx-auto object-cover shadow-lg"
                   />
                 </div>
               );
@@ -54,7 +55,7 @@ const LessonCard = ({ lesson: lessonProp }) => {
             if (cont.contentType === "video") {
               return (
                 <div key={index} className="flex justify-center">
-                  <div className="w-3/5 aspect-video mx-auto my-4">
+                  <div className="w-[calc(100vw-0.5rem)] lg:w-4/5 aspect-video lg:mx-auto">
                     {cont.value ? (
                       <video
                         controls
@@ -88,7 +89,7 @@ const LessonCard = ({ lesson: lessonProp }) => {
               const video = cont.value.find((v) => v.contentType === "video");
 
               return (
-                <div key={index} className="flex flex-col gap-2 w-3/5 m-auto">
+                <div key={index} className="flex flex-col gap-2 lg:w-4/5 lg:m-auto">
                   {cont.subtitle && (
                     <h2 className="text-3xl mb-2">{cont.subtitle}</h2>
                   )}
