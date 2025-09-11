@@ -77,9 +77,9 @@ export default function Register() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="flex items-center justify-center min-h-[calc(100vh-20rem)] px-4 my-10"
+      className="flex items-center justify-center lg:min-h-[calc(100vh-20rem)] px-2 lg:px-4 py-4 lg:my-10"
     >
-      <div className="w-full max-w-[calc(50vw+2px)] bg-gradient-to-br from-gradientLeft to-gradientRight rounded-[1rem] p-1">
+      <div className="w-full lg:max-w-[calc(50vw+2px)] bg-gradient-to-br from-gradientLeft to-gradientRight rounded-[1rem] p-1">
         <form
           onSubmit={handleSubmit}
           className="p-8 rounded-xl w-full bg-pastelPink/70"
@@ -228,7 +228,7 @@ export default function Register() {
             )}
           </div>
 
-          <div className="relative w-1/2 mx-auto group mt-4">
+          <div className="relative lg:w-1/2 mx-auto group mt-4">
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-fuchsia-600 to-rose-500 blur-sm opacity-70 group-hover:blur-md group-hover:opacity-90 transition-all duration-500 rounded-md" />
             <button
               type="submit"
@@ -242,7 +242,7 @@ export default function Register() {
           <p className="text-center mt-4 text-gray-700 font-poppins">
             {t("Register.LoginQ")}
           </p>
-          <div className="relative w-1/2 mx-auto group mt-4">
+          <div className="relative lg:w-1/2 mx-auto group mt-4">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 blur-sm opacity-70 group-hover:blur-md group-hover:opacity-90 transition-all duration-500 rounded-md" />
             <Link
               href="/login"
