@@ -81,7 +81,7 @@ const Checkout = ({ item }) => {
     return <div className="text-center text-red-500 font-medium">{error}</div>;
 
   return (
-    <div className="flex flex-col md:flex-row p-1 gap-1 max-w-screen-xl min-h-[calc(100vh-31rem)] mx-auto bg-gradient-to-br from-gradientLeft to-gradientRight rounded-[0.75rem] my-4">
+    <div className="flex flex-col md:flex-row p-1 gap-1 max-w-screen-xl lg:min-h-[calc(100vh-31rem)] mx-auto bg-gradient-to-br from-gradientLeft to-gradientRight rounded-[0.75rem] my-4">
       <div className="flex-1 bg-snow/75 rounded-lg p-6 shadow-md">
         <Link
           href={`/courses/${locale === 'de' ? item?.name?.de?.replace(/\s+/g, "-").toLowerCase() : item?.slug}`}
@@ -93,7 +93,7 @@ const Checkout = ({ item }) => {
           </div>
         </Link>
 
-        <div className="flex">
+        <div className="flex flex-col lg:flex-row">
           <div className="flex-1 flex flex-col">
             <h2 className="text-2xl font-bold mt-2 text-gray-800">
               {locale === 'de' ? item?.name?.de : item?.name?.es}
@@ -103,7 +103,7 @@ const Checkout = ({ item }) => {
             </p>
           </div>
 
-          <div className="ml-6 w-2/5">
+          <div className=" mt-2 lg:mt-0 lg:ml-6 w-full lg:w-2/5">
             <img
               src={locale === 'de' ? item?.poster?.de : item?.poster?.es}
               alt={t("Checkout.AltPoster")}
