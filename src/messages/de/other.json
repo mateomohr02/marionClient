@@ -15,7 +15,9 @@
         "InvalidCredentials": "E-Mail oder Passwort sind falsch",
         "MissingFields": "Beide Felder müssen ausgefüllt werden",
         "NetworkError": "Netzwerkfehler, bitte versuche es später erneut"
-    }       
+    },
+    "ForgotPassword": "Passwort vergessen?"
+       
 
 },
     "Register": {
@@ -44,6 +46,31 @@
         "t2": "Ups... du scheinst dich verlaufen zu haben.",
         "t3": "Die Seite, die du suchst, existiert nicht oder wurde verschoben.",
         "returnBtn": "Zur Startseite zurückkehren"
+    },
+    "Recovery": {
+        "Title": "Wiederherstellung",
+        "Email": "E-Mail Adresse",
+        "EmailPlaceholder": "Gib deine E-Mail Adresse ein",
+        "SendRecoveryEmail": "Wiederherstellungs-E-Mail senden",
+        "SuccessAlert": "Wiederherstellungs-E-Mail gesendet",
+        "ErrorAlert": "Fehler beim Senden der Wiederherstellungs-E-Mail",
+        "ResetPassword": {
+            "Title": "Passwort zurücksetzen",
+            "Password": "Passwort",
+            "RepeatPassword": "Passwort wiederholen",
+            "SuccessAlert": "Passwort erfolgreich zurückgesetzt",
+            "ErrorAlert": "Fehler beim Zurücksetzen des Passworts",
+            "BtnSubmit": "Zurücksetzen"
+        },
+        "GoHome": "Zur Startseite",
+        "Validation": {
+            "CharCount": "Mindestens 8 Zeichen",
+            "Lowercase": "Ein Kleinbuchstabe",
+            "Uppercase": "Ein Großbuchstabe",
+            "Number": "Eine Zahl",
+            "SpecialChar": "Ein Sonderzeichen (@$!%*?#&+)",
+            "Match": "Die Passwörter stimmen überein",
+            "MissMatch": "Die Passwörter stimmen nicht überein"
+        }
     }
-
 }

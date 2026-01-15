@@ -15,7 +15,8 @@
             "InvalidCredentials": "Email o contraseña incorrectos",
             "MissingFields": "Debes completar ambos campos",
             "NetworkError": "Error de red, intenta más tarde"
-        }
+        },
+        "ForgotPassword":"¿Olvidaste tu contraseña?"
     },
     "Register":{
         "Title":"Registrarse",
@@ -43,5 +44,31 @@
         "t2":"Ups... parece que te has perdido.",
         "t3":"La página que buscás no existe o fue movida.",
         "returnBtn":"Volver al inicio"
+    },
+    "Recovery":{
+        "Title":"Recuperación",
+        "Email":"Correo Electrónico",
+        "EmailPlaceholder":"Introduce tu correo electrónico",
+        "SendRecoveryEmail":"Enviar correo de recuperación",
+        "SuccessAlert":"Correo de recuperación enviado",
+        "ErrorAlert":"Error al enviar el correo de recuperación",
+        "ResetPassword": {
+            "Title": "Reestablecer Contraseña",
+            "Password": "Contraseña", 
+            "RepeatPassword": "Confirmar Contraseña",
+            "SuccessAlert": "Contraseña reestablecida con éxito",
+            "ErrorAlert": "Error al reestablecer la contraseña",
+            "BtnSubmit": "Reestablecer"
+        },
+        "GoHome": "Ir al inicio",
+        "Validation":{
+            "MissMatch":"Las contraseñas no coinciden",
+            "Match": "Las contraseñas coinciden",
+            "CharCount":"Debe tener al menos 8 caracteres",
+            "Uppercase":"Debe incluir al menos una letra mayúscula",
+            "Lowercase":"Debe incluir al menos una letra minúscula",
+            "Number":"Debe incluir al menos un número",
+            "SpecialChar":"Debe incluir al menos un carácter especial (@$!%*?#&+)"
+        }
     }
 }

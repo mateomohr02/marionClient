@@ -152,6 +152,12 @@ export default function Login() {
               </Link>
             </div>
           </div>
+
+          <div className='flex items-center justify-center'>
+            <Link href="/recovery" className="text-gray-700 font-poppins mt-4 inline-block">
+              {t("Login.ForgotPassword")}
+            </Link>
+          </div>
         </form>
       </div>
     </motion.div>
